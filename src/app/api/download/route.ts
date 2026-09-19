@@ -28,8 +28,69 @@ function sanitizeMediaUrl(rawUrl: string): string {
   return trimmed;
 }
 
+export async function GET(request: NextRequest) {
+  return NextResponse.json(
+    {
+      status: false,
+      code: 418,
+      roast: 'NGAPAIN GET KE SINI BANG? WKWKWK! 😂',
+      message:
+        'Mau ngintip parameter ya? Endpoint ini cuma nerima request resmi dari web DownFlow. Bikin downloader sendiri jangan manja nyolong endpoint orang wkwk.',
+      creator: 'zansxart',
+      tips: 'Sungkem dulu ke @zansxart di GitHub (https://github.com/zansxart) atau traktir kopi.',
+      rickroll: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    },
+    {
+      status: 418,
+      headers: {
+        'X-Roast': 'Ngapain nge-probe GET ke downloader endpoint dek wkwk',
+      },
+    }
+  );
+}
+
 export async function POST(request: NextRequest) {
   try {
+    const userAgent = (request.headers.get('user-agent') || '').toLowerCase();
+    const clientFlow = request.headers.get('x-client-flow');
+
+    const isKnownBot =
+      userAgent.includes('python') ||
+      userAgent.includes('requests') ||
+      userAgent.includes('scrapy') ||
+      userAgent.includes('aiohttp') ||
+      userAgent.includes('go-http') ||
+      userAgent.includes('postman') ||
+      userAgent.includes('insomnia') ||
+      userAgent.includes('curl') ||
+      userAgent.includes('wget') ||
+      userAgent.includes('httpie') ||
+      userAgent.includes('node-fetch') ||
+      userAgent.includes('axios');
+
+    // Bot detection: if it's a known scraper and missing legitimate frontend flow header
+    if (isKnownBot && clientFlow !== 'downflow-web-v1') {
+      const detectedBot = userAgent.slice(0, 40) || 'Scraper Script';
+      return NextResponse.json(
+        {
+          status: false,
+          code: 418,
+          roast: 'CIEEE KETAHUAN NGE-SCRAPE PAKE BOT WKWKWK! 😂',
+          message: `Lu kira gua gatau lu pake script bot (${detectedBot}) buat nembak endpoint ini? Minimal modal browser lah bjir! Bikin downloader sendiri jangan manja nyolong endpoint orang wkwk.`,
+          creator: 'zansxart',
+          tips: 'Sungkem dulu ke @zansxart di GitHub (https://github.com/zansxart) atau traktir kopi biar dapet restu.',
+          rickroll: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        },
+        {
+          status: 418,
+          headers: {
+            'X-Roast': 'Ciee ketahuan nge-scrape pake bot wkwk',
+            'X-Anti-Bot': 'Active',
+          },
+        }
+      );
+    }
+
     const body = await request.json().catch(() => ({}));
     let rawUrl = String(body.url || '').trim();
     let requestedPlatform = (body.platform || 'auto') as PlatformId;

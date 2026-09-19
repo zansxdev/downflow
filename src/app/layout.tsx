@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Plus_Jakarta_Sans, JetBrains_Mono, Space_Grotesk } from 'next/font/google';
 import './globals.css';
 import { SocialBackground } from '@/components/SocialBackground';
+import { ConsolePrank } from '@/components/ConsolePrank';
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -169,6 +170,20 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-[#050505] text-[#f4f4f5] antialiased selection:bg-zinc-800 selection:text-white min-h-screen flex flex-col justify-between relative">
+        <ConsolePrank />
+        <div
+          dangerouslySetInnerHTML={{
+            __html: `<!--
+=======================================================
+  CIEEE NGAPAIN BUKA VIEW-SOURCE BANG? WKWKWK 😂
+  Mau nyolong kode atau scraping endpoint ya?
+  Minimal bikin scraper sendiri jangan modal copy-paste dek.
+  Dibuat oleh @zansxart.
+  GitHub: https://github.com/zansxart
+=======================================================
+-->`,
+          }}
+        />
         <SocialBackground />
         {children}
       </body>

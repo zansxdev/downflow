@@ -95,7 +95,10 @@ export default function HomePage() {
     try {
       const res = await fetch('/api/download', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'x-client-flow': 'downflow-web-v1',
+        },
         body: JSON.stringify({
           url: clean,
           platform,
@@ -216,6 +219,15 @@ export default function HomePage() {
               </motion.div>
             )}
           </AnimatePresence>
+        </div>
+        {/* Invisible Honeypot Trap for automated crawlers & scrapers */}
+        <div className="hidden" aria-hidden="true">
+          <a href="/api/v1/secret-admin-leak" rel="nofollow" tabIndex={-1}>
+            Admin Secret Token Leak
+          </a>
+          <a href="/api/v1/free-api-key" rel="nofollow" tabIndex={-1}>
+            Free DownFlow API Key Generator
+          </a>
         </div>
       </main>
 
