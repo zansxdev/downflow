@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { detectPlatform, extractUrl } from '@/lib/url-detector';
 import { NormalizedMediaResult, PlatformId, DownloadOption } from '@/lib/types';
+import { recordDownload, recordBotBlocked } from '@/lib/stats';
 
 const BACKEND_URL = process.env.BACKEND_API_URL || 'http://localhost:3050';
 const BACKEND_KEY = process.env.BACKEND_API_KEY || 'downflow_internal_secret_2026';
@@ -70,7 +71,18 @@ export async function POST(request: NextRequest) {
 
     // Bot detection: if it's a known scraper and missing legitimate frontend flow header
     if (isKnownBot && clientFlow !== 'downflow-web-v1') {
+      const clientIp =
+        request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+        request.headers.get('x-real-ip') ||
+        'Unknown';
       const detectedBot = userAgent.slice(0, 40) || 'Scraper Script';
+      
+      recordBotBlocked({
+        userAgent,
+        ip: clientIp,
+        reason: `Blocked scraper bot: ${detectedBot}`,
+      });
+
       return NextResponse.json(
         {
           status: false,
@@ -185,10 +197,24 @@ export async function POST(request: NextRequest) {
 
     const data = await response.json().catch(() => null);
 
+    const clientIp =
+      request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+      request.headers.get('x-real-ip') ||
+      'Unknown';
+
     if (!response.ok || !data || data.status === false) {
       const errorMsg =
         data?.message ||
         `Gagal mengambil media dari ${platform}. Pastikan konten publik dan dapat diakses.`;
+
+      recordDownload({
+        platform,
+        url: cleanUrl,
+        success: false,
+        ip: clientIp,
+        userAgent,
+      });
+
       return NextResponse.json(
         { status: false, message: errorMsg },
         { status: response.status >= 400 && response.status < 500 ? response.status : 422 }
@@ -196,6 +222,15 @@ export async function POST(request: NextRequest) {
     }
 
     const normalized = normalizeResult(platform, cleanUrl, data);
+
+    recordDownload({
+      platform,
+      url: cleanUrl,
+      title: normalized.title,
+      success: true,
+      ip: clientIp,
+      userAgent,
+    });
 
     return NextResponse.json({
       status: true,

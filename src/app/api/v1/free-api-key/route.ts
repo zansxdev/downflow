@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { recordHoneypot } from '@/lib/stats';
 
 export async function GET(request: NextRequest) {
   const ip =
@@ -6,6 +7,12 @@ export async function GET(request: NextRequest) {
     request.headers.get('x-real-ip') ||
     'IP Misterius';
   const ua = request.headers.get('user-agent') || 'Bot Kang Scrape';
+
+  recordHoneypot({
+    endpoint: '/api/v1/free-api-key',
+    ip,
+    userAgent: ua,
+  });
 
   return NextResponse.json(
     {
