@@ -136,7 +136,7 @@ export const UrlInputBar: React.FC<UrlInputBarProps> = ({
               border: '1px solid var(--btn-primary-border)',
               boxShadow: 'var(--btn-primary-shadow)',
             }}
-            className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-2.5 sm:py-2 rounded-xl font-bold text-xs hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed transition-all min-h-[42px] sm:min-h-0 cursor-pointer"
+            className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-2.5 sm:py-2 rounded-xl font-bold text-xs hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed transition-all min-h-[42px] sm:min-h-0 cursor-pointer neo-btn-action"
           >
             {isLoading ? (
               <>

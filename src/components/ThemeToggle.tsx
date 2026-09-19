@@ -2,9 +2,9 @@
 
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Moon, Sun, Sparkles } from 'lucide-react';
+import { Moon, Sun, Zap } from 'lucide-react';
 
-export type ThemeMode = 'dark' | 'light' | 'liquid';
+export type ThemeMode = 'dark' | 'light' | 'neo';
 
 const THEMES: { id: ThemeMode; label: string; icon: React.ReactNode; desc: string }[] = [
   {
@@ -20,10 +20,10 @@ const THEMES: { id: ThemeMode; label: string; icon: React.ReactNode; desc: strin
     desc: 'Clean Daylight',
   },
   {
-    id: 'liquid',
-    label: 'Glass',
-    icon: <Sparkles className="w-3.5 h-3.5" />,
-    desc: 'iOS 26 Liquid Glass',
+    id: 'neo',
+    label: 'Brutal',
+    icon: <Zap className="w-3.5 h-3.5" />,
+    desc: 'Neo-Brutalism',
   },
 ];
 
@@ -34,7 +34,8 @@ export const ThemeToggle: React.FC = () => {
   useEffect(() => {
     setMounted(true);
     try {
-      const saved = (localStorage.getItem('downflow_theme') as ThemeMode) || 'dark';
+      const raw = localStorage.getItem('downflow_theme');
+      const saved = (raw === 'liquid' ? 'neo' : raw) as ThemeMode || 'dark';
       setTheme(saved);
       applyTheme(saved);
     } catch {
@@ -45,7 +46,7 @@ export const ThemeToggle: React.FC = () => {
   const applyTheme = (mode: ThemeMode) => {
     document.documentElement.setAttribute('data-theme', mode);
     // Also toggle standard 'dark' class for tailwind dark: modifiers if any
-    if (mode === 'light') {
+    if (mode === 'light' || mode === 'neo') {
       document.documentElement.classList.remove('dark');
       document.documentElement.classList.add('light');
     } else {
@@ -57,7 +58,7 @@ export const ThemeToggle: React.FC = () => {
     if (metaTheme) {
       metaTheme.setAttribute(
         'content',
-        mode === 'light' ? '#f8fafc' : mode === 'liquid' ? '#050711' : '#050505'
+        mode === 'light' ? '#f8fafc' : mode === 'neo' ? '#fffdf5' : '#050505'
       );
     }
   };
@@ -86,7 +87,7 @@ export const ThemeToggle: React.FC = () => {
     <div
       role="radiogroup"
       aria-label="Pilih Tema Tampilan"
-      className="flex items-center gap-0.5 p-1 rounded-xl bg-[var(--bg-surface-elevated)] border border-[var(--border-subtle)] shadow-sm backdrop-blur-md"
+      className="flex items-center gap-0.5 p-1 rounded-xl bg-[var(--bg-surface-elevated)] border border-[var(--border-subtle)] shadow-sm backdrop-blur-md theme-toggle-container"
     >
       {THEMES.map((t) => {
         const isActive = theme === t.id;

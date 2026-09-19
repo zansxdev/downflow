@@ -47,7 +47,7 @@ export const Footer: React.FC = () => {
             rel="noopener noreferrer"
             whileHover={{ y: -2, scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
-            className="p-2.5 rounded-lg text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface-elevated)] transition-colors cursor-pointer flex items-center justify-center"
+            className="p-2.5 rounded-lg text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface-elevated)] transition-colors cursor-pointer flex items-center justify-center neo-social-icon"
             aria-label={`${item.name} @zansxart`}
             title={`@zansxart di ${item.name}`}
           >

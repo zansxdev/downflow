@@ -78,7 +78,8 @@ export const PlatformChips: React.FC<PlatformChipsProps> = ({
             onClick={() => onSelectPlatform(platform.id)}
             whileHover={{ y: -1 }}
             whileTap={{ scale: 0.96 }}
-            className={`relative flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium transition-colors cursor-pointer border backdrop-blur-sm ${
+            data-selected={isSelected}
+            className={`platform-chip relative flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium transition-colors cursor-pointer border backdrop-blur-sm ${
               isSelected
                 ? 'text-[var(--chip-active-text)] border-[var(--chip-active-border)] bg-[var(--chip-active-bg)] shadow-sm'
                 : 'text-[var(--chip-text)] hover:text-[var(--text-primary)] border-[var(--chip-border)] bg-[var(--chip-bg)] hover:bg-[var(--bg-surface-elevated)]'

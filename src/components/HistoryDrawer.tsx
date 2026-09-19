@@ -80,13 +80,13 @@ export const HistoryDrawer: React.FC<HistoryDrawerProps> = ({
                   history.map((item) => (
                     <div
                       key={item.id}
-                      className="group flex items-center justify-between p-2.5 rounded-xl bg-[var(--bg-surface-elevated)] border border-[var(--border-subtle)] hover:border-[var(--border-strong)] transition-colors"
+                      className="group flex items-center justify-between p-2.5 rounded-xl bg-[var(--bg-surface-elevated)] border border-[var(--border-subtle)] hover:border-[var(--border-strong)] transition-colors neo-box"
                     >
                       <div
                         onClick={() => onSelectHistory(item)}
                         className="flex items-center gap-3 cursor-pointer min-w-0 flex-1"
                       >
-                        <div className="w-12 h-12 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-subtle)] shrink-0 overflow-hidden flex items-center justify-center">
+                        <div className="w-12 h-12 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-subtle)] shrink-0 overflow-hidden flex items-center justify-center neo-box">
                           {item.thumbnail ? (
                             // eslint-disable-next-line @next/next/no-img-element
                             <img

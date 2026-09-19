@@ -203,7 +203,7 @@ export const MediaResultCard: React.FC<MediaResultCardProps> = ({ result, onRese
                   hidden: { opacity: 0, y: 10 },
                   show: { opacity: 1, y: 0 },
                 }}
-                className="flex items-center justify-between p-3 rounded-xl bg-[var(--bg-surface-elevated)] border border-[var(--border-subtle)] hover:border-[var(--border-strong)] transition-all gap-2"
+                className="flex items-center justify-between p-3 rounded-xl bg-[var(--bg-surface-elevated)] border border-[var(--border-subtle)] hover:border-[var(--border-strong)] transition-all gap-2 neo-box"
               >
                 <div className="flex items-center gap-2.5 min-w-0 flex-1">
                   {opt.format === 'mp3' ? (
@@ -233,7 +233,7 @@ export const MediaResultCard: React.FC<MediaResultCardProps> = ({ result, onRese
                     onClick={() => handleCopyLink(opt)}
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
-                    className="p-2 sm:p-1.5 min-w-[36px] min-h-[36px] flex items-center justify-center rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] bg-[var(--bg-surface)] hover:bg-[var(--chip-active-bg)] border border-[var(--border-subtle)] transition-colors cursor-pointer"
+                    className="p-2 sm:p-1.5 min-w-[36px] min-h-[36px] flex items-center justify-center rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] bg-[var(--bg-surface)] hover:bg-[var(--chip-active-bg)] border border-[var(--border-subtle)] transition-colors cursor-pointer neo-box"
                     title="Salin tautan langsung"
                   >
                     {isCopied ? (
@@ -254,7 +254,7 @@ export const MediaResultCard: React.FC<MediaResultCardProps> = ({ result, onRese
                       border: '1px solid var(--btn-primary-border)',
                       boxShadow: 'var(--btn-primary-shadow)',
                     }}
-                    className="flex items-center justify-center gap-1 px-3 py-2 sm:py-1.5 min-h-[36px] rounded-lg text-xs font-bold hover:opacity-90 transition-all cursor-pointer"
+                    className="flex items-center justify-center gap-1 px-3 py-2 sm:py-1.5 min-h-[36px] rounded-lg text-xs font-bold hover:opacity-90 transition-all cursor-pointer neo-btn-action"
                   >
                     <Download className="w-3.5 h-3.5" />
                     <span>{isDownloading ? 'Membuka...' : 'Unduh'}</span>

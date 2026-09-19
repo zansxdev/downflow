@@ -66,70 +66,128 @@
   --btn-primary-shadow: 0 4px 14px rgba(15, 23, 42, 0.18);
 }
 
-[data-theme="liquid"] {
-  --bg-canvas: #090b10;
-  --bg-surface: rgba(255, 255, 255, 0.035);
-  --bg-surface-elevated: rgba(255, 255, 255, 0.07);
-  --bg-input: rgba(255, 255, 255, 0.04);
-  --border-subtle: rgba(255, 255, 255, 0.12);
-  --border-strong: rgba(255, 255, 255, 0.28);
-  --text-primary: #ffffff;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
-  --accent-primary: #ffffff;
-  --accent-glow: rgba(255, 255, 255, 0.08);
-  --glass-blur: 24px;
-  --card-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.75), inset 0 1px 0 0 rgba(255, 255, 255, 0.22), inset 0 -1px 0 0 rgba(255, 255, 255, 0.02);
-  --chip-bg: rgba(255, 255, 255, 0.04);
-  --chip-border: rgba(255, 255, 255, 0.1);
-  --chip-text: #94a3b8;
-  --chip-active-bg: rgba(255, 255, 255, 0.15);
-  --chip-active-border: rgba(255, 255, 255, 0.35);
-  --chip-active-text: #ffffff;
-  --bg-icon-color: #71717a;
-  --bg-icon-opacity: 0.3;
-  --navbar-border: rgba(255, 255, 255, 0.1);
-  --footer-border: rgba(255, 255, 255, 0.1);
-  --selection-bg: rgba(255, 255, 255, 0.2);
-  --selection-text: #ffffff;
-  --btn-primary-bg: #ffffff;
-  --btn-primary-text: #090b10;
-  --btn-primary-border: rgba(255, 255, 255, 0.3);
-  --btn-primary-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+[data-theme="neo"] {
+  --bg-canvas: #fffdf5;
+  --bg-surface: #ffffff;
+  --bg-surface-elevated: #fffbeb;
+  --bg-input: #ffffff;
+  --border-subtle: #000000;
+  --border-strong: #000000;
+  --text-primary: #000000;
+  --text-secondary: #171717;
+  --text-muted: #525252;
+  --accent-primary: #ffe600;
+  --accent-glow: none;
+  --glass-blur: 0px;
+  --card-shadow: 5px 5px 0px 0px #000000;
+  --chip-bg: #ffffff;
+  --chip-border: #000000;
+  --chip-text: #000000;
+  --chip-active-bg: #ffe600;
+  --chip-active-border: #000000;
+  --chip-active-text: #000000;
+  --bg-icon-color: #000000;
+  --bg-icon-opacity: 0.14;
+  --navbar-border: #000000;
+  --footer-border: #000000;
+  --selection-bg: #ffe600;
+  --selection-text: #000000;
+  --btn-primary-bg: #ffe600;
+  --btn-primary-text: #000000;
+  --btn-primary-border: #000000;
+  --btn-primary-shadow: 3px 3px 0px 0px #000000;
 }
 
-* {
-  box-sizing: border-box;
+/* Neo-Brutalism Design System Overrides */
+[data-theme="neo"] .liquid-glass-card {
+  background: #ffffff !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 2.5px solid #000000 !important;
+  box-shadow: 5px 5px 0px 0px #000000 !important;
+  border-radius: 1rem !important;
 }
 
-html {
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
+[data-theme="neo"] .theme-toggle-container {
+  background: #ffffff !important;
+  border: 2px solid #000000 !important;
+  box-shadow: 3px 3px 0px 0px #000000 !important;
+  border-radius: 0.75rem !important;
 }
 
-body {
-  background-color: var(--bg-canvas);
-  color: var(--text-primary);
-  font-family: var(--font-jakarta);
-  min-height: 100vh;
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+[data-theme="neo"] .theme-toggle-container button {
+  border-radius: 0.5rem !important;
+  font-weight: 700 !important;
+  color: #000000 !important;
 }
 
-[data-theme="liquid"] .liquid-glass-card {
-  background: rgba(255, 255, 255, 0.035) !important;
-  backdrop-filter: blur(24px) saturate(160%) !important;
-  -webkit-backdrop-filter: blur(24px) saturate(160%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.12) !important;
-  box-shadow: 
-    0 24px 48px -12px rgba(0, 0, 0, 0.75),
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.22),
-    inset 0 -1px 0 0 rgba(255, 255, 255, 0.02) !important;
+[data-theme="neo"] .platform-chip {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+  box-shadow: 2.5px 2.5px 0px 0px #000000 !important;
+  font-weight: 700 !important;
+  border-radius: 0.75rem !important;
+  transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.1s ease !important;
+}
+
+[data-theme="neo"] .platform-chip:hover {
+  background: #fef08a !important;
+  transform: translate(-1px, -1px);
+  box-shadow: 3.5px 3.5px 0px 0px #000000 !important;
+}
+
+[data-theme="neo"] .platform-chip[data-selected="true"] {
+  background: #ffe600 !important;
+  border: 2px solid #000000 !important;
+  box-shadow: 2.5px 2.5px 0px 0px #000000 !important;
+}
+
+[data-theme="neo"] .neo-btn-action {
+  background: #ffe600 !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+  box-shadow: 3px 3px 0px 0px #000000 !important;
+  font-weight: 800 !important;
+  transition: transform 0.1s ease, box-shadow 0.1s ease !important;
+}
+
+[data-theme="neo"] .neo-btn-action:hover {
+  background: #facc15 !important;
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0px 0px #000000 !important;
+}
+
+[data-theme="neo"] .neo-btn-action:active {
+  transform: translate(2px, 2px) !important;
+  box-shadow: 1px 1px 0px 0px #000000 !important;
+}
+
+[data-theme="neo"] .neo-box {
+  border: 2px solid #000000 !important;
+  box-shadow: 3px 3px 0px 0px #000000 !important;
+}
+
+[data-theme="neo"] header {
+  border-bottom: 2px solid #000000 !important;
+}
+
+[data-theme="neo"] footer {
+  border-top: 2px solid #000000 !important;
+}
+
+[data-theme="neo"] .neo-social-icon {
+  background: #ffffff !important;
+  border: 1.5px solid #000000 !important;
+  box-shadow: 2px 2px 0px 0px #000000 !important;
+  color: #000000 !important;
+  transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.1s ease !important;
+}
+
+[data-theme="neo"] .neo-social-icon:hover {
+  background: #ffe600 !important;
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0px 0px #000000 !important;
 }
 
 ::selection {
