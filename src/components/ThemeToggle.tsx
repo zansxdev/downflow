@@ -98,19 +98,18 @@ export const ThemeToggle: React.FC = () => {
             role="radio"
             aria-checked={isActive}
             onClick={() => handleSelectTheme(t.id)}
-            className={`relative flex items-center justify-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors cursor-pointer select-none ${
+            data-active={isActive}
+            className={`relative flex items-center justify-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium cursor-pointer select-none transition-all duration-100 ${
               isActive
-                ? 'text-[var(--text-primary)] font-semibold'
+                ? 'text-[var(--chip-active-text)] font-bold'
                 : 'text-[var(--text-muted)] hover:text-[var(--text-secondary)]'
             }`}
             title={`${t.label} (${t.desc})`}
             aria-label={`${t.label} mode`}
           >
             {isActive && (
-              <motion.div
-                layoutId="activeThemePill"
+              <span
                 className="absolute inset-0 rounded-lg bg-[var(--chip-active-bg)] border border-[var(--chip-active-border)] shadow-sm -z-10"
-                transition={{ type: 'spring', stiffness: 450, damping: 32 }}
               />
             )}
             <span className="shrink-0">{t.icon}</span>

@@ -86,14 +86,12 @@ export const PlatformChips: React.FC<PlatformChipsProps> = ({
             }`}
           >
             {isSelected && (
-              <motion.div
-                layoutId="activePlatformIndicator"
+              <span
                 className="absolute inset-0 rounded-xl bg-[var(--chip-active-bg)] border border-[var(--chip-active-border)] -z-10 shadow-sm"
-                transition={{ type: 'spring', stiffness: 380, damping: 30 }}
               />
             )}
             {ICONS[platform.id] && (
-              <span className="shrink-0 opacity-80">{ICONS[platform.id]}</span>
+              <span className={`shrink-0 platform-icon-${platform.id}`}>{ICONS[platform.id]}</span>
             )}
             <span>{platform.name}</span>
           </motion.button>

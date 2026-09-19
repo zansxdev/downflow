@@ -118,7 +118,82 @@
 [data-theme="neo"] .theme-toggle-container button {
   border-radius: 0.5rem !important;
   font-weight: 700 !important;
+}
+
+[data-theme="neo"] .theme-toggle-container button[data-active="true"] {
+  background: #ffe600 !important;
   color: #000000 !important;
+  border: 1.5px solid #000000 !important;
+  box-shadow: 1.5px 1.5px 0px 0px #000000 !important;
+}
+
+[data-theme="neo"] .theme-toggle-container button[data-active="false"] {
+  color: #525252 !important;
+}
+
+[data-theme="neo"] .theme-toggle-container button[data-active="false"]:hover {
+  color: #000000 !important;
+}
+
+/* Neo-Brutalism Authentic Brand Colors */
+[data-theme="neo"] .platform-icon-tiktok,
+[data-theme="neo"] .social-icon-tiktok {
+  color: #ff0050 !important;
+}
+
+[data-theme="neo"] .platform-icon-instagram,
+[data-theme="neo"] .social-icon-instagram {
+  color: #e1306c !important;
+}
+
+[data-theme="neo"] .platform-icon-youtube,
+[data-theme="neo"] .social-icon-youtube {
+  color: #ff0000 !important;
+}
+
+[data-theme="neo"] .platform-icon-spotify,
+[data-theme="neo"] .social-icon-spotify {
+  color: #1db954 !important;
+}
+
+[data-theme="neo"] .platform-icon-twitter,
+[data-theme="neo"] .social-icon-twitter {
+  color: #1da1f2 !important;
+}
+
+[data-theme="neo"] .platform-icon-facebook,
+[data-theme="neo"] .social-icon-facebook {
+  color: #1877f2 !important;
+}
+
+[data-theme="neo"] .platform-icon-pinterest,
+[data-theme="neo"] .social-icon-pinterest {
+  color: #e60023 !important;
+}
+
+[data-theme="neo"] .platform-icon-soundcloud,
+[data-theme="neo"] .social-icon-soundcloud {
+  color: #ff5500 !important;
+}
+
+[data-theme="neo"] .platform-icon-capcut,
+[data-theme="neo"] .social-icon-capcut {
+  color: #000000 !important;
+}
+
+[data-theme="neo"] .platform-icon-threads,
+[data-theme="neo"] .social-icon-threads {
+  color: #000000 !important;
+}
+
+[data-theme="neo"] .platform-icon-auto {
+  color: #d97706 !important;
+}
+
+/* Floating Neo-Brutalist Sticker Effect */
+[data-theme="neo"] .social-floating-icon {
+  opacity: 0.35 !important;
+  filter: drop-shadow(2px 2px 0px #000000) !important;
 }
 
 [data-theme="neo"] .platform-chip {
@@ -188,6 +263,29 @@
   background: #ffe600 !important;
   transform: translate(-1px, -1px);
   box-shadow: 3px 3px 0px 0px #000000 !important;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+  font-family: var(--font-jakarta);
+  min-height: 100vh;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.12s ease, color 0.12s ease;
 }
 
 ::selection {
