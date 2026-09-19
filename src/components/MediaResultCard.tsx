@@ -57,14 +57,14 @@ export const MediaResultCard: React.FC<MediaResultCardProps> = ({ result, onRese
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 20, scale: 0.97 }}
       transition={{ type: 'spring', damping: 20, stiffness: 150 }}
-      className="w-full bg-[#0c0c10]/95 backdrop-blur-md border border-[#202026] rounded-xl p-5 sm:p-6 space-y-6 shadow-2xl"
+      className="w-full bg-[#0c0c10]/95 backdrop-blur-md border border-[#202026] rounded-xl p-4 sm:p-6 space-y-5 sm:space-y-6 shadow-2xl"
     >
       {/* Media Info */}
-      <div className="flex flex-col sm:flex-row gap-5">
+      <div className="flex flex-col sm:flex-row gap-4 sm:gap-5">
         <motion.div
           whileHover={{ scale: 1.02 }}
           transition={{ duration: 0.2 }}
-          className="relative w-full sm:w-52 h-44 sm:h-52 bg-[#121217] rounded-lg overflow-hidden border border-[#222228] shrink-0 flex items-center justify-center"
+          className="relative w-full sm:w-52 h-48 sm:h-52 bg-[#121217] rounded-lg overflow-hidden border border-[#222228] shrink-0 flex items-center justify-center"
         >
           {previewImage || result.thumbnail ? (
             // eslint-disable-next-line @next/next/no-img-element
@@ -203,9 +203,9 @@ export const MediaResultCard: React.FC<MediaResultCardProps> = ({ result, onRese
                   hidden: { opacity: 0, y: 10 },
                   show: { opacity: 1, y: 0 },
                 }}
-                className="flex items-center justify-between p-3 rounded-lg bg-[#111116] border border-[#1e1e24] hover:border-zinc-700 transition-colors"
+                className="flex items-center justify-between p-3 rounded-lg bg-[#111116] border border-[#1e1e24] hover:border-zinc-700 transition-colors gap-2"
               >
-                <div className="flex items-center gap-2.5 min-w-0 pr-2">
+                <div className="flex items-center gap-2.5 min-w-0 flex-1">
                   {opt.format === 'mp3' ? (
                     <Music className="w-4 h-4 text-zinc-400 shrink-0" />
                   ) : opt.format === 'jpg' ? (
@@ -220,7 +220,7 @@ export const MediaResultCard: React.FC<MediaResultCardProps> = ({ result, onRese
                       {opt.quality && (
                         <>
                           <span>•</span>
-                          <span className="text-zinc-300">{opt.quality}</span>
+                          <span className="text-zinc-300 truncate">{opt.quality}</span>
                         </>
                       )}
                     </div>
@@ -233,7 +233,7 @@ export const MediaResultCard: React.FC<MediaResultCardProps> = ({ result, onRese
                     onClick={() => handleCopyLink(opt)}
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
-                    className="p-1.5 rounded text-zinc-400 hover:text-white bg-[#181820] hover:bg-[#22222a] border border-[#262630] transition-colors cursor-pointer"
+                    className="p-2 sm:p-1.5 min-w-[36px] min-h-[36px] flex items-center justify-center rounded text-zinc-400 hover:text-white bg-[#181820] hover:bg-[#22222a] border border-[#262630] transition-colors cursor-pointer"
                     title="Salin tautan langsung"
                   >
                     {isCopied ? (
@@ -248,7 +248,7 @@ export const MediaResultCard: React.FC<MediaResultCardProps> = ({ result, onRese
                     onClick={() => handleDownload(opt)}
                     whileHover={{ scale: 1.04 }}
                     whileTap={{ scale: 0.96 }}
-                    className="flex items-center gap-1 px-3 py-1.5 rounded text-xs font-semibold text-black bg-white hover:bg-zinc-200 transition-colors cursor-pointer"
+                    className="flex items-center justify-center gap-1 px-3 py-2 sm:py-1.5 min-h-[36px] rounded text-xs font-semibold text-black bg-white hover:bg-zinc-200 transition-colors cursor-pointer"
                   >
                     <Download className="w-3.5 h-3.5" />
                     <span>{isDownloading ? 'Membuka...' : 'Unduh'}</span>

@@ -131,19 +131,19 @@ export default function HomePage() {
     <div className="relative flex flex-col min-h-screen">
       <Navbar onOpenHistory={() => setIsHistoryOpen(true)} historyCount={history.length} />
 
-      <main className="flex-1 w-full max-w-4xl mx-auto px-4 py-10 sm:py-16 flex flex-col items-center z-10">
+      <main className="flex-1 w-full max-w-4xl mx-auto px-4 py-6 sm:py-14 flex flex-col items-center z-10">
         {/* Animated Hero Header */}
         <motion.div
-          initial={{ opacity: 0, y: 25 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ type: 'spring', damping: 20, stiffness: 140 }}
-          className="text-center space-y-3 max-w-2xl mb-8"
+          className="text-center space-y-2.5 max-w-2xl mb-6 sm:mb-8"
         >
           <motion.h1
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1, duration: 0.4 }}
-            className="font-display text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-[1.1]"
+            className="font-display text-[26px] sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-[1.15] px-1"
           >
             Universal Media Downloader
           </motion.h1>
@@ -152,7 +152,7 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.4 }}
-            className="text-sm sm:text-base text-zinc-400 leading-relaxed font-sans"
+            className="text-xs sm:text-sm md:text-base text-zinc-400 leading-relaxed font-sans px-2"
           >
             Unduh video, audio, dan foto dari TikTok, Instagram, YouTube, X, Facebook, dan Spotify tanpa iklan.
           </motion.p>

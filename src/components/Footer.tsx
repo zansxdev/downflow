@@ -38,7 +38,7 @@ export const Footer: React.FC = () => {
     <footer className="w-full max-w-4xl mx-auto px-4 py-8 border-t border-[#18181f] text-xs text-zinc-500 font-mono flex flex-col sm:flex-row items-center justify-between gap-4 relative z-10">
       <span className="text-zinc-500">DownFlow Media Extractor</span>
 
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-2 sm:gap-3">
         {SOCIAL_LINKS.map((item) => (
           <motion.a
             key={item.name}
@@ -47,7 +47,7 @@ export const Footer: React.FC = () => {
             rel="noopener noreferrer"
             whileHover={{ y: -2, scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
-            className="text-zinc-500 hover:text-white transition-colors cursor-pointer"
+            className="p-2.5 rounded-lg text-zinc-500 hover:text-white hover:bg-[#121218] transition-colors cursor-pointer flex items-center justify-center"
             aria-label={`${item.name} @zansxart`}
             title={`@zansxart di ${item.name}`}
           >

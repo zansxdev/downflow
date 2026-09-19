@@ -47,10 +47,10 @@ export const HistoryDrawer: React.FC<HistoryDrawerProps> = ({
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 26, stiffness: 240 }}
-            className="fixed top-0 right-0 h-full w-full max-w-md bg-[#0c0c10] border-l border-[#202026] z-50 p-6 flex flex-col justify-between shadow-2xl overflow-hidden"
+            className="fixed top-0 right-0 h-full w-full max-w-md bg-[#0c0c10] border-l border-[#202026] z-50 p-4 sm:p-6 flex flex-col justify-between shadow-2xl overflow-hidden"
           >
             <div>
-              <div className="flex items-center justify-between pb-4 border-b border-[#1c1c24]">
+              <div className="flex items-center justify-between pb-3 sm:pb-4 border-b border-[#1c1c24]">
                 <div className="flex items-center gap-2">
                   <Clock className="w-4 h-4 text-zinc-400" />
                   <h3 className="font-bold text-sm text-zinc-100 font-sans">
@@ -64,7 +64,7 @@ export const HistoryDrawer: React.FC<HistoryDrawerProps> = ({
                 <button
                   type="button"
                   onClick={onClose}
-                  className="p-1.5 rounded text-zinc-400 hover:text-zinc-100 hover:bg-[#181822] transition-colors cursor-pointer"
+                  className="p-2 rounded-lg text-zinc-400 hover:text-zinc-100 hover:bg-[#181822] transition-colors cursor-pointer"
                   aria-label="Tutup Riwayat"
                 >
                   <X className="w-4 h-4" />
