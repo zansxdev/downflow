@@ -143,11 +143,7 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1, duration: 0.4 }}
-            className="font-display text-[26px] sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-[1.15] px-1 bg-clip-text text-transparent transition-all duration-300"
-            style={{
-              backgroundImage: 'var(--hero-title-gradient)',
-              filter: 'drop-shadow(var(--hero-title-shadow))',
-            }}
+            className="font-display text-[26px] sm:text-4xl md:text-5xl font-extrabold text-[var(--text-primary)] tracking-tight leading-[1.15] px-1 transition-colors duration-200"
           >
             Universal Media Downloader
           </motion.h1>
@@ -156,7 +152,7 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.4 }}
-            className="text-xs sm:text-sm md:text-base text-[var(--text-secondary)] leading-relaxed font-sans px-2 transition-colors duration-300"
+            className="text-xs sm:text-sm md:text-base text-[var(--text-secondary)] leading-relaxed font-sans px-2 transition-colors duration-200"
           >
             Unduh video, audio, dan foto dari TikTok, Instagram, YouTube, X, Facebook, dan Spotify tanpa iklan.
           </motion.p>

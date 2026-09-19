@@ -28,8 +28,6 @@
   --footer-border: #18181f;
   --selection-bg: #27272a;
   --selection-text: #ffffff;
-  --hero-title-gradient: linear-gradient(180deg, #ffffff 40%, #a1a1aa 100%);
-  --hero-title-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   --btn-primary-bg: #ffffff;
   --btn-primary-text: #050505;
   --btn-primary-border: rgba(255, 255, 255, 0.1);
@@ -62,8 +60,6 @@
   --footer-border: #e2e8f0;
   --selection-bg: #e2e8f0;
   --selection-text: #0f172a;
-  --hero-title-gradient: linear-gradient(180deg, #0f172a 20%, #334155 100%);
-  --hero-title-shadow: none;
   --btn-primary-bg: #0f172a;
   --btn-primary-text: #ffffff;
   --btn-primary-border: transparent;
@@ -71,37 +67,35 @@
 }
 
 [data-theme="liquid"] {
-  --bg-canvas: #050711;
-  --bg-surface: rgba(255, 255, 255, 0.08);
-  --bg-surface-elevated: rgba(255, 255, 255, 0.13);
-  --bg-input: rgba(255, 255, 255, 0.08);
-  --border-subtle: rgba(255, 255, 255, 0.2);
-  --border-strong: rgba(255, 255, 255, 0.4);
+  --bg-canvas: #090b10;
+  --bg-surface: rgba(255, 255, 255, 0.035);
+  --bg-surface-elevated: rgba(255, 255, 255, 0.07);
+  --bg-input: rgba(255, 255, 255, 0.04);
+  --border-subtle: rgba(255, 255, 255, 0.12);
+  --border-strong: rgba(255, 255, 255, 0.28);
   --text-primary: #ffffff;
-  --text-secondary: #e2e8f0;
-  --text-muted: #94a3b8;
-  --accent-primary: #38bdf8;
-  --accent-glow: rgba(56, 189, 248, 0.4);
-  --glass-blur: 32px;
-  --card-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.75), 0 0 35px -5px rgba(56, 189, 248, 0.22), inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.55), inset 0 -1px 1px 0 rgba(255, 255, 255, 0.1);
-  --chip-bg: rgba(255, 255, 255, 0.08);
-  --chip-border: rgba(255, 255, 255, 0.2);
-  --chip-text: #e2e8f0;
-  --chip-active-bg: linear-gradient(135deg, rgba(56, 189, 248, 0.35) 0%, rgba(139, 92, 246, 0.3) 100%);
-  --chip-active-border: rgba(255, 255, 255, 0.6);
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --accent-primary: #ffffff;
+  --accent-glow: rgba(255, 255, 255, 0.08);
+  --glass-blur: 24px;
+  --card-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.75), inset 0 1px 0 0 rgba(255, 255, 255, 0.22), inset 0 -1px 0 0 rgba(255, 255, 255, 0.02);
+  --chip-bg: rgba(255, 255, 255, 0.04);
+  --chip-border: rgba(255, 255, 255, 0.1);
+  --chip-text: #94a3b8;
+  --chip-active-bg: rgba(255, 255, 255, 0.15);
+  --chip-active-border: rgba(255, 255, 255, 0.35);
   --chip-active-text: #ffffff;
-  --bg-icon-color: #38bdf8;
-  --bg-icon-opacity: 0.55;
-  --navbar-border: rgba(255, 255, 255, 0.18);
-  --footer-border: rgba(255, 255, 255, 0.18);
-  --selection-bg: rgba(56, 189, 248, 0.4);
+  --bg-icon-color: #71717a;
+  --bg-icon-opacity: 0.3;
+  --navbar-border: rgba(255, 255, 255, 0.1);
+  --footer-border: rgba(255, 255, 255, 0.1);
+  --selection-bg: rgba(255, 255, 255, 0.2);
   --selection-text: #ffffff;
-  --hero-title-gradient: linear-gradient(135deg, #ffffff 10%, #7dd3fc 45%, #c084fc 80%, #38bdf8 100%);
-  --hero-title-shadow: 0 0 35px rgba(56, 189, 248, 0.5);
-  --btn-primary-bg: linear-gradient(135deg, #06b6d4 0%, #3b82f6 50%, #8b5cf6 100%);
-  --btn-primary-text: #ffffff;
-  --btn-primary-border: rgba(255, 255, 255, 0.5);
-  --btn-primary-shadow: 0 10px 30px -5px rgba(6, 182, 212, 0.6), inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.75);
+  --btn-primary-bg: #ffffff;
+  --btn-primary-text: #090b10;
+  --btn-primary-border: rgba(255, 255, 255, 0.3);
+  --btn-primary-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
 }
 
 * {
@@ -127,35 +121,15 @@ body {
   transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
 }
 
-/* Aurora Layer for Liquid Glass Mode */
-.liquid-aurora-layer {
-  display: none;
-}
-
-[data-theme="liquid"] .liquid-aurora-layer {
-  display: block;
-}
-
 [data-theme="liquid"] .liquid-glass-card {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.11) 0%, rgba(255, 255, 255, 0.03) 100%) !important;
-  backdrop-filter: blur(28px) saturate(190%) !important;
-  -webkit-backdrop-filter: blur(28px) saturate(190%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+  background: rgba(255, 255, 255, 0.035) !important;
+  backdrop-filter: blur(24px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(160%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
   box-shadow: 
-    0 25px 60px -15px rgba(0, 0, 0, 0.75),
-    0 0 35px -5px rgba(56, 189, 248, 0.22),
-    inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.55),
-    inset 0 -1px 1px 0 rgba(255, 255, 255, 0.08) !important;
-}
-
-[data-theme="liquid"] .social-icon-floater {
-  filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.55));
-}
-
-[data-theme="light"] body {
-  background-image: 
-    radial-gradient(circle at 50% -10%, rgba(226, 232, 240, 0.6) 0%, transparent 60%);
-  background-attachment: fixed;
+    0 24px 48px -12px rgba(0, 0, 0, 0.75),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.22),
+    inset 0 -1px 0 0 rgba(255, 255, 255, 0.02) !important;
 }
 
 ::selection {

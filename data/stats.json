@@ -1,12 +1,12 @@
 {
-  "totalRequests": 5,
-  "totalSuccess": 5,
+  "totalRequests": 7,
+  "totalSuccess": 7,
   "totalFailed": 0,
   "totalBotsBlocked": 3,
   "totalHoneypotHits": 2,
   "byPlatform": {
     "tiktok": 2,
-    "youtube": 3,
+    "youtube": 5,
     "instagram": 0,
     "spotify": 0,
     "twitter": 0,
@@ -18,6 +18,28 @@
     "other": 0
   },
   "recentLogs": [
+    {
+      "id": "log-1789815504590-kuvp",
+      "timestamp": 1789815504590,
+      "type": "download",
+      "platform": "youtube",
+      "title": "SENAM KREASI LAGU BRAZIL #senamkreasi #pelajar #sehat #anakindonesia",
+      "url": "https://youtu.be/gYNnnr_kk-4?feature=shared",
+      "success": true,
+      "ip": "103.166.159.115",
+      "userAgent": "mozilla/5.0 (linux; android 10; k) applewebkit/537.36 (khtml, like gecko) chrome/153.0.0.0 mobile safari/537.36"
+    },
+    {
+      "id": "log-1789815443853-ctas",
+      "timestamp": 1789815443853,
+      "type": "download",
+      "platform": "youtube",
+      "title": "SENAM KREASI LAGU BRAZIL #senamkreasi #pelajar #sehat #anakindonesia",
+      "url": "https://youtu.be/gYNnnr_kk-4?feature=shared",
+      "success": true,
+      "ip": "103.166.159.115",
+      "userAgent": "mozilla/5.0 (linux; android 10; k) applewebkit/537.36 (khtml, like gecko) chrome/153.0.0.0 mobile safari/537.36"
+    },
     {
       "id": "log-1789810996082-7hk2",
       "timestamp": 1789810996082,
@@ -114,5 +136,5 @@
       "details": "Blocked scraper bot: python-requests/2.31.0"
     }
   ],
-  "updatedAt": 1789810996082
+  "updatedAt": 1789815504590
 }

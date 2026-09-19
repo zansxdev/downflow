@@ -158,7 +158,7 @@ export const SocialBackground: React.FC = () => {
               opacity: 'var(--bg-icon-opacity, 0.4)' as any,
               willChange: 'transform',
             }}
-            className="text-[var(--bg-icon-color)] transition-colors duration-300 social-icon-floater"
+            className="text-[var(--bg-icon-color)] transition-colors duration-300"
             animate={{
               x: item.xMoves,
               y: item.yMoves,
@@ -190,7 +190,7 @@ export const SocialBackground: React.FC = () => {
               opacity: 'var(--bg-icon-opacity, 0.4)' as any,
               willChange: 'transform',
             }}
-            className="text-[var(--bg-icon-color)] transition-colors duration-300 social-icon-floater"
+            className="text-[var(--bg-icon-color)] transition-colors duration-300"
             animate={{
               x: item.xMoves,
               y: item.yMoves,

@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from 'next';
 import { Plus_Jakarta_Sans, JetBrains_Mono, Space_Grotesk } from 'next/font/google';
 import './globals.css';
 import { SocialBackground } from '@/components/SocialBackground';
-import { LiquidBackground } from '@/components/LiquidBackground';
 import { ConsolePrank } from '@/components/ConsolePrank';
 
 const jakarta = Plus_Jakarta_Sans({
@@ -190,7 +189,6 @@ export default function RootLayout({
 -->`,
           }}
         />
-        <LiquidBackground />
         <SocialBackground />
         {children}
       </body>
