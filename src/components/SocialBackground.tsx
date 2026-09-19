@@ -39,9 +39,19 @@ const ICONS = {
       <path d="M12 0a12 12 0 0 0-4.37 23.17c-.07-.63-.13-1.6.03-2.29l.98-4.14s-.25-.5-.25-1.25c0-1.17.68-2.05 1.53-2.05.72 0 1.07.54 1.07 1.19 0 .73-.46 1.81-.71 2.82-.2.85.42 1.54 1.26 1.54 1.51 0 2.67-1.59 2.67-3.89 0-2.03-1.46-3.46-3.55-3.46-2.42 0-3.84 1.82-3.84 3.69 0 .73.28 1.52.63 1.95.07.08.08.16.06.25l-.23.95c-.04.16-.13.2-.3.12-1.12-.52-1.82-2.15-1.82-3.46 0-2.82 2.05-5.41 5.91-5.41 3.1 0 5.51 2.21 5.51 5.16 0 3.08-1.94 5.56-4.64 5.56-.91 0-1.76-.47-2.05-1.02l-.56 2.13c-.2.78-.75 1.76-1.12 2.36A12 12 0 1 0 12 0z" />
     </svg>
   ),
+  soundcloud: (
+    <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
+      <path d="M23.999 14.165c-.052 1.796-1.612 3.169-3.4 3.169h-8.18a.68.68 0 0 1-.675-.683V7.862a.747.747 0 0 1 .452-.724s.75-.513 2.333-.513a5.364 5.364 0 0 1 2.763.755 5.433 5.433 0 0 1 2.57 3.54c.282-.08.574-.121.868-.12.884 0 1.73.358 2.347.992s.948 1.49.922 2.373ZM10.721 8.421c.247 2.98.427 5.697 0 8.672a.264.264 0 0 1-.53 0c-.395-2.946-.22-5.718 0-8.672a.264.264 0 0 1 .53 0ZM9.072 9.448c.285 2.659.37 4.986-.006 7.655a.277.277 0 0 1-.55 0c-.331-2.63-.256-5.02 0-7.655a.277.277 0 0 1 .556 0Zm-1.663-.257c.27 2.726.39 5.171 0 7.904a.266.266 0 0 1-.532 0c-.38-2.69-.257-5.21 0-7.904a.266.266 0 0 1 .532 0Zm-1.647.77a26.108 26.108 0 0 1-.008 7.147.272.272 0 0 1-.542 0 27.955 27.955 0 0 1 0-7.147.275.275 0 0 1 .55 0Zm-1.67 1.769c.421 1.865.228 3.5-.029 5.388a.257.257 0 0 1-.514 0c-.21-1.858-.398-3.549 0-5.389a.272.272 0 0 1 .543 0Zm-1.655-.273c.388 1.897.26 3.508-.01 5.412-.026.28-.514.283-.54 0-.244-1.878-.347-3.54-.01-5.412a.283.283 0 0 1 .56 0Zm-1.668.911c.4 1.268.257 2.292-.026 3.572a.257.257 0 0 1-.514 0c-.241-1.262-.354-2.312-.023-3.572a.283.283 0 0 1 .563 0Z"/>
+    </svg>
+  ),
+  capcut: (
+    <svg viewBox="0 0 512 512" fill="currentColor" className="w-full h-full">
+      <path d="M109.095 181.505c2.223-19.532 18.316-34.578 37.955-35.483l167.194-.001a40.612 40.612 0 0130.095 17.427 42.152 42.152 0 016.39 14.915l49.135-24.364a2.185 2.185 0 013.141 1.674v27.628l.001.096a4.571 4.571 0 01-2.837 4.229 177620.936 177620.936 0 00-135.63 67.336l135.324 66.948a4.695 4.695 0 013.142 4.08v27.685a2.266 2.266 0 01-3.613 1.821c-16.12-8.162-32.464-15.854-48.462-24.18a63.503 63.503 0 01-4.282 11.225 40.813 40.813 0 01-26.098 20.135 44.994 44.994 0 01-11.221.919l-155.833.003c-3.51 0-7.04 0-10.53-.266-18.089-2.705-32.049-17.363-33.869-35.565v-26.77a5.935 5.935 0 014.08-4.879c27.791-13.732 55.521-27.587 83.353-41.258a32412.61 32412.61 0 00-84.17-41.748 5.41 5.41 0 01-3.223-4.918c-.042-8.876-.185-17.792-.042-26.689zm30.975.184c-1.674 3.367-.898 7.263-1.041 10.896 30.608 15.12 60.99 30.321 91.536 45.339 30.185-14.963 60.384-29.927 90.596-44.89 0-2.714.123-5.428 0-8.162a10.203 10.203 0 00-10.096-8.734h-.106l-161.565.001a10.082 10.082 0 00-9.345 5.55h.021zm-1.041 135.406c.142 3.673-.654 7.631 1.122 11.039a10.204 10.204 0 009.284 5.405l161.667.002.081-.001c3.618 0 6.961-1.94 8.754-5.081 2.04-3.57 1.102-7.855 1.305-11.773-30.26-14.936-60.48-30.118-90.801-44.89a43915.126 43915.126 0 00-91.432 45.299h.02z"/>
+    </svg>
+  ),
   threads: (
     <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-      <path d="M12.186 24h-.007C5.463 23.978 0 18.579 0 11.973 0 5.378 5.446 0 12.153 0c6.643 0 11.847 5.158 11.847 11.758 0 .61-.047 1.226-.14 1.832l-2.09-.32c.07-.464.105-.934.105-1.401 0-5.187-3.99-9.258-9.722-9.258-5.772 0-9.654 4.14-9.654 9.362 0 5.212 3.882 9.473 9.68 9.495 2.855.011 5.304-.98 7.078-2.867.247.387.525.753.834 1.096-2.124 2.278-5.064 3.486-8.525 3.486l.48-.183z" />
+      <path d="M18.263 11.097c-.03-3.486-1.92-5.586-5.111-5.586-2.13 0-3.922.963-4.863 2.499l2.062 1.438c.535-.843 1.272-1.543 2.628-1.543 1.528 0 2.318.85 2.544 2.431a15 15 0 0 0-2.236-.173c-4.125 0-6.068 1.867-6.068 4.336s1.943 3.99 4.804 3.99c3.139 0 5.013-2.115 5.781-4.735.798.361 1.348 1.204 1.348 2.47 0 3.387-3.907 5.232-7.22 5.232-4.885 0-8.077-3.207-8.077-8.424 0-6.392 4.223-10.487 9.9-10.487 3.808 0 5.69 1.671 6.97 3.914l2.108-1.475C21.44 2.078 18.331 0 13.663 0 6.227 0 1.168 5.277 1.168 12.934c0 7 4.953 11.066 10.856 11.066 4.878 0 9.809-2.846 9.809-7.716 0-2.545-1.46-4.231-3.569-5.187m-6.33 4.855c-1.077 0-2.026-.512-2.026-1.453 0-1.483 1.822-1.934 3.606-1.934.678 0 1.34.045 1.927.173-.422 1.927-1.671 3.215-3.508 3.214Z"/>
     </svg>
   ),
 };
@@ -61,68 +71,68 @@ interface FloatingLogo {
   delay: number;
 }
 
-// Desktop ambient set
+// Desktop ambient set (24 items)
 const DESKTOP_ITEMS: FloatingLogo[] = [
   // Top left cluster
-  { id: 'f-1', type: 'tiktok', size: 50, startX: 6, startY: 10, xMoves: [0, 25, -15, 0], yMoves: [0, -35, 20, 0], rotates: [0, 20, -15, 0], duration: 18, delay: 0 },
-  { id: 'f-2', type: 'instagram', size: 38, startX: 18, startY: 8, xMoves: [0, -20, 25, 0], yMoves: [0, 40, -20, 0], rotates: [0, -25, 15, 0], duration: 15, delay: 1 },
-  { id: 'f-3', type: 'youtube', size: 54, startX: 28, startY: 14, xMoves: [0, 30, -20, 0], yMoves: [0, -30, 25, 0], rotates: [0, 15, -20, 0], duration: 20, delay: 2 },
+  { id: 'f-1', type: 'tiktok', size: 50, startX: 6, startY: 10, xMoves: [0, 25, -15, 0], yMoves: [0, -35, 20, 0], rotates: [0, 20, -15, 0], duration: 15, delay: 0 },
+  { id: 'f-2', type: 'instagram', size: 38, startX: 18, startY: 8, xMoves: [0, -20, 25, 0], yMoves: [0, 40, -20, 0], rotates: [0, -25, 15, 0], duration: 13, delay: 1 },
+  { id: 'f-3', type: 'youtube', size: 54, startX: 28, startY: 14, xMoves: [0, 30, -20, 0], yMoves: [0, -30, 25, 0], rotates: [0, 15, -20, 0], duration: 16, delay: 2 },
   
   // Top right cluster
-  { id: 'f-4', type: 'spotify', size: 46, startX: 72, startY: 9, xMoves: [0, -25, 20, 0], yMoves: [0, 35, -25, 0], rotates: [0, -15, 20, 0], duration: 17, delay: 0.5 },
-  { id: 'f-5', type: 'twitter', size: 52, startX: 84, startY: 12, xMoves: [0, 20, -30, 0], yMoves: [0, -40, 15, 0], rotates: [0, 25, -10, 0], duration: 19, delay: 1.5 },
-  { id: 'f-6', type: 'threads', size: 40, startX: 94, startY: 8, xMoves: [0, -15, 15, 0], yMoves: [0, 25, -30, 0], rotates: [0, -20, 15, 0], duration: 16, delay: 3 },
+  { id: 'f-4', type: 'spotify', size: 46, startX: 72, startY: 9, xMoves: [0, -25, 20, 0], yMoves: [0, 35, -25, 0], rotates: [0, -15, 20, 0], duration: 14, delay: 0.5 },
+  { id: 'f-5', type: 'twitter', size: 52, startX: 84, startY: 12, xMoves: [0, 20, -30, 0], yMoves: [0, -40, 15, 0], rotates: [0, 25, -10, 0], duration: 15, delay: 1.5 },
+  { id: 'f-6', type: 'threads', size: 40, startX: 94, startY: 8, xMoves: [0, -15, 15, 0], yMoves: [0, 25, -30, 0], rotates: [0, -20, 15, 0], duration: 13, delay: 3 },
 
   // Mid left flank
-  { id: 'f-7', type: 'facebook', size: 48, startX: 4, startY: 34, xMoves: [0, 35, -10, 0], yMoves: [0, -30, 30, 0], rotates: [0, 15, -25, 0], duration: 21, delay: 2 },
-  { id: 'f-8', type: 'instagram', size: 60, startX: 14, startY: 42, xMoves: [0, -25, 30, 0], yMoves: [0, 35, -20, 0], rotates: [0, -18, 18, 0], duration: 22, delay: 0.8 },
-  { id: 'f-9', type: 'pinterest', size: 36, startX: 8, startY: 56, xMoves: [0, 20, -25, 0], yMoves: [0, -25, 35, 0], rotates: [0, 30, -15, 0], duration: 16, delay: 3.5 },
+  { id: 'f-7', type: 'facebook', size: 48, startX: 4, startY: 34, xMoves: [0, 35, -10, 0], yMoves: [0, -30, 30, 0], rotates: [0, 15, -25, 0], duration: 17, delay: 2 },
+  { id: 'f-8', type: 'instagram', size: 60, startX: 14, startY: 42, xMoves: [0, -25, 30, 0], yMoves: [0, 35, -20, 0], rotates: [0, -18, 18, 0], duration: 16, delay: 0.8 },
+  { id: 'f-9', type: 'soundcloud', size: 46, startX: 8, startY: 56, xMoves: [0, 20, -25, 0], yMoves: [0, -25, 35, 0], rotates: [0, 25, -15, 0], duration: 14, delay: 2.5 },
 
   // Mid right flank
-  { id: 'f-10', type: 'tiktok', size: 62, startX: 88, startY: 36, xMoves: [0, -30, 20, 0], yMoves: [0, 45, -25, 0], rotates: [0, -20, 25, 0], duration: 23, delay: 1.2 },
-  { id: 'f-11', type: 'youtube', size: 44, startX: 78, startY: 46, xMoves: [0, 25, -35, 0], yMoves: [0, -35, 20, 0], rotates: [0, 20, -15, 0], duration: 18, delay: 2.8 },
-  { id: 'f-12', type: 'spotify', size: 54, startX: 92, startY: 58, xMoves: [0, -20, 15, 0], yMoves: [0, 30, -40, 0], rotates: [0, -15, 20, 0], duration: 20, delay: 0.2 },
+  { id: 'f-10', type: 'tiktok', size: 62, startX: 88, startY: 36, xMoves: [0, -30, 20, 0], yMoves: [0, 45, -25, 0], rotates: [0, -20, 25, 0], duration: 17, delay: 1.2 },
+  { id: 'f-11', type: 'capcut', size: 48, startX: 78, startY: 46, xMoves: [0, 25, -35, 0], yMoves: [0, -35, 20, 0], rotates: [0, 20, -15, 0], duration: 15, delay: 2.8 },
+  { id: 'f-12', type: 'spotify', size: 54, startX: 92, startY: 58, xMoves: [0, -20, 15, 0], yMoves: [0, 30, -40, 0], rotates: [0, -15, 20, 0], duration: 16, delay: 0.2 },
 
   // Lower left cluster
-  { id: 'f-13', type: 'twitter', size: 42, startX: 5, startY: 72, xMoves: [0, 30, -20, 0], yMoves: [0, -40, 20, 0], rotates: [0, 25, -20, 0], duration: 17, delay: 1.7 },
-  { id: 'f-14', type: 'threads', size: 48, startX: 18, startY: 78, xMoves: [0, -20, 25, 0], yMoves: [0, 30, -30, 0], rotates: [0, -20, 15, 0], duration: 19, delay: 2.4 },
-  { id: 'f-15', type: 'tiktok', size: 38, startX: 10, startY: 88, xMoves: [0, 25, -15, 0], yMoves: [0, -25, 35, 0], rotates: [0, 15, -25, 0], duration: 15, delay: 0.4 },
+  { id: 'f-13', type: 'twitter', size: 42, startX: 5, startY: 72, xMoves: [0, 30, -20, 0], yMoves: [0, -40, 20, 0], rotates: [0, 25, -20, 0], duration: 14, delay: 1.7 },
+  { id: 'f-14', type: 'threads', size: 48, startX: 18, startY: 78, xMoves: [0, -20, 25, 0], yMoves: [0, 30, -30, 0], rotates: [0, -20, 15, 0], duration: 15, delay: 2.4 },
+  { id: 'f-15', type: 'tiktok', size: 38, startX: 10, startY: 88, xMoves: [0, 25, -15, 0], yMoves: [0, -25, 35, 0], rotates: [0, 15, -25, 0], duration: 13, delay: 0.4 },
 
   // Lower right cluster
-  { id: 'f-16', type: 'facebook', size: 40, startX: 86, startY: 75, xMoves: [0, -25, 30, 0], yMoves: [0, 35, -20, 0], rotates: [0, -25, 20, 0], duration: 16, delay: 2.1 },
-  { id: 'f-17', type: 'instagram', size: 54, startX: 74, startY: 82, xMoves: [0, 20, -25, 0], yMoves: [0, -30, 25, 0], rotates: [0, 18, -15, 0], duration: 21, delay: 1.1 },
-  { id: 'f-18', type: 'youtube', size: 62, startX: 90, startY: 90, xMoves: [0, -30, 20, 0], yMoves: [0, 25, -35, 0], rotates: [0, -15, 25, 0], duration: 24, delay: 3.2 },
+  { id: 'f-16', type: 'facebook', size: 40, startX: 86, startY: 75, xMoves: [0, -25, 30, 0], yMoves: [0, 35, -20, 0], rotates: [0, -25, 20, 0], duration: 14, delay: 2.1 },
+  { id: 'f-17', type: 'instagram', size: 54, startX: 74, startY: 82, xMoves: [0, 20, -25, 0], yMoves: [0, -30, 25, 0], rotates: [0, 18, -15, 0], duration: 16, delay: 1.1 },
+  { id: 'f-18', type: 'youtube', size: 62, startX: 90, startY: 90, xMoves: [0, -30, 20, 0], yMoves: [0, 25, -35, 0], rotates: [0, -15, 25, 0], duration: 18, delay: 3.2 },
 
   // Center ambient floaters
-  { id: 'f-19', type: 'spotify', size: 34, startX: 42, startY: 4, xMoves: [0, 20, -20, 0], yMoves: [0, -20, 20, 0], rotates: [0, 30, -30, 0], duration: 14, delay: 0.6 },
-  { id: 'f-20', type: 'tiktok', size: 36, startX: 56, startY: 5, xMoves: [0, -20, 20, 0], yMoves: [0, 20, -20, 0], rotates: [0, -30, 30, 0], duration: 15, delay: 2.2 },
-  { id: 'f-21', type: 'twitter', size: 32, startX: 34, startY: 88, xMoves: [0, 15, -25, 0], yMoves: [0, -25, 20, 0], rotates: [0, 20, -20, 0], duration: 16, delay: 1.8 },
-  { id: 'f-22', type: 'pinterest', size: 34, startX: 62, startY: 89, xMoves: [0, -25, 15, 0], yMoves: [0, 20, -25, 0], rotates: [0, -20, 20, 0], duration: 17, delay: 0.9 },
-  { id: 'f-23', type: 'instagram', size: 30, startX: 24, startY: 48, xMoves: [0, 20, -15, 0], yMoves: [0, -25, 25, 0], rotates: [0, 25, -25, 0], duration: 13, delay: 3.1 },
-  { id: 'f-24', type: 'youtube', size: 32, startX: 70, startY: 52, xMoves: [0, -20, 20, 0], yMoves: [0, 25, -20, 0], rotates: [0, -25, 25, 0], duration: 14, delay: 1.4 },
+  { id: 'f-19', type: 'soundcloud', size: 40, startX: 42, startY: 4, xMoves: [0, 20, -20, 0], yMoves: [0, -20, 20, 0], rotates: [0, 25, -25, 0], duration: 12, delay: 0.6 },
+  { id: 'f-20', type: 'tiktok', size: 36, startX: 56, startY: 5, xMoves: [0, -20, 20, 0], yMoves: [0, 20, -20, 0], rotates: [0, -30, 30, 0], duration: 13, delay: 2.2 },
+  { id: 'f-21', type: 'twitter', size: 32, startX: 34, startY: 88, xMoves: [0, 15, -25, 0], yMoves: [0, -25, 20, 0], rotates: [0, 20, -20, 0], duration: 14, delay: 1.8 },
+  { id: 'f-22', type: 'capcut', size: 42, startX: 62, startY: 89, xMoves: [0, -25, 15, 0], yMoves: [0, 20, -25, 0], rotates: [0, -20, 20, 0], duration: 13, delay: 0.9 },
+  { id: 'f-23', type: 'instagram', size: 30, startX: 24, startY: 48, xMoves: [0, 20, -15, 0], yMoves: [0, -25, 25, 0], rotates: [0, 25, -25, 0], duration: 11, delay: 3.1 },
+  { id: 'f-24', type: 'youtube', size: 32, startX: 70, startY: 52, xMoves: [0, -20, 20, 0], yMoves: [0, 25, -20, 0], rotates: [0, -25, 25, 0], duration: 12, delay: 1.4 },
 ];
 
 // Mobile ambient set: 14 animated floating logos tuned to mobile viewport dimensions
 const MOBILE_ITEMS: FloatingLogo[] = [
   // Top region
-  { id: 'm-1', type: 'tiktok', size: 38, startX: 6, startY: 8, xMoves: [0, 8, -6, 0], yMoves: [0, -12, 10, 0], rotates: [0, 15, -10, 0], duration: 16, delay: 0 },
-  { id: 'm-2', type: 'youtube', size: 40, startX: 78, startY: 9, xMoves: [0, -8, 6, 0], yMoves: [0, 14, -8, 0], rotates: [0, -12, 15, 0], duration: 17, delay: 0.5 },
-  { id: 'm-3', type: 'instagram', size: 32, startX: 22, startY: 15, xMoves: [0, 6, -8, 0], yMoves: [0, 10, -12, 0], rotates: [0, -15, 12, 0], duration: 14, delay: 1.2 },
-  { id: 'm-4', type: 'spotify', size: 36, startX: 68, startY: 16, xMoves: [0, -6, 8, 0], yMoves: [0, -10, 12, 0], rotates: [0, 12, -15, 0], duration: 15, delay: 1.8 },
+  { id: 'm-1', type: 'tiktok', size: 38, startX: 6, startY: 8, xMoves: [0, 10, -8, 0], yMoves: [0, -15, 12, 0], rotates: [0, 18, -12, 0], duration: 13, delay: 0 },
+  { id: 'm-2', type: 'youtube', size: 40, startX: 78, startY: 9, xMoves: [0, -10, 8, 0], yMoves: [0, 16, -10, 0], rotates: [0, -15, 18, 0], duration: 14, delay: 0.5 },
+  { id: 'm-3', type: 'instagram', size: 32, startX: 22, startY: 15, xMoves: [0, 8, -10, 0], yMoves: [0, 12, -14, 0], rotates: [0, -18, 14, 0], duration: 12, delay: 1.2 },
+  { id: 'm-4', type: 'soundcloud', size: 36, startX: 68, startY: 16, xMoves: [0, -8, 10, 0], yMoves: [0, -12, 14, 0], rotates: [0, 14, -18, 0], duration: 13, delay: 1.8 },
 
   // Mid region (flanks)
-  { id: 'm-5', type: 'twitter', size: 34, startX: 5, startY: 35, xMoves: [0, 8, -4, 0], yMoves: [0, -12, 10, 0], rotates: [0, 15, -12, 0], duration: 18, delay: 0.8 },
-  { id: 'm-6', type: 'tiktok', size: 40, startX: 80, startY: 37, xMoves: [0, -8, 5, 0], yMoves: [0, 12, -10, 0], rotates: [0, -15, 12, 0], duration: 19, delay: 1.5 },
-  { id: 'm-7', type: 'pinterest', size: 32, startX: 7, startY: 52, xMoves: [0, 6, -6, 0], yMoves: [0, -10, 12, 0], rotates: [0, 20, -10, 0], duration: 15, delay: 2.2 },
-  { id: 'm-8', type: 'instagram', size: 42, startX: 76, startY: 54, xMoves: [0, -6, 8, 0], yMoves: [0, 14, -12, 0], rotates: [0, -12, 16, 0], duration: 20, delay: 0.4 },
+  { id: 'm-5', type: 'twitter', size: 34, startX: 5, startY: 35, xMoves: [0, 10, -6, 0], yMoves: [0, -14, 12, 0], rotates: [0, 18, -14, 0], duration: 14, delay: 0.8 },
+  { id: 'm-6', type: 'capcut', size: 38, startX: 80, startY: 37, xMoves: [0, -10, 7, 0], yMoves: [0, 14, -12, 0], rotates: [0, -18, 14, 0], duration: 15, delay: 1.5 },
+  { id: 'm-7', type: 'pinterest', size: 32, startX: 7, startY: 52, xMoves: [0, 8, -8, 0], yMoves: [0, -12, 14, 0], rotates: [0, 22, -12, 0], duration: 12, delay: 2.2 },
+  { id: 'm-8', type: 'threads', size: 38, startX: 76, startY: 54, xMoves: [0, -8, 10, 0], yMoves: [0, 16, -14, 0], rotates: [0, -15, 18, 0], duration: 14, delay: 0.4 },
 
   // Lower region
-  { id: 'm-9', type: 'facebook', size: 34, startX: 6, startY: 69, xMoves: [0, 7, -6, 0], yMoves: [0, -12, 8, 0], rotates: [0, 14, -14, 0], duration: 17, delay: 1.1 },
-  { id: 'm-10', type: 'threads', size: 36, startX: 78, startY: 71, xMoves: [0, -8, 6, 0], yMoves: [0, 10, -12, 0], rotates: [0, -16, 12, 0], duration: 16, delay: 2.5 },
-  { id: 'm-11', type: 'youtube', size: 40, startX: 8, startY: 84, xMoves: [0, 6, -8, 0], yMoves: [0, -10, 10, 0], rotates: [0, 12, -12, 0], duration: 18, delay: 0.7 },
-  { id: 'm-12', type: 'spotify', size: 38, startX: 74, startY: 86, xMoves: [0, -7, 6, 0], yMoves: [0, 12, -8, 0], rotates: [0, -14, 14, 0], duration: 15, delay: 1.9 },
-  { id: 'm-13', type: 'twitter', size: 30, startX: 28, startY: 93, xMoves: [0, 5, -5, 0], yMoves: [0, -8, 8, 0], rotates: [0, 15, -15, 0], duration: 14, delay: 1.3 },
-  { id: 'm-14', type: 'tiktok', size: 32, startX: 58, startY: 93, xMoves: [0, -6, 5, 0], yMoves: [0, 8, -8, 0], rotates: [0, -12, 12, 0], duration: 16, delay: 2.1 },
+  { id: 'm-9', type: 'facebook', size: 34, startX: 6, startY: 69, xMoves: [0, 9, -8, 0], yMoves: [0, -14, 10, 0], rotates: [0, 16, -16, 0], duration: 13, delay: 1.1 },
+  { id: 'm-10', type: 'instagram', size: 38, startX: 78, startY: 71, xMoves: [0, -10, 8, 0], yMoves: [0, 12, -14, 0], rotates: [0, -18, 14, 0], duration: 14, delay: 2.5 },
+  { id: 'm-11', type: 'soundcloud', size: 38, startX: 8, startY: 84, xMoves: [0, 8, -10, 0], yMoves: [0, -12, 12, 0], rotates: [0, 14, -14, 0], duration: 13, delay: 0.7 },
+  { id: 'm-12', type: 'spotify', size: 38, startX: 74, startY: 86, xMoves: [0, -9, 8, 0], yMoves: [0, 14, -10, 0], rotates: [0, -16, 16, 0], duration: 12, delay: 1.9 },
+  { id: 'm-13', type: 'capcut', size: 34, startX: 28, startY: 93, xMoves: [0, 7, -7, 0], yMoves: [0, -10, 10, 0], rotates: [0, 18, -18, 0], duration: 12, delay: 1.3 },
+  { id: 'm-14', type: 'tiktok', size: 34, startX: 58, startY: 93, xMoves: [0, -8, 7, 0], yMoves: [0, 10, -10, 0], rotates: [0, -14, 14, 0], duration: 13, delay: 2.1 },
 ];
 
 export const SocialBackground: React.FC = () => {
