@@ -14,7 +14,9 @@
 }
 
 html {
-  overflow-x: clip;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -22,7 +24,9 @@ body {
   color: #f4f4f5;
   font-family: var(--font-jakarta);
   min-height: 100vh;
-  overflow-x: clip;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

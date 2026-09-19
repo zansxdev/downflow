@@ -128,10 +128,10 @@ export default function HomePage() {
   };
 
   return (
-    <div className="relative flex flex-col min-h-screen">
+    <div className="relative flex flex-col min-h-screen w-full max-w-full overflow-x-hidden">
       <Navbar onOpenHistory={() => setIsHistoryOpen(true)} historyCount={history.length} />
 
-      <main className="flex-1 w-full max-w-4xl mx-auto px-4 py-6 sm:py-14 flex flex-col items-center z-10">
+      <main className="flex-1 w-full max-w-4xl mx-auto px-4 py-6 sm:py-14 flex flex-col items-center z-10 overflow-x-hidden">
         {/* Animated Hero Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

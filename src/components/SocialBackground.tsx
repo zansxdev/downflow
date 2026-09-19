@@ -102,63 +102,51 @@ const DESKTOP_ITEMS: FloatingLogo[] = [
   { id: 'f-24', type: 'youtube', size: 32, startX: 70, startY: 52, xMoves: [0, -20, 20, 0], yMoves: [0, 25, -20, 0], rotates: [0, -25, 25, 0], duration: 14, delay: 1.4 },
 ];
 
-// Minimal mobile set: strictly 4 small subtle marks at screen corners to prevent cluttering the mobile layout
-const MOBILE_ITEMS: FloatingLogo[] = [
-  { id: 'm-1', type: 'tiktok', size: 22, startX: 5, startY: 6, xMoves: [0, 6, -6, 0], yMoves: [0, -8, 6, 0], rotates: [0, 12, -10, 0], duration: 16, delay: 0 },
-  { id: 'm-2', type: 'youtube', size: 24, startX: 86, startY: 6, xMoves: [0, -6, 6, 0], yMoves: [0, 8, -6, 0], rotates: [0, -10, 12, 0], duration: 18, delay: 1 },
-  { id: 'm-3', type: 'instagram', size: 22, startX: 6, startY: 90, xMoves: [0, 6, -6, 0], yMoves: [0, -6, 8, 0], rotates: [0, 10, -12, 0], duration: 17, delay: 0.5 },
-  { id: 'm-4', type: 'spotify', size: 22, startX: 85, startY: 90, xMoves: [0, -6, 6, 0], yMoves: [0, 8, -8, 0], rotates: [0, -12, 10, 0], duration: 15, delay: 1.5 },
+interface MobileCornerLogo {
+  id: string;
+  type: IconKey;
+  size: number;
+  position: {
+    top?: string;
+    bottom?: string;
+    left?: string;
+    right?: string;
+  };
+}
+
+// Minimal mobile set: strictly 4 small subtle marks at screen corners without animation to prevent any layout shifts
+const MOBILE_ITEMS: MobileCornerLogo[] = [
+  { id: 'm-1', type: 'tiktok', size: 20, position: { top: '4%', left: '4%' } },
+  { id: 'm-2', type: 'youtube', size: 22, position: { top: '4%', right: '4%' } },
+  { id: 'm-3', type: 'instagram', size: 20, position: { bottom: '6%', left: '4%' } },
+  { id: 'm-4', type: 'spotify', size: 20, position: { bottom: '6%', right: '4%' } },
 ];
 
 export const SocialBackground: React.FC = () => {
   return (
     <div
-      className="pointer-events-none select-none"
+      aria-hidden="true"
+      className="fixed inset-0 pointer-events-none select-none overflow-hidden max-w-full z-0"
       style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        width: '100vw',
-        height: '100vh',
-        overflow: 'hidden',
-        zIndex: 0,
-        transform: 'translateZ(0)',
-        WebkitTransform: 'translateZ(0)',
-        backfaceVisibility: 'hidden',
-        WebkitBackfaceVisibility: 'hidden',
-        contain: 'paint layout',
+        contain: 'strict',
       }}
     >
       {/* Mobile items (hidden on sm+) */}
       <div className="block sm:hidden">
         {MOBILE_ITEMS.map((item) => (
-          <motion.div
+          <div
             key={item.id}
             style={{
               position: 'absolute',
-              left: `${item.startX}vw`,
-              top: `${item.startY}vh`,
+              ...item.position,
               width: item.size,
               height: item.size,
-              opacity: 0.2, // Very soft 20% on mobile
-              willChange: 'transform',
-              transform: 'translateZ(0)',
+              opacity: 0.2,
             }}
             className="text-zinc-500"
-            animate={{
-              x: item.xMoves,
-              y: item.yMoves,
-              rotate: item.rotates,
-            }}
-            transition={{
-              duration: item.duration,
-              repeat: Infinity,
-              ease: 'easeInOut',
-              delay: item.delay,
-            }}
           >
             {ICONS[item.type]}
-          </motion.div>
+          </div>
         ))}
       </div>
 
@@ -169,13 +157,12 @@ export const SocialBackground: React.FC = () => {
             key={item.id}
             style={{
               position: 'absolute',
-              left: `${item.startX}vw`,
-              top: `${item.startY}vh`,
+              left: `${item.startX}%`,
+              top: `${item.startY}%`,
               width: item.size,
               height: item.size,
               opacity: 0.28,
               willChange: 'transform',
-              transform: 'translateZ(0)',
             }}
             className="text-zinc-500"
             animate={{

@@ -52,7 +52,7 @@ export const UrlInputBar: React.FC<UrlInputBarProps> = ({
       <motion.div
         animate={{ scale: isLoading ? 0.99 : 1 }}
         transition={{ duration: 0.2 }}
-        className="relative flex flex-col sm:flex-row sm:items-center bg-[#0c0c10]/95 backdrop-blur-md border border-[#24242c] focus-within:border-zinc-400 rounded-xl p-2 sm:p-2.5 transition-colors shadow-xl gap-2 sm:gap-1.5"
+        className="relative flex flex-col sm:flex-row sm:items-center bg-[#0c0c10]/95 backdrop-blur-md border border-[#24242c] focus-within:border-zinc-400 rounded-xl p-2 sm:p-2.5 transition-colors shadow-xl gap-2 sm:gap-1.5 w-full max-w-full overflow-hidden"
       >
         <div className="flex items-center flex-1 min-w-0">
           <div className="pl-2 pr-1 text-zinc-500 flex items-center shrink-0">
@@ -75,7 +75,7 @@ export const UrlInputBar: React.FC<UrlInputBarProps> = ({
                 : 'Tempel link video atau audio di sini...'
             }
             disabled={isLoading}
-            className="w-full bg-transparent px-2.5 py-2.5 sm:py-2 text-sm text-zinc-100 placeholder:text-zinc-600 focus:outline-none disabled:opacity-50 font-sans"
+            className="flex-1 min-w-0 bg-transparent px-2.5 py-2.5 sm:py-2 text-sm text-zinc-100 placeholder:text-zinc-600 focus:outline-none disabled:opacity-50 font-sans"
             aria-label="Input URL Media"
           />
 

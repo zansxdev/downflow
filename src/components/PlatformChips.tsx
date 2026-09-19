@@ -53,41 +53,36 @@ export const PlatformChips: React.FC<PlatformChipsProps> = ({
   onSelectPlatform,
 }) => {
   return (
-    <div
-      className="w-full overflow-x-auto no-scrollbar py-1.5 scroll-smooth -mx-4 px-4 sm:mx-0 sm:px-0"
-      style={{ WebkitOverflowScrolling: 'touch' }}
-    >
-      <div className="flex items-center gap-2 min-w-max pb-0.5">
-        {PLATFORMS.map((platform) => {
-          const isSelected = selectedPlatform === platform.id;
-          return (
-            <motion.button
-              key={platform.id}
-              type="button"
-              onClick={() => onSelectPlatform(platform.id)}
-              whileHover={{ y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              className={`relative flex items-center gap-1.5 px-3.5 py-2 sm:py-1.5 min-h-[38px] sm:min-h-0 rounded-lg text-xs font-medium transition-colors cursor-pointer border ${
-                isSelected
-                  ? 'text-white border-zinc-500 bg-zinc-800 shadow-sm'
-                  : 'text-zinc-400 hover:text-zinc-200 border-[#1e1e24] bg-[#0c0c10] hover:bg-[#14141a]'
-              }`}
-            >
-              {isSelected && (
-                <motion.div
-                  layoutId="activePlatformIndicator"
-                  className="absolute inset-0 rounded-lg bg-zinc-800 border border-zinc-500 -z-10"
-                  transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                />
-              )}
-              {ICONS[platform.id] && (
-                <span className="shrink-0 text-zinc-400">{ICONS[platform.id]}</span>
-              )}
-              <span className="whitespace-nowrap">{platform.name}</span>
-            </motion.button>
-          );
-        })}
-      </div>
+    <div className="w-full flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 py-1">
+      {PLATFORMS.map((platform) => {
+        const isSelected = selectedPlatform === platform.id;
+        return (
+          <motion.button
+            key={platform.id}
+            type="button"
+            onClick={() => onSelectPlatform(platform.id)}
+            whileHover={{ y: -1 }}
+            whileTap={{ scale: 0.96 }}
+            className={`relative flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors cursor-pointer border ${
+              isSelected
+                ? 'text-white border-zinc-500 bg-zinc-800 shadow-sm'
+                : 'text-zinc-400 hover:text-zinc-200 border-[#1e1e24] bg-[#0c0c10] hover:bg-[#14141a]'
+            }`}
+          >
+            {isSelected && (
+              <motion.div
+                layoutId="activePlatformIndicator"
+                className="absolute inset-0 rounded-lg bg-zinc-800 border border-zinc-500 -z-10"
+                transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+              />
+            )}
+            {ICONS[platform.id] && (
+              <span className="shrink-0 text-zinc-400">{ICONS[platform.id]}</span>
+            )}
+            <span>{platform.name}</span>
+          </motion.button>
+        );
+      })}
     </div>
   );
 };
