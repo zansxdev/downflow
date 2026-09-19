@@ -1,8 +1,16 @@
 [
   {
+    "id": "wl-1789811083050-wxz6",
+    "ip": "114.10.16.236",
+    "label": "IP Saya (Otomatis)",
+    "createdAt": 1789811083050,
+    "bypassBotBlock": true,
+    "allowAdmin": true
+  },
+  {
     "id": "wl-1789810816296-ct1p",
     "ip": "104.234.26.109",
-    "label": "VPS Server",
+    "label": "ip gw",
     "createdAt": 1789810816296,
     "bypassBotBlock": true,
     "allowAdmin": true

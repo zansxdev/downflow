@@ -102,24 +102,27 @@ const DESKTOP_ITEMS: FloatingLogo[] = [
   { id: 'f-24', type: 'youtube', size: 32, startX: 70, startY: 52, xMoves: [0, -20, 20, 0], yMoves: [0, 25, -20, 0], rotates: [0, -25, 25, 0], duration: 14, delay: 1.4 },
 ];
 
-interface MobileCornerLogo {
-  id: string;
-  type: IconKey;
-  size: number;
-  position: {
-    top?: string;
-    bottom?: string;
-    left?: string;
-    right?: string;
-  };
-}
+// Mobile ambient set: 14 animated floating logos tuned to mobile viewport dimensions
+const MOBILE_ITEMS: FloatingLogo[] = [
+  // Top region
+  { id: 'm-1', type: 'tiktok', size: 38, startX: 6, startY: 8, xMoves: [0, 8, -6, 0], yMoves: [0, -12, 10, 0], rotates: [0, 15, -10, 0], duration: 16, delay: 0 },
+  { id: 'm-2', type: 'youtube', size: 40, startX: 78, startY: 9, xMoves: [0, -8, 6, 0], yMoves: [0, 14, -8, 0], rotates: [0, -12, 15, 0], duration: 17, delay: 0.5 },
+  { id: 'm-3', type: 'instagram', size: 32, startX: 22, startY: 15, xMoves: [0, 6, -8, 0], yMoves: [0, 10, -12, 0], rotates: [0, -15, 12, 0], duration: 14, delay: 1.2 },
+  { id: 'm-4', type: 'spotify', size: 36, startX: 68, startY: 16, xMoves: [0, -6, 8, 0], yMoves: [0, -10, 12, 0], rotates: [0, 12, -15, 0], duration: 15, delay: 1.8 },
 
-// Minimal mobile set: strictly 4 small subtle marks at screen corners without animation to prevent any layout shifts
-const MOBILE_ITEMS: MobileCornerLogo[] = [
-  { id: 'm-1', type: 'tiktok', size: 20, position: { top: '4%', left: '4%' } },
-  { id: 'm-2', type: 'youtube', size: 22, position: { top: '4%', right: '4%' } },
-  { id: 'm-3', type: 'instagram', size: 20, position: { bottom: '6%', left: '4%' } },
-  { id: 'm-4', type: 'spotify', size: 20, position: { bottom: '6%', right: '4%' } },
+  // Mid region (flanks)
+  { id: 'm-5', type: 'twitter', size: 34, startX: 5, startY: 35, xMoves: [0, 8, -4, 0], yMoves: [0, -12, 10, 0], rotates: [0, 15, -12, 0], duration: 18, delay: 0.8 },
+  { id: 'm-6', type: 'tiktok', size: 40, startX: 80, startY: 37, xMoves: [0, -8, 5, 0], yMoves: [0, 12, -10, 0], rotates: [0, -15, 12, 0], duration: 19, delay: 1.5 },
+  { id: 'm-7', type: 'pinterest', size: 32, startX: 7, startY: 52, xMoves: [0, 6, -6, 0], yMoves: [0, -10, 12, 0], rotates: [0, 20, -10, 0], duration: 15, delay: 2.2 },
+  { id: 'm-8', type: 'instagram', size: 42, startX: 76, startY: 54, xMoves: [0, -6, 8, 0], yMoves: [0, 14, -12, 0], rotates: [0, -12, 16, 0], duration: 20, delay: 0.4 },
+
+  // Lower region
+  { id: 'm-9', type: 'facebook', size: 34, startX: 6, startY: 69, xMoves: [0, 7, -6, 0], yMoves: [0, -12, 8, 0], rotates: [0, 14, -14, 0], duration: 17, delay: 1.1 },
+  { id: 'm-10', type: 'threads', size: 36, startX: 78, startY: 71, xMoves: [0, -8, 6, 0], yMoves: [0, 10, -12, 0], rotates: [0, -16, 12, 0], duration: 16, delay: 2.5 },
+  { id: 'm-11', type: 'youtube', size: 40, startX: 8, startY: 84, xMoves: [0, 6, -8, 0], yMoves: [0, -10, 10, 0], rotates: [0, 12, -12, 0], duration: 18, delay: 0.7 },
+  { id: 'm-12', type: 'spotify', size: 38, startX: 74, startY: 86, xMoves: [0, -7, 6, 0], yMoves: [0, 12, -8, 0], rotates: [0, -14, 14, 0], duration: 15, delay: 1.9 },
+  { id: 'm-13', type: 'twitter', size: 30, startX: 28, startY: 93, xMoves: [0, 5, -5, 0], yMoves: [0, -8, 8, 0], rotates: [0, 15, -15, 0], duration: 14, delay: 1.3 },
+  { id: 'm-14', type: 'tiktok', size: 32, startX: 58, startY: 93, xMoves: [0, -6, 5, 0], yMoves: [0, 8, -8, 0], rotates: [0, -12, 12, 0], duration: 16, delay: 2.1 },
 ];
 
 export const SocialBackground: React.FC = () => {
@@ -134,19 +137,32 @@ export const SocialBackground: React.FC = () => {
       {/* Mobile items (hidden on sm+) */}
       <div className="block sm:hidden">
         {MOBILE_ITEMS.map((item) => (
-          <div
+          <motion.div
             key={item.id}
             style={{
               position: 'absolute',
-              ...item.position,
+              left: `${item.startX}%`,
+              top: `${item.startY}%`,
               width: item.size,
               height: item.size,
-              opacity: 0.2,
+              opacity: 0.42,
+              willChange: 'transform',
             }}
-            className="text-zinc-500"
+            className="text-zinc-400"
+            animate={{
+              x: item.xMoves,
+              y: item.yMoves,
+              rotate: item.rotates,
+            }}
+            transition={{
+              duration: item.duration,
+              repeat: Infinity,
+              ease: 'easeInOut',
+              delay: item.delay,
+            }}
           >
             {ICONS[item.type]}
-          </div>
+          </motion.div>
         ))}
       </div>
 
@@ -161,10 +177,10 @@ export const SocialBackground: React.FC = () => {
               top: `${item.startY}%`,
               width: item.size,
               height: item.size,
-              opacity: 0.28,
+              opacity: 0.44,
               willChange: 'transform',
             }}
-            className="text-zinc-500"
+            className="text-zinc-400"
             animate={{
               x: item.xMoves,
               y: item.yMoves,
