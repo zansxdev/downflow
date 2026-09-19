@@ -1,0 +1,29 @@
+{
+  "name": "downflow",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Ultra-clean, dark aesthetic universal media downloader powered by Fastify REST backend & Framer Motion",
+  "scripts": {
+    "dev": "next dev -p 3080",
+    "build": "next build",
+    "start": "next start -p 3080"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.43.0",
+    "lucide-react": "^1.27.0",
+    "next": "^15.1.7",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tailwind-merge": "^3.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.0",
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.5.1",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.7.3"
+  }
+}
