@@ -135,65 +135,49 @@
   color: #000000 !important;
 }
 
-/* Neo-Brutalism Authentic Brand Colors */
-[data-theme="neo"] .platform-icon-tiktok,
-[data-theme="neo"] .social-icon-tiktok {
+/* Neo-Brutalism Authentic Brand Colors for Platform Chips */
+[data-theme="neo"] .platform-icon-tiktok {
   color: #ff0050 !important;
 }
 
-[data-theme="neo"] .platform-icon-instagram,
-[data-theme="neo"] .social-icon-instagram {
+[data-theme="neo"] .platform-icon-instagram {
   color: #e1306c !important;
 }
 
-[data-theme="neo"] .platform-icon-youtube,
-[data-theme="neo"] .social-icon-youtube {
+[data-theme="neo"] .platform-icon-youtube {
   color: #ff0000 !important;
 }
 
-[data-theme="neo"] .platform-icon-spotify,
-[data-theme="neo"] .social-icon-spotify {
+[data-theme="neo"] .platform-icon-spotify {
   color: #1db954 !important;
 }
 
-[data-theme="neo"] .platform-icon-twitter,
-[data-theme="neo"] .social-icon-twitter {
+[data-theme="neo"] .platform-icon-twitter {
   color: #1da1f2 !important;
 }
 
-[data-theme="neo"] .platform-icon-facebook,
-[data-theme="neo"] .social-icon-facebook {
+[data-theme="neo"] .platform-icon-facebook {
   color: #1877f2 !important;
 }
 
-[data-theme="neo"] .platform-icon-pinterest,
-[data-theme="neo"] .social-icon-pinterest {
+[data-theme="neo"] .platform-icon-pinterest {
   color: #e60023 !important;
 }
 
-[data-theme="neo"] .platform-icon-soundcloud,
-[data-theme="neo"] .social-icon-soundcloud {
+[data-theme="neo"] .platform-icon-soundcloud {
   color: #ff5500 !important;
 }
 
-[data-theme="neo"] .platform-icon-capcut,
-[data-theme="neo"] .social-icon-capcut {
+[data-theme="neo"] .platform-icon-capcut {
   color: #000000 !important;
 }
 
-[data-theme="neo"] .platform-icon-threads,
-[data-theme="neo"] .social-icon-threads {
+[data-theme="neo"] .platform-icon-threads {
   color: #000000 !important;
 }
 
 [data-theme="neo"] .platform-icon-auto {
   color: #d97706 !important;
-}
-
-/* Floating Neo-Brutalist Sticker Effect */
-[data-theme="neo"] .social-floating-icon {
-  opacity: 0.35 !important;
-  filter: drop-shadow(2px 2px 0px #000000) !important;
 }
 
 [data-theme="neo"] .platform-chip {
