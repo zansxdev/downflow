@@ -28,6 +28,12 @@
   --footer-border: #18181f;
   --selection-bg: #27272a;
   --selection-text: #ffffff;
+  --hero-title-gradient: linear-gradient(180deg, #ffffff 40%, #a1a1aa 100%);
+  --hero-title-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  --btn-primary-bg: #ffffff;
+  --btn-primary-text: #050505;
+  --btn-primary-border: rgba(255, 255, 255, 0.1);
+  --btn-primary-shadow: 0 4px 14px rgba(255, 255, 255, 0.12);
 }
 
 [data-theme="light"] {
@@ -56,34 +62,46 @@
   --footer-border: #e2e8f0;
   --selection-bg: #e2e8f0;
   --selection-text: #0f172a;
+  --hero-title-gradient: linear-gradient(180deg, #0f172a 20%, #334155 100%);
+  --hero-title-shadow: none;
+  --btn-primary-bg: #0f172a;
+  --btn-primary-text: #ffffff;
+  --btn-primary-border: transparent;
+  --btn-primary-shadow: 0 4px 14px rgba(15, 23, 42, 0.18);
 }
 
 [data-theme="liquid"] {
-  --bg-canvas: #070913;
-  --bg-surface: rgba(255, 255, 255, 0.04);
-  --bg-surface-elevated: rgba(255, 255, 255, 0.08);
-  --bg-input: rgba(255, 255, 255, 0.05);
-  --border-subtle: rgba(255, 255, 255, 0.14);
-  --border-strong: rgba(255, 255, 255, 0.28);
+  --bg-canvas: #050711;
+  --bg-surface: rgba(255, 255, 255, 0.08);
+  --bg-surface-elevated: rgba(255, 255, 255, 0.13);
+  --bg-input: rgba(255, 255, 255, 0.08);
+  --border-subtle: rgba(255, 255, 255, 0.2);
+  --border-strong: rgba(255, 255, 255, 0.4);
   --text-primary: #ffffff;
-  --text-secondary: #cbd5e1;
+  --text-secondary: #e2e8f0;
   --text-muted: #94a3b8;
   --accent-primary: #38bdf8;
-  --accent-glow: rgba(56, 189, 248, 0.2);
-  --glass-blur: 28px;
-  --card-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.22);
-  --chip-bg: rgba(255, 255, 255, 0.05);
-  --chip-border: rgba(255, 255, 255, 0.14);
-  --chip-text: #cbd5e1;
-  --chip-active-bg: rgba(255, 255, 255, 0.18);
-  --chip-active-border: rgba(255, 255, 255, 0.38);
+  --accent-glow: rgba(56, 189, 248, 0.4);
+  --glass-blur: 32px;
+  --card-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.75), 0 0 35px -5px rgba(56, 189, 248, 0.22), inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.55), inset 0 -1px 1px 0 rgba(255, 255, 255, 0.1);
+  --chip-bg: rgba(255, 255, 255, 0.08);
+  --chip-border: rgba(255, 255, 255, 0.2);
+  --chip-text: #e2e8f0;
+  --chip-active-bg: linear-gradient(135deg, rgba(56, 189, 248, 0.35) 0%, rgba(139, 92, 246, 0.3) 100%);
+  --chip-active-border: rgba(255, 255, 255, 0.6);
   --chip-active-text: #ffffff;
-  --bg-icon-color: #7dd3fc;
-  --bg-icon-opacity: 0.44;
-  --navbar-border: rgba(255, 255, 255, 0.12);
-  --footer-border: rgba(255, 255, 255, 0.12);
-  --selection-bg: rgba(56, 189, 248, 0.3);
+  --bg-icon-color: #38bdf8;
+  --bg-icon-opacity: 0.55;
+  --navbar-border: rgba(255, 255, 255, 0.18);
+  --footer-border: rgba(255, 255, 255, 0.18);
+  --selection-bg: rgba(56, 189, 248, 0.4);
   --selection-text: #ffffff;
+  --hero-title-gradient: linear-gradient(135deg, #ffffff 10%, #7dd3fc 45%, #c084fc 80%, #38bdf8 100%);
+  --hero-title-shadow: 0 0 35px rgba(56, 189, 248, 0.5);
+  --btn-primary-bg: linear-gradient(135deg, #06b6d4 0%, #3b82f6 50%, #8b5cf6 100%);
+  --btn-primary-text: #ffffff;
+  --btn-primary-border: rgba(255, 255, 255, 0.5);
+  --btn-primary-shadow: 0 10px 30px -5px rgba(6, 182, 212, 0.6), inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.75);
 }
 
 * {
@@ -109,12 +127,29 @@ body {
   transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
 }
 
-[data-theme="liquid"] body {
-  background-image: 
-    radial-gradient(circle at 50% -10%, rgba(99, 102, 241, 0.18) 0%, transparent 50%),
-    radial-gradient(circle at 90% 40%, rgba(168, 85, 247, 0.14) 0%, transparent 45%),
-    radial-gradient(circle at 10% 80%, rgba(56, 189, 248, 0.12) 0%, transparent 45%);
-  background-attachment: fixed;
+/* Aurora Layer for Liquid Glass Mode */
+.liquid-aurora-layer {
+  display: none;
+}
+
+[data-theme="liquid"] .liquid-aurora-layer {
+  display: block;
+}
+
+[data-theme="liquid"] .liquid-glass-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.11) 0%, rgba(255, 255, 255, 0.03) 100%) !important;
+  backdrop-filter: blur(28px) saturate(190%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(190%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+  box-shadow: 
+    0 25px 60px -15px rgba(0, 0, 0, 0.75),
+    0 0 35px -5px rgba(56, 189, 248, 0.22),
+    inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.55),
+    inset 0 -1px 1px 0 rgba(255, 255, 255, 0.08) !important;
+}
+
+[data-theme="liquid"] .social-icon-floater {
+  filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.55));
 }
 
 [data-theme="light"] body {

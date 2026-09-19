@@ -52,7 +52,7 @@ export const UrlInputBar: React.FC<UrlInputBarProps> = ({
       <motion.div
         animate={{ scale: isLoading ? 0.99 : 1 }}
         transition={{ duration: 0.2 }}
-        className="relative flex flex-col sm:flex-row sm:items-center bg-[var(--bg-surface)] backdrop-blur-xl border border-[var(--border-subtle)] focus-within:border-[var(--border-strong)] rounded-2xl p-2 sm:p-2.5 transition-all shadow-[var(--card-shadow)] gap-2 sm:gap-1.5 w-full max-w-full overflow-hidden"
+        className="relative flex flex-col sm:flex-row sm:items-center bg-[var(--bg-surface)] backdrop-blur-xl border border-[var(--border-subtle)] focus-within:border-[var(--border-strong)] rounded-2xl p-2 sm:p-2.5 transition-all shadow-[var(--card-shadow)] gap-2 sm:gap-1.5 w-full max-w-full overflow-hidden liquid-glass-card"
       >
         <div className="flex items-center flex-1 min-w-0">
           <div className="pl-2 pr-1 text-[var(--text-muted)] flex items-center shrink-0">
@@ -130,7 +130,13 @@ export const UrlInputBar: React.FC<UrlInputBarProps> = ({
             disabled={isLoading || !url.trim()}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.97 }}
-            className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-2.5 sm:py-2 rounded-xl font-bold text-xs text-[var(--bg-canvas)] bg-[var(--text-primary)] hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-md min-h-[42px] sm:min-h-0 cursor-pointer"
+            style={{
+              background: 'var(--btn-primary-bg)',
+              color: 'var(--btn-primary-text)',
+              border: '1px solid var(--btn-primary-border)',
+              boxShadow: 'var(--btn-primary-shadow)',
+            }}
+            className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-2.5 sm:py-2 rounded-xl font-bold text-xs hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed transition-all min-h-[42px] sm:min-h-0 cursor-pointer"
           >
             {isLoading ? (
               <>

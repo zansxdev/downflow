@@ -57,7 +57,7 @@ export const ThemeToggle: React.FC = () => {
     if (metaTheme) {
       metaTheme.setAttribute(
         'content',
-        mode === 'light' ? '#f8fafc' : mode === 'liquid' ? '#070913' : '#050505'
+        mode === 'light' ? '#f8fafc' : mode === 'liquid' ? '#050711' : '#050505'
       );
     }
   };

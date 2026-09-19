@@ -57,7 +57,7 @@ export const MediaResultCard: React.FC<MediaResultCardProps> = ({ result, onRese
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 20, scale: 0.97 }}
       transition={{ type: 'spring', damping: 20, stiffness: 150 }}
-      className="w-full bg-[var(--bg-surface)] backdrop-blur-xl border border-[var(--border-subtle)] rounded-2xl p-4 sm:p-6 space-y-5 sm:space-y-6 shadow-[var(--card-shadow)]"
+      className="w-full bg-[var(--bg-surface)] backdrop-blur-xl border border-[var(--border-subtle)] rounded-2xl p-4 sm:p-6 space-y-5 sm:space-y-6 shadow-[var(--card-shadow)] liquid-glass-card"
     >
       {/* Media Info */}
       <div className="flex flex-col sm:flex-row gap-4 sm:gap-5">
@@ -248,7 +248,13 @@ export const MediaResultCard: React.FC<MediaResultCardProps> = ({ result, onRese
                     onClick={() => handleDownload(opt)}
                     whileHover={{ scale: 1.04 }}
                     whileTap={{ scale: 0.96 }}
-                    className="flex items-center justify-center gap-1 px-3 py-2 sm:py-1.5 min-h-[36px] rounded-lg text-xs font-bold text-[var(--bg-canvas)] bg-[var(--text-primary)] hover:opacity-90 transition-all cursor-pointer shadow-sm"
+                    style={{
+                      background: 'var(--btn-primary-bg)',
+                      color: 'var(--btn-primary-text)',
+                      border: '1px solid var(--btn-primary-border)',
+                      boxShadow: 'var(--btn-primary-shadow)',
+                    }}
+                    className="flex items-center justify-center gap-1 px-3 py-2 sm:py-1.5 min-h-[36px] rounded-lg text-xs font-bold hover:opacity-90 transition-all cursor-pointer"
                   >
                     <Download className="w-3.5 h-3.5" />
                     <span>{isDownloading ? 'Membuka...' : 'Unduh'}</span>
