@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   Shield,
   ShieldAlert,
+  ShieldCheck,
   Activity,
   Download,
   Bot,
@@ -17,6 +18,7 @@ import {
   Server,
   ArrowUpRight,
   Filter,
+  Plus,
 } from 'lucide-react';
 import { AppStats, ActivityLog } from '@/lib/stats';
 
@@ -28,6 +30,15 @@ interface ServerInfo {
   timestamp: number;
 }
 
+interface WhitelistItem {
+  id: string;
+  ip: string;
+  label: string;
+  createdAt: number;
+  bypassBotBlock: boolean;
+  allowAdmin: boolean;
+}
+
 export default function AdminPage() {
   const [pin, setPin] = useState('');
   const [isAuth, setIsAuth] = useState<boolean | null>(null);
@@ -36,6 +47,14 @@ export default function AdminPage() {
 
   const [stats, setStats] = useState<AppStats | null>(null);
   const [serverInfo, setServerInfo] = useState<ServerInfo | null>(null);
+  const [whitelist, setWhitelist] = useState<WhitelistItem[]>([]);
+  const [clientIp, setClientIp] = useState<string>('');
+  const [newIp, setNewIp] = useState('');
+  const [newLabel, setNewLabel] = useState('');
+  const [isSubmittingWl, setIsSubmittingWl] = useState(false);
+  const [wlSuccessMsg, setWlSuccessMsg] = useState<string | null>(null);
+  const [wlErrorMsg, setWlErrorMsg] = useState<string | null>(null);
+
   const [isLoadingStats, setIsLoadingStats] = useState(false);
   const [filterType, setFilterType] = useState<'all' | 'download' | 'bot_blocked' | 'honeypot'>('all');
   const [confirmReset, setConfirmReset] = useState(false);
@@ -48,6 +67,8 @@ export default function AdminPage() {
       if (res.ok && json.status) {
         setStats(json.data.stats);
         setServerInfo(json.data.server);
+        setWhitelist(json.data.whitelist || []);
+        setClientIp(json.data.clientIp || '');
         setIsAuth(true);
       } else {
         setIsAuth(false);
@@ -116,6 +137,66 @@ export default function AdminPage() {
       });
       if (res.ok) {
         setConfirmReset(false);
+        fetchStats();
+      }
+    } catch {
+      // Failed
+    }
+  };
+
+  const handleAddWhitelist = async (ipToAdd?: string, labelToAdd?: string) => {
+    const ip = (ipToAdd || newIp).trim();
+    const label = (labelToAdd || newLabel).trim();
+    if (!ip) return;
+
+    setIsSubmittingWl(true);
+    setWlSuccessMsg(null);
+    setWlErrorMsg(null);
+
+    try {
+      const res = await fetch('/api/admin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'add_whitelist',
+          ip,
+          label: label || undefined,
+          bypassBotBlock: true,
+          allowAdmin: true,
+        }),
+      });
+
+      const json = await res.json().catch(() => ({}));
+      if (res.ok && json.status) {
+        setWlSuccessMsg(json.message || 'IP berhasil ditambahkan ke whitelist.');
+        setNewIp('');
+        setNewLabel('');
+        fetchStats();
+        setTimeout(() => setWlSuccessMsg(null), 3000);
+      } else {
+        setWlErrorMsg(json.message || 'Gagal menambahkan IP.');
+        setTimeout(() => setWlErrorMsg(null), 4000);
+      }
+    } catch {
+      setWlErrorMsg('Terjadi gangguan saat menyimpan IP.');
+      setTimeout(() => setWlErrorMsg(null), 4000);
+    } finally {
+      setIsSubmittingWl(false);
+    }
+  };
+
+  const handleRemoveWhitelist = async (id: string) => {
+    try {
+      const res = await fetch('/api/admin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'remove_whitelist',
+          id,
+        }),
+      });
+
+      if (res.ok) {
         fetchStats();
       }
     } catch {
@@ -471,6 +552,129 @@ export default function AdminPage() {
           <div className="pt-3 border-t border-[#181820] text-[10px] sm:text-[11px] text-zinc-500 font-mono">
             Host: 104.234.26.109 • SSL Let&apos;s Encrypt
           </div>
+        </div>
+      </div>
+
+      {/* IP Whitelist Management Section */}
+      <div className="bg-[#0c0c10] border border-[#1e1e26] rounded-xl p-4 sm:p-5 space-y-4 w-full max-w-full overflow-hidden">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#181820]">
+          <div className="space-y-0.5">
+            <div className="flex items-center gap-2">
+              <h2 className="text-sm font-bold text-white flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                IP Whitelist Management
+              </h2>
+              <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-[#161620] text-emerald-400 border border-emerald-900/40">
+                {whitelist.length} IP
+              </span>
+            </div>
+            <p className="text-xs text-zinc-500 font-mono">
+              IP yang diizinkan bypass proteksi anti-bot 418 &amp; request download langsung
+            </p>
+          </div>
+
+          {clientIp && (
+            <button
+              type="button"
+              onClick={() => handleAddWhitelist(clientIp, 'IP Saya (Otomatis)')}
+              disabled={isSubmittingWl || whitelist.some((w) => w.ip === clientIp)}
+              className="flex items-center justify-center gap-1.5 px-3 py-2 sm:py-1.5 rounded-lg text-xs font-semibold bg-emerald-950/40 hover:bg-emerald-900/40 text-emerald-400 border border-emerald-800/40 disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer w-full sm:w-auto shrink-0 min-h-[38px] sm:min-h-0"
+            >
+              <Plus className="w-3.5 h-3.5" />
+              <span>
+                {whitelist.some((w) => w.ip === clientIp)
+                  ? `IP Anda (${clientIp}) Sudah Whitelist`
+                  : `+ Whitelist IP Saya (${clientIp})`}
+              </span>
+            </button>
+          )}
+        </div>
+
+        {/* Feedback Alerts */}
+        {wlSuccessMsg && (
+          <div className="p-2.5 rounded-lg bg-emerald-950/30 border border-emerald-800/50 text-emerald-400 text-xs font-mono">
+            {wlSuccessMsg}
+          </div>
+        )}
+        {wlErrorMsg && (
+          <div className="p-2.5 rounded-lg bg-red-950/30 border border-red-800/50 text-red-400 text-xs font-mono">
+            {wlErrorMsg}
+          </div>
+        )}
+
+        {/* Add Custom IP Form */}
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleAddWhitelist();
+          }}
+          className="flex flex-col sm:flex-row gap-2"
+        >
+          <input
+            type="text"
+            value={newIp}
+            onChange={(e) => setNewIp(e.target.value)}
+            placeholder="Ketik IP (misal: 103.123.45.67)..."
+            className="flex-1 bg-[#111116] border border-[#22222a] focus:border-zinc-500 rounded-lg px-3 py-2 text-xs font-mono text-zinc-100 placeholder:text-zinc-600 focus:outline-none min-h-[38px]"
+          />
+          <input
+            type="text"
+            value={newLabel}
+            onChange={(e) => setNewLabel(e.target.value)}
+            placeholder="Label (opsional, misal: Bot Server / HP)..."
+            className="sm:w-64 bg-[#111116] border border-[#22222a] focus:border-zinc-500 rounded-lg px-3 py-2 text-xs font-mono text-zinc-100 placeholder:text-zinc-600 focus:outline-none min-h-[38px]"
+          />
+          <button
+            type="submit"
+            disabled={isSubmittingWl || !newIp.trim()}
+            className="px-4 py-2 rounded-lg text-xs font-semibold text-black bg-white hover:bg-zinc-200 disabled:bg-zinc-800 disabled:text-zinc-600 transition-colors cursor-pointer flex items-center justify-center gap-1.5 shrink-0 min-h-[38px]"
+          >
+            <Plus className="w-3.5 h-3.5" />
+            <span>Tambah IP</span>
+          </button>
+        </form>
+
+        {/* Whitelist Cards List */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+          {whitelist.map((item) => {
+            const isMyIp = item.ip === clientIp;
+            const isLocal = item.id === 'wl-localhost-v4' || item.id === 'wl-localhost-v6';
+
+            return (
+              <div
+                key={item.id}
+                className="flex items-center justify-between p-3 rounded-lg bg-[#111116] border border-[#1e1e24] hover:border-zinc-700 transition-colors gap-2"
+              >
+                <div className="min-w-0 flex-1 space-y-1">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="font-mono font-bold text-xs text-zinc-100 truncate">{item.ip}</span>
+                    {isMyIp && (
+                      <span className="px-1.5 py-0.2 rounded text-[9px] font-mono font-bold bg-emerald-950/60 text-emerald-400 border border-emerald-800/40">
+                        IP ANDA
+                      </span>
+                    )}
+                  </div>
+                  <div className="flex items-center gap-1.5 text-[10px] font-mono text-zinc-500">
+                    <span className="text-zinc-400 truncate">{item.label}</span>
+                    <span>•</span>
+                    <span className="text-emerald-400/90">Bypass Anti-Bot</span>
+                  </div>
+                </div>
+
+                {!isLocal && (
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveWhitelist(item.id)}
+                    className="p-2 rounded text-zinc-500 hover:text-red-400 hover:bg-[#181822] transition-colors cursor-pointer shrink-0 min-w-[34px] min-h-[34px] flex items-center justify-center"
+                    title="Hapus dari whitelist"
+                    aria-label={`Hapus IP ${item.ip}`}
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                  </button>
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
 

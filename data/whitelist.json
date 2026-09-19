@@ -1,0 +1,26 @@
+[
+  {
+    "id": "wl-1789810816296-ct1p",
+    "ip": "104.234.26.109",
+    "label": "VPS Server",
+    "createdAt": 1789810816296,
+    "bypassBotBlock": true,
+    "allowAdmin": true
+  },
+  {
+    "id": "wl-localhost-v4",
+    "ip": "127.0.0.1",
+    "label": "Localhost IPv4",
+    "createdAt": 1789810810185,
+    "bypassBotBlock": true,
+    "allowAdmin": true
+  },
+  {
+    "id": "wl-localhost-v6",
+    "ip": "::1",
+    "label": "Localhost IPv6",
+    "createdAt": 1789810810185,
+    "bypassBotBlock": true,
+    "allowAdmin": true
+  }
+]

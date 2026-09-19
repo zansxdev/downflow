@@ -1,5 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getStats, resetAllStats } from '@/lib/stats';
+import {
+  getWhitelist,
+  addWhitelistEntry,
+  removeWhitelistEntry,
+  getClientIpFromHeaders,
+} from '@/lib/whitelist';
 
 const ADMIN_PIN = process.env.ADMIN_PIN || 'zansxart2026';
 const AUTH_COOKIE_NAME = 'downflow_admin_auth';
@@ -25,11 +31,15 @@ export async function GET(request: NextRequest) {
 
   const stats = getStats();
   const memory = process.memoryUsage();
+  const whitelist = getWhitelist();
+  const clientIp = getClientIpFromHeaders(request.headers);
 
   return NextResponse.json({
     status: true,
     data: {
       stats,
+      whitelist,
+      clientIp,
       server: {
         uptimeSeconds: Math.floor(process.uptime()),
         memoryRssMb: Math.round((memory.rss / 1024 / 1024) * 10) / 10,
@@ -91,6 +101,73 @@ export async function POST(request: NextRequest) {
       status: true,
       message: 'Seluruh data statistik berhasil direset.',
     });
+  }
+
+  if (action === 'add_whitelist') {
+    if (!isAuthenticated(request)) {
+      return NextResponse.json(
+        { status: false, message: 'Unauthorized.' },
+        { status: 401 }
+      );
+    }
+
+    try {
+      const rawIp = String(body.ip || '').trim();
+      if (!rawIp) {
+        return NextResponse.json(
+          { status: false, message: 'Alamat IP tidak boleh kosong.' },
+          { status: 400 }
+        );
+      }
+
+      const entry = addWhitelistEntry({
+        ip: rawIp,
+        label: body.label,
+        bypassBotBlock: body.bypassBotBlock ?? true,
+        allowAdmin: body.allowAdmin ?? true,
+      });
+
+      return NextResponse.json({
+        status: true,
+        message: `IP ${entry.ip} berhasil ditambahkan ke whitelist.`,
+        data: entry,
+      });
+    } catch (err: any) {
+      return NextResponse.json(
+        { status: false, message: err.message || 'Gagal menambahkan IP.' },
+        { status: 400 }
+      );
+    }
+  }
+
+  if (action === 'remove_whitelist') {
+    if (!isAuthenticated(request)) {
+      return NextResponse.json(
+        { status: false, message: 'Unauthorized.' },
+        { status: 401 }
+      );
+    }
+
+    const id = String(body.id || '').trim();
+    if (!id) {
+      return NextResponse.json(
+        { status: false, message: 'ID whitelist diperlukan.' },
+        { status: 400 }
+      );
+    }
+
+    const success = removeWhitelistEntry(id);
+    if (success) {
+      return NextResponse.json({
+        status: true,
+        message: 'IP berhasil dihapus dari whitelist.',
+      });
+    }
+
+    return NextResponse.json(
+      { status: false, message: 'IP tidak ditemukan dalam daftar whitelist.' },
+      { status: 404 }
+    );
   }
 
   return NextResponse.json(

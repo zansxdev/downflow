@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { detectPlatform, extractUrl } from '@/lib/url-detector';
 import { NormalizedMediaResult, PlatformId, DownloadOption } from '@/lib/types';
 import { recordDownload, recordBotBlocked } from '@/lib/stats';
+import { isIpWhitelisted, getClientIpFromHeaders } from '@/lib/whitelist';
 
 const BACKEND_URL = process.env.BACKEND_API_URL || 'http://localhost:3050';
 const BACKEND_KEY = process.env.BACKEND_API_KEY || 'downflow_internal_secret_2026';
@@ -54,6 +55,8 @@ export async function POST(request: NextRequest) {
   try {
     const userAgent = (request.headers.get('user-agent') || '').toLowerCase();
     const clientFlow = request.headers.get('x-client-flow');
+    const clientIp = getClientIpFromHeaders(request.headers);
+    const isWhitelisted = isIpWhitelisted(clientIp, 'bypassBotBlock');
 
     const isKnownBot =
       userAgent.includes('python') ||
@@ -69,12 +72,8 @@ export async function POST(request: NextRequest) {
       userAgent.includes('node-fetch') ||
       userAgent.includes('axios');
 
-    // Bot detection: if it's a known scraper and missing legitimate frontend flow header
-    if (isKnownBot && clientFlow !== 'downflow-web-v1') {
-      const clientIp =
-        request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
-        request.headers.get('x-real-ip') ||
-        'Unknown';
+    // Bot detection: if it's a known scraper, NOT whitelisted, and missing legitimate frontend flow header
+    if (isKnownBot && !isWhitelisted && clientFlow !== 'downflow-web-v1') {
       const detectedBot = userAgent.slice(0, 40) || 'Scraper Script';
       
       recordBotBlocked({
@@ -196,11 +195,6 @@ export async function POST(request: NextRequest) {
     });
 
     const data = await response.json().catch(() => null);
-
-    const clientIp =
-      request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
-      request.headers.get('x-real-ip') ||
-      'Unknown';
 
     if (!response.ok || !data || data.status === false) {
       const errorMsg =
