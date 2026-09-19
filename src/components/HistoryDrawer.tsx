@@ -92,6 +92,7 @@ export const HistoryDrawer: React.FC<HistoryDrawerProps> = ({
                             <img
                               src={item.thumbnail}
                               alt={item.title}
+                              referrerPolicy="no-referrer"
                               className="w-full h-full object-cover"
                             />
                           ) : (

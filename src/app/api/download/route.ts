@@ -5,6 +5,29 @@ import { NormalizedMediaResult, PlatformId, DownloadOption } from '@/lib/types';
 const BACKEND_URL = process.env.BACKEND_API_URL || 'http://localhost:3050';
 const BACKEND_KEY = process.env.BACKEND_API_KEY || 'downflow_internal_secret_2026';
 
+function sanitizeMediaUrl(rawUrl: string): string {
+  if (!rawUrl || typeof rawUrl !== 'string') return '';
+  const trimmed = rawUrl.trim();
+
+  // Rewrite any local Fastify URLs to the public Next.js streaming proxy
+  if (trimmed.includes('localhost:3050') || trimmed.includes('127.0.0.1:3050')) {
+    try {
+      const parsed = new URL(trimmed);
+      const targetParam = parsed.searchParams.get('url') || '';
+      if (parsed.pathname.includes('/ytmp3')) {
+        return `/api/download/proxy?type=ytmp3&url=${encodeURIComponent(targetParam)}`;
+      }
+      if (parsed.pathname.includes('/ytmp4')) {
+        return `/api/download/proxy?type=ytmp4&url=${encodeURIComponent(targetParam)}`;
+      }
+    } catch {
+      // Fallback
+    }
+  }
+
+  return trimmed;
+}
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json().catch(() => ({}));
@@ -23,110 +46,94 @@ export async function POST(request: NextRequest) {
 
     if (platform === 'auto') {
       return NextResponse.json(
-        { status: false, message: 'Platform tidak dikenali. Masukkan link TikTok, Instagram, YouTube, X, Facebook, atau Spotify yang valid.' },
+        {
+          status: false,
+          message:
+            'Platform tidak dikenali. Masukkan link TikTok, Instagram, YouTube, X, Facebook, atau Spotify yang valid.',
+        },
         { status: 400 }
       );
     }
 
     let endpoint = '';
-    let method: 'GET' | 'POST' = 'POST';
-    let requestPayload: any = { url: cleanUrl };
 
     switch (platform) {
       case 'tiktok':
         endpoint = '/api/download/tiktok';
-        method = 'POST';
-        requestPayload = { url: cleanUrl };
         break;
 
       case 'instagram':
         endpoint = '/api/download/instagram';
-        method = 'POST';
-        requestPayload = { url: cleanUrl };
         break;
 
       case 'youtube':
         endpoint = '/api/download/ytmp4';
-        method = 'GET';
-        // Use preview=true to inspect metadata first
         break;
 
       case 'twitter':
         endpoint = '/api/download/twitter';
-        method = 'POST';
-        requestPayload = { url: cleanUrl };
         break;
 
       case 'facebook':
         endpoint = '/api/download/facebook';
-        method = 'POST';
-        requestPayload = { url: cleanUrl };
         break;
 
       case 'spotify':
         endpoint = '/api/download/spotify';
-        method = 'GET';
         break;
 
       case 'soundcloud':
         endpoint = '/api/download/soundcloud';
-        method = 'GET';
         break;
 
       case 'capcut':
         endpoint = '/api/download/capcut';
-        method = 'POST';
-        requestPayload = { url: cleanUrl };
         break;
 
       case 'threads':
         endpoint = '/api/download/threads';
-        method = 'POST';
-        requestPayload = { url: cleanUrl };
         break;
 
       case 'pinterest':
         endpoint = '/api/download/pindl';
-        method = 'GET';
         break;
 
       default:
         endpoint = '/api/download/aio';
-        method = 'GET';
     }
 
+    // All Fastify download handlers natively parse query parameters
     const fetchUrl = new URL(endpoint, BACKEND_URL);
-    if (method === 'GET') {
-      fetchUrl.searchParams.set('url', cleanUrl);
-      if (platform === 'youtube') {
-        fetchUrl.searchParams.set('preview', 'true');
-      }
+    fetchUrl.searchParams.set('url', cleanUrl);
+
+    if (platform === 'youtube') {
+      fetchUrl.searchParams.set('preview', 'true');
     }
 
     const headers: Record<string, string> = {
       'X-API-Key': BACKEND_KEY,
-      'Accept': 'application/json',
+      Accept: 'application/json',
     };
 
-    if (method === 'POST') {
-      headers['Content-Type'] = 'application/json';
-    }
-
     const response = await fetch(fetchUrl.toString(), {
-      method,
+      method: 'GET',
       headers,
-      body: method === 'POST' ? JSON.stringify(requestPayload) : undefined,
       cache: 'no-store',
+      signal: AbortSignal.timeout(30000),
     });
 
     const data = await response.json().catch(() => null);
 
     if (!response.ok || !data || data.status === false) {
-      const errorMsg = data?.message || `Gagal mengambil media dari ${platform}. Pastikan link publik dan dapat diakses.`;
-      return NextResponse.json({ status: false, message: errorMsg }, { status: response.status || 500 });
+      const errorMsg =
+        data?.message ||
+        `Gagal mengambil media dari ${platform}. Pastikan konten publik dan dapat diakses.`;
+      return NextResponse.json(
+        { status: false, message: errorMsg },
+        { status: response.status >= 400 && response.status < 500 ? response.status : 422 }
+      );
     }
 
-    // Normalize response according to platform
     const normalized = normalizeResult(platform, cleanUrl, data);
 
     return NextResponse.json({
@@ -135,9 +142,15 @@ export async function POST(request: NextRequest) {
     });
   } catch (err: any) {
     console.error('Downloader API error:', err);
+    const isTimeout = err?.name === 'TimeoutError' || err?.message?.includes('aborted');
     return NextResponse.json(
-      { status: false, message: err.message || 'Terjadi kesalahan saat memproses link download.' },
-      { status: 500 }
+      {
+        status: false,
+        message: isTimeout
+          ? 'Waktu proses habis saat menghubungi server. Silakan coba sesaat lagi.'
+          : err.message || 'Terjadi kesalahan saat memproses link download.',
+      },
+      { status: isTimeout ? 504 : 500 }
     );
   }
 }
@@ -146,39 +159,68 @@ function normalizeResult(platform: PlatformId, originalUrl: string, raw: any): N
   const payload = raw.data || raw.result || raw;
   const downloads: DownloadOption[] = [];
 
-  let title = payload.title || payload.caption || payload.desc || 'Media Download';
+  const title = payload.title || payload.caption || payload.desc || 'Media Download';
   let thumbnail = payload.thumbnail || payload.cover || payload.thumb || '';
-  let author = {
-    name: payload.author?.name || payload.author?.nickname || payload.uploader || 'Creator',
-    username: payload.author?.username || payload.author?.unique_id || '',
-    avatar: payload.author?.avatar || payload.author?.avatar_thumb?.url_list?.[0] || '',
+
+  const authorName =
+    typeof payload.author === 'string'
+      ? payload.author
+      : payload.author?.name || payload.author?.nickname || payload.uploader || payload.artis || 'Creator';
+
+  const authorUsername =
+    typeof payload.author === 'string'
+      ? ''
+      : payload.author?.username || payload.author?.unique_id || '';
+
+  const authorAvatar =
+    typeof payload.author === 'object'
+      ? payload.author?.avatar || payload.author?.avatar_thumb?.url_list?.[0] || ''
+      : '';
+
+  const author = {
+    name: authorName,
+    username: authorUsername,
+    avatar: authorAvatar,
   };
-  let duration = payload.duration ? `${payload.duration}s` : undefined;
+
+  const duration = payload.duration
+    ? typeof payload.duration === 'number'
+      ? `${payload.duration}s`
+      : String(payload.duration)
+    : payload.durasi || undefined;
+
   let images: string[] = [];
 
   if (platform === 'tiktok') {
-    if (payload.video) {
+    const videoUrl = sanitizeMediaUrl(
+      payload.video || (typeof payload.result === 'string' ? payload.result : '')
+    );
+
+    if (videoUrl) {
       downloads.push({
         id: 'tt-video-nowm',
         label: 'Video Tanpa Watermark',
         format: 'mp4',
         quality: 'HD',
-        url: payload.video,
-        downloadUrl: payload.video,
+        url: videoUrl,
+        downloadUrl: videoUrl,
       });
     }
+
     if (payload.audio) {
+      const audioUrl = sanitizeMediaUrl(payload.audio);
       downloads.push({
         id: 'tt-audio',
         label: 'Audio Musik (MP3)',
         format: 'mp3',
-        url: payload.audio,
-        downloadUrl: payload.audio,
+        url: audioUrl,
+        downloadUrl: audioUrl,
       });
     }
+
     if (payload.images && Array.isArray(payload.images) && payload.images.length > 0) {
-      images = payload.images;
-      payload.images.forEach((imgUrl: string, idx: number) => {
+      images = payload.images.map(sanitizeMediaUrl);
+      images.forEach((imgUrl: string, idx: number) => {
         downloads.push({
           id: `tt-image-${idx + 1}`,
           label: `Foto Slide #${idx + 1}`,
@@ -191,23 +233,27 @@ function normalizeResult(platform: PlatformId, originalUrl: string, raw: any): N
   } else if (platform === 'instagram') {
     const list = Array.isArray(payload) ? payload : [payload];
     list.forEach((item: any, idx: number) => {
-      const mediaUrl = item.url || item.download_url || item.video || item.image || item;
-      const isVideo = item.type === 'video' || (typeof mediaUrl === 'string' && (mediaUrl.includes('.mp4') || mediaUrl.includes('video')));
-      
-      downloads.push({
-        id: `ig-media-${idx + 1}`,
-        label: isVideo ? `Video Reels / Post #${idx + 1}` : `Foto Instagram #${idx + 1}`,
-        format: isVideo ? 'mp4' : 'jpg',
-        quality: 'Original HD',
-        url: mediaUrl,
-        downloadUrl: mediaUrl,
-      });
-      if (!thumbnail && !isVideo) {
-        thumbnail = mediaUrl;
+      const rawMedia = item.url || item.download_url || item.video || item.image || item;
+      const mediaUrl = sanitizeMediaUrl(rawMedia);
+      const isVideo =
+        item.type === 'video' ||
+        (typeof mediaUrl === 'string' && (mediaUrl.includes('.mp4') || mediaUrl.includes('video')));
+
+      if (mediaUrl) {
+        downloads.push({
+          id: `ig-media-${idx + 1}`,
+          label: isVideo ? `Video Reels / Post #${idx + 1}` : `Foto Instagram #${idx + 1}`,
+          format: isVideo ? 'mp4' : 'jpg',
+          quality: 'Original HD',
+          url: mediaUrl,
+          downloadUrl: mediaUrl,
+        });
+        if (!thumbnail && !isVideo) {
+          thumbnail = mediaUrl;
+        }
       }
     });
   } else if (platform === 'youtube') {
-    // YouTube proxy link directly using our REST backend streaming endpoint
     const ytMp4Url = `/api/download/proxy?type=ytmp4&url=${encodeURIComponent(originalUrl)}`;
     const ytMp3Url = `/api/download/proxy?type=ytmp3&url=${encodeURIComponent(originalUrl)}`;
 
@@ -233,79 +279,89 @@ function normalizeResult(platform: PlatformId, originalUrl: string, raw: any): N
   } else if (platform === 'twitter') {
     if (Array.isArray(payload)) {
       payload.forEach((v: any, idx: number) => {
-        downloads.push({
-          id: `tw-video-${idx + 1}`,
-          label: v.quality ? `Video (${v.quality})` : `Video MP4 #${idx + 1}`,
-          format: 'mp4',
-          quality: v.quality || 'HD',
-          url: v.url || v,
-          downloadUrl: v.url || v,
-        });
+        const twUrl = sanitizeMediaUrl(v.url || v);
+        if (twUrl) {
+          downloads.push({
+            id: `tw-video-${idx + 1}`,
+            label: v.quality ? `Video (${v.quality})` : `Video MP4 #${idx + 1}`,
+            format: 'mp4',
+            quality: v.quality || 'HD',
+            url: twUrl,
+            downloadUrl: twUrl,
+          });
+        }
       });
     } else if (payload.url || payload.video) {
+      const twUrl = sanitizeMediaUrl(payload.url || payload.video);
       downloads.push({
         id: 'tw-video',
         label: 'Video Twitter / X',
         format: 'mp4',
         quality: 'HD',
-        url: payload.url || payload.video,
-        downloadUrl: payload.url || payload.video,
+        url: twUrl,
+        downloadUrl: twUrl,
       });
     }
   } else if (platform === 'facebook') {
     if (payload.hd || payload.video_hd) {
+      const hdUrl = sanitizeMediaUrl(payload.hd || payload.video_hd);
       downloads.push({
         id: 'fb-video-hd',
         label: 'Video Facebook HD',
         format: 'mp4',
         quality: '1080p HD',
-        url: payload.hd || payload.video_hd,
-        downloadUrl: payload.hd || payload.video_hd,
+        url: hdUrl,
+        downloadUrl: hdUrl,
       });
     }
     if (payload.sd || payload.video_sd) {
+      const sdUrl = sanitizeMediaUrl(payload.sd || payload.video_sd);
       downloads.push({
         id: 'fb-video-sd',
         label: 'Video Facebook SD',
         format: 'mp4',
         quality: 'SD Standard',
-        url: payload.sd || payload.video_sd,
-        downloadUrl: payload.sd || payload.video_sd,
+        url: sdUrl,
+        downloadUrl: sdUrl,
       });
     }
   } else if (platform === 'spotify') {
-    if (payload.download || payload.url || payload.audio) {
+    const rawAudio = payload.download || payload.url || payload.audio;
+    if (rawAudio) {
+      const spAudio = sanitizeMediaUrl(rawAudio);
       downloads.push({
         id: 'sp-audio-mp3',
         label: 'Audio Spotify (MP3)',
         format: 'mp3',
         quality: '320kbps',
-        url: payload.download || payload.url || payload.audio,
-        downloadUrl: payload.download || payload.url || payload.audio,
+        url: spAudio,
+        downloadUrl: spAudio,
       });
     }
+    if (payload.image && !thumbnail) {
+      thumbnail = payload.image;
+    }
   } else {
-    // Generic fallback
-    if (payload.url || payload.video || payload.link) {
-      const mediaUrl = payload.url || payload.video || payload.link;
+    const genericUrl = sanitizeMediaUrl(payload.url || payload.video || payload.link);
+    if (genericUrl) {
       downloads.push({
         id: 'generic-media',
         label: 'Download Media',
         format: 'mp4',
-        url: mediaUrl,
-        downloadUrl: mediaUrl,
+        url: genericUrl,
+        downloadUrl: genericUrl,
       });
     }
   }
 
-  // Fallback if no specific format detected but url exists
   if (downloads.length === 0 && payload.url) {
+    const fallbackUrl = sanitizeMediaUrl(payload.url);
     downloads.push({
       id: 'fallback-download',
       label: 'Download File',
       format: 'file',
-      url: payload.url,
-      downloadUrl: payload.url,
+      url: fallbackUrl,
+      downloadUrl: fallbackUrl,
     });
   }
 

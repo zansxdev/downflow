@@ -71,6 +71,7 @@ export const MediaResultCard: React.FC<MediaResultCardProps> = ({ result, onRese
             <img
               src={previewImage || result.thumbnail}
               alt={result.title}
+              referrerPolicy="no-referrer"
               className="w-full h-full object-cover"
             />
           ) : (
@@ -105,6 +106,7 @@ export const MediaResultCard: React.FC<MediaResultCardProps> = ({ result, onRese
                   <img
                     src={result.author.avatar}
                     alt={result.author.name || 'Author'}
+                    referrerPolicy="no-referrer"
                     className="w-5 h-5 rounded-full object-cover border border-zinc-700"
                   />
                 ) : (
@@ -138,7 +140,7 @@ export const MediaResultCard: React.FC<MediaResultCardProps> = ({ result, onRese
                     }`}
                   >
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={imgUrl} alt={`Slide ${i + 1}`} className="w-full h-full object-cover" />
+                    <img src={imgUrl} alt={`Slide ${i + 1}`} referrerPolicy="no-referrer" className="w-full h-full object-cover" />
                   </motion.button>
                 ))}
               </div>
