@@ -312,3 +312,25 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* GPU-accelerated background ambient float animations (Zero JS, completely detached from scroll) */
+@keyframes bg-float-1 {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  50% { transform: translate3d(24px, -30px, 0) rotate(16deg); }
+}
+
+@keyframes bg-float-2 {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  50% { transform: translate3d(-26px, 26px, 0) rotate(-18deg); }
+}
+
+@keyframes bg-float-3 {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  50% { transform: translate3d(20px, 28px, 0) rotate(-14deg); }
+}
+
+@keyframes bg-float-4 {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  50% { transform: translate3d(-22px, -26px, 0) rotate(20deg); }
+}
+

@@ -1,13 +1,13 @@
 {
-  "totalRequests": 0,
-  "totalSuccess": 0,
+  "totalRequests": 1,
+  "totalSuccess": 1,
   "totalFailed": 0,
   "totalBotsBlocked": 0,
   "totalHoneypotHits": 0,
   "byPlatform": {
     "tiktok": 0,
     "youtube": 0,
-    "instagram": 0,
+    "instagram": 1,
     "spotify": 0,
     "twitter": 0,
     "facebook": 0,
@@ -17,6 +17,18 @@
     "pinterest": 0,
     "other": 0
   },
-  "recentLogs": [],
-  "updatedAt": 1789825400072
+  "recentLogs": [
+    {
+      "id": "log-1789826169962-j852",
+      "timestamp": 1789826169962,
+      "type": "download",
+      "platform": "instagram",
+      "title": "Media Download",
+      "url": "https://www.instagram.com/reel/Ddb0z3QAVzh/?stkn=dXJodWpvN3I4MzM1",
+      "success": true,
+      "ip": "114.10.16.236",
+      "userAgent": "mozilla/5.0 (linux; android 10; k) applewebkit/537.36 (khtml, like gecko) chrome/153.0.0.0 mobile safari/537.36"
+    }
+  ],
+  "updatedAt": 1789826169963
 }

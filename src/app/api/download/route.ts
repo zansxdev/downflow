@@ -303,6 +303,7 @@ function normalizeResult(platform: PlatformId, originalUrl: string, raw: any): N
         id: 'tt-audio',
         label: 'Audio Musik (MP3)',
         format: 'mp3',
+        quality: 'Original HQ',
         url: audioUrl,
         downloadUrl: audioUrl,
       });
@@ -338,6 +339,21 @@ function normalizeResult(platform: PlatformId, originalUrl: string, raw: any): N
           url: mediaUrl,
           downloadUrl: mediaUrl,
         });
+
+        // Also provide instant MP3 audio option for Instagram videos
+        if (isVideo) {
+          const audioProxy = `/api/download/proxy?type=audio&url=${encodeURIComponent(mediaUrl)}&title=${encodeURIComponent(title)}`;
+          downloads.push({
+            id: `ig-audio-${idx + 1}`,
+            label: `Audio Reels #${idx + 1} (MP3)`,
+            format: 'mp3',
+            quality: 'HQ 192kbps',
+            url: audioProxy,
+            downloadUrl: audioProxy,
+            isStream: true,
+          });
+        }
+
         if (!thumbnail && !isVideo) {
           thumbnail = mediaUrl;
         }
@@ -431,6 +447,58 @@ function normalizeResult(platform: PlatformId, originalUrl: string, raw: any): N
     if (payload.image && !thumbnail) {
       thumbnail = payload.image;
     }
+  } else if (platform === 'soundcloud') {
+    const scAudio = sanitizeMediaUrl(payload.audioUrl || payload.download || payload.url);
+    if (scAudio) {
+      downloads.push({
+        id: 'sc-audio-mp3',
+        label: 'Audio SoundCloud (MP3)',
+        format: 'mp3',
+        quality: 'Original HQ',
+        url: scAudio,
+        downloadUrl: scAudio,
+      });
+    }
+  } else if (platform === 'capcut') {
+    const capcutUrl = sanitizeMediaUrl(payload.video || payload.url);
+    if (capcutUrl) {
+      downloads.push({
+        id: 'capcut-video-mp4',
+        label: 'Video CapCut (MP4)',
+        format: 'mp4',
+        quality: 'HD',
+        url: capcutUrl,
+        downloadUrl: capcutUrl,
+      });
+    }
+  } else if (platform === 'threads') {
+    const threadMedia = payload.media || payload.url || payload.video;
+    if (Array.isArray(threadMedia)) {
+      threadMedia.forEach((m: any, idx: number) => {
+        const mUrl = sanitizeMediaUrl(m.url || m);
+        const isVid = typeof mUrl === 'string' && (mUrl.includes('.mp4') || m.type === 'video');
+        if (mUrl) {
+          downloads.push({
+            id: `threads-media-${idx + 1}`,
+            label: isVid ? `Video Threads #${idx + 1}` : `Foto Threads #${idx + 1}`,
+            format: isVid ? 'mp4' : 'jpg',
+            quality: 'Original',
+            url: mUrl,
+            downloadUrl: mUrl,
+          });
+        }
+      });
+    } else if (threadMedia) {
+      const mUrl = sanitizeMediaUrl(threadMedia);
+      downloads.push({
+        id: 'threads-media',
+        label: 'Media Threads',
+        format: 'mp4',
+        quality: 'Original',
+        url: mUrl,
+        downloadUrl: mUrl,
+      });
+    }
   } else {
     const genericUrl = sanitizeMediaUrl(payload.url || payload.video || payload.link);
     if (genericUrl) {
@@ -444,6 +512,25 @@ function normalizeResult(platform: PlatformId, originalUrl: string, raw: any): N
     }
   }
 
+  // Universal Audio Guarantee:
+  // If result contains any video format (mp4) but lacks an audio option,
+  // automatically append an on-the-fly MP3 audio extraction download option!
+  const hasAudioOption = downloads.some((d) => d.format === 'mp3');
+  const primaryVideoOption = downloads.find((d) => d.format === 'mp4' && d.url);
+
+  if (!hasAudioOption && primaryVideoOption) {
+    const audioProxyUrl = `/api/download/proxy?type=audio&url=${encodeURIComponent(primaryVideoOption.url)}&title=${encodeURIComponent(title)}`;
+    downloads.push({
+      id: `${platform}-extracted-audio-mp3`,
+      label: 'Audio Musik (MP3)',
+      format: 'mp3',
+      quality: 'HQ 192kbps',
+      url: audioProxyUrl,
+      downloadUrl: audioProxyUrl,
+      isStream: true,
+    });
+  }
+
   if (downloads.length === 0 && payload.url) {
     const fallbackUrl = sanitizeMediaUrl(payload.url);
     downloads.push({
@@ -454,6 +541,7 @@ function normalizeResult(platform: PlatformId, originalUrl: string, raw: any): N
       downloadUrl: fallbackUrl,
     });
   }
+
 
   return {
     id: `dl-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`,

@@ -217,8 +217,9 @@ export const BatchQueueView: React.FC<BatchQueueViewProps> = ({
 
                     {/* Status Badge */}
                     {item.status === 'pending' && (
-                      <span className="px-1.5 py-0.5 rounded text-[10px] font-mono bg-zinc-800 text-zinc-400">
-                        ⏳ Menunggu
+                      <span className="px-1.5 py-0.5 rounded text-[10px] font-mono bg-zinc-800 text-zinc-400 flex items-center gap-1">
+                        <Clock className="w-2.5 h-2.5" />
+                        Menunggu
                       </span>
                     )}
                     {item.status === 'processing' && (

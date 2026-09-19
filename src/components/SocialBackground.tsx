@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
 
 const ICONS = {
   tiktok: (
@@ -64,75 +63,68 @@ interface FloatingLogo {
   size: number;
   startX: number;
   startY: number;
-  xMoves: number[];
-  yMoves: number[];
-  rotates: number[];
+  anim: string;
   duration: number;
   delay: number;
 }
 
-// Desktop ambient set (24 items)
+// Desktop items: 24 floating logos with GPU CSS animations
 const DESKTOP_ITEMS: FloatingLogo[] = [
   // Top left cluster
-  { id: 'f-1', type: 'tiktok', size: 50, startX: 6, startY: 10, xMoves: [0, 25, -15, 0], yMoves: [0, -35, 20, 0], rotates: [0, 20, -15, 0], duration: 15, delay: 0 },
-  { id: 'f-2', type: 'instagram', size: 38, startX: 18, startY: 8, xMoves: [0, -20, 25, 0], yMoves: [0, 40, -20, 0], rotates: [0, -25, 15, 0], duration: 13, delay: 1 },
-  { id: 'f-3', type: 'youtube', size: 54, startX: 28, startY: 14, xMoves: [0, 30, -20, 0], yMoves: [0, -30, 25, 0], rotates: [0, 15, -20, 0], duration: 16, delay: 2 },
+  { id: 'f-1', type: 'tiktok', size: 50, startX: 6, startY: 10, anim: 'bg-float-1', duration: 15, delay: 0 },
+  { id: 'f-2', type: 'instagram', size: 38, startX: 18, startY: 8, anim: 'bg-float-2', duration: 13, delay: 1 },
+  { id: 'f-3', type: 'youtube', size: 54, startX: 28, startY: 14, anim: 'bg-float-3', duration: 16, delay: 2 },
   
   // Top right cluster
-  { id: 'f-4', type: 'spotify', size: 46, startX: 72, startY: 9, xMoves: [0, -25, 20, 0], yMoves: [0, 35, -25, 0], rotates: [0, -15, 20, 0], duration: 14, delay: 0.5 },
-  { id: 'f-5', type: 'twitter', size: 52, startX: 84, startY: 12, xMoves: [0, 20, -30, 0], yMoves: [0, -40, 15, 0], rotates: [0, 25, -10, 0], duration: 15, delay: 1.5 },
-  { id: 'f-6', type: 'threads', size: 40, startX: 94, startY: 8, xMoves: [0, -15, 15, 0], yMoves: [0, 25, -30, 0], rotates: [0, -20, 15, 0], duration: 13, delay: 3 },
+  { id: 'f-4', type: 'spotify', size: 46, startX: 72, startY: 9, anim: 'bg-float-4', duration: 14, delay: 0.5 },
+  { id: 'f-5', type: 'twitter', size: 52, startX: 84, startY: 12, anim: 'bg-float-1', duration: 15, delay: 1.5 },
+  { id: 'f-6', type: 'threads', size: 40, startX: 94, startY: 8, anim: 'bg-float-2', duration: 13, delay: 3 },
 
   // Mid left flank
-  { id: 'f-7', type: 'facebook', size: 48, startX: 4, startY: 34, xMoves: [0, 35, -10, 0], yMoves: [0, -30, 30, 0], rotates: [0, 15, -25, 0], duration: 17, delay: 2 },
-  { id: 'f-8', type: 'instagram', size: 60, startX: 14, startY: 42, xMoves: [0, -25, 30, 0], yMoves: [0, 35, -20, 0], rotates: [0, -18, 18, 0], duration: 16, delay: 0.8 },
-  { id: 'f-9', type: 'soundcloud', size: 46, startX: 8, startY: 56, xMoves: [0, 20, -25, 0], yMoves: [0, -25, 35, 0], rotates: [0, 25, -15, 0], duration: 14, delay: 2.5 },
+  { id: 'f-7', type: 'facebook', size: 48, startX: 4, startY: 34, anim: 'bg-float-3', duration: 17, delay: 2 },
+  { id: 'f-8', type: 'instagram', size: 60, startX: 14, startY: 42, anim: 'bg-float-4', duration: 16, delay: 0.8 },
+  { id: 'f-9', type: 'soundcloud', size: 46, startX: 8, startY: 56, anim: 'bg-float-1', duration: 14, delay: 2.5 },
 
   // Mid right flank
-  { id: 'f-10', type: 'tiktok', size: 62, startX: 88, startY: 36, xMoves: [0, -30, 20, 0], yMoves: [0, 45, -25, 0], rotates: [0, -20, 25, 0], duration: 17, delay: 1.2 },
-  { id: 'f-11', type: 'capcut', size: 48, startX: 78, startY: 46, xMoves: [0, 25, -35, 0], yMoves: [0, -35, 20, 0], rotates: [0, 20, -15, 0], duration: 15, delay: 2.8 },
-  { id: 'f-12', type: 'spotify', size: 54, startX: 92, startY: 58, xMoves: [0, -20, 15, 0], yMoves: [0, 30, -40, 0], rotates: [0, -15, 20, 0], duration: 16, delay: 0.2 },
+  { id: 'f-10', type: 'tiktok', size: 62, startX: 88, startY: 36, anim: 'bg-float-2', duration: 17, delay: 1.2 },
+  { id: 'f-11', type: 'capcut', size: 48, startX: 78, startY: 46, anim: 'bg-float-3', duration: 15, delay: 2.8 },
+  { id: 'f-12', type: 'spotify', size: 54, startX: 92, startY: 58, anim: 'bg-float-4', duration: 16, delay: 0.2 },
 
   // Lower left cluster
-  { id: 'f-13', type: 'twitter', size: 42, startX: 5, startY: 72, xMoves: [0, 30, -20, 0], yMoves: [0, -40, 20, 0], rotates: [0, 25, -20, 0], duration: 14, delay: 1.7 },
-  { id: 'f-14', type: 'threads', size: 48, startX: 18, startY: 78, xMoves: [0, -20, 25, 0], yMoves: [0, 30, -30, 0], rotates: [0, -20, 15, 0], duration: 15, delay: 2.4 },
-  { id: 'f-15', type: 'tiktok', size: 38, startX: 10, startY: 88, xMoves: [0, 25, -15, 0], yMoves: [0, -25, 35, 0], rotates: [0, 15, -25, 0], duration: 13, delay: 0.4 },
+  { id: 'f-13', type: 'twitter', size: 42, startX: 5, startY: 72, anim: 'bg-float-1', duration: 14, delay: 1.7 },
+  { id: 'f-14', type: 'threads', size: 48, startX: 18, startY: 78, anim: 'bg-float-2', duration: 15, delay: 2.4 },
+  { id: 'f-15', type: 'tiktok', size: 38, startX: 10, startY: 88, anim: 'bg-float-3', duration: 13, delay: 0.4 },
 
   // Lower right cluster
-  { id: 'f-16', type: 'facebook', size: 40, startX: 86, startY: 75, xMoves: [0, -25, 30, 0], yMoves: [0, 35, -20, 0], rotates: [0, -25, 20, 0], duration: 14, delay: 2.1 },
-  { id: 'f-17', type: 'instagram', size: 54, startX: 74, startY: 82, xMoves: [0, 20, -25, 0], yMoves: [0, -30, 25, 0], rotates: [0, 18, -15, 0], duration: 16, delay: 1.1 },
-  { id: 'f-18', type: 'youtube', size: 62, startX: 90, startY: 90, xMoves: [0, -30, 20, 0], yMoves: [0, 25, -35, 0], rotates: [0, -15, 25, 0], duration: 18, delay: 3.2 },
+  { id: 'f-16', type: 'facebook', size: 40, startX: 86, startY: 75, anim: 'bg-float-4', duration: 14, delay: 2.1 },
+  { id: 'f-17', type: 'instagram', size: 54, startX: 74, startY: 82, anim: 'bg-float-1', duration: 16, delay: 1.1 },
+  { id: 'f-18', type: 'youtube', size: 62, startX: 90, startY: 90, anim: 'bg-float-2', duration: 18, delay: 3.2 },
 
   // Center ambient floaters
-  { id: 'f-19', type: 'soundcloud', size: 40, startX: 42, startY: 4, xMoves: [0, 20, -20, 0], yMoves: [0, -20, 20, 0], rotates: [0, 25, -25, 0], duration: 12, delay: 0.6 },
-  { id: 'f-20', type: 'tiktok', size: 36, startX: 56, startY: 5, xMoves: [0, -20, 20, 0], yMoves: [0, 20, -20, 0], rotates: [0, -30, 30, 0], duration: 13, delay: 2.2 },
-  { id: 'f-21', type: 'twitter', size: 32, startX: 34, startY: 88, xMoves: [0, 15, -25, 0], yMoves: [0, -25, 20, 0], rotates: [0, 20, -20, 0], duration: 14, delay: 1.8 },
-  { id: 'f-22', type: 'capcut', size: 42, startX: 62, startY: 89, xMoves: [0, -25, 15, 0], yMoves: [0, 20, -25, 0], rotates: [0, -20, 20, 0], duration: 13, delay: 0.9 },
-  { id: 'f-23', type: 'instagram', size: 30, startX: 24, startY: 48, xMoves: [0, 20, -15, 0], yMoves: [0, -25, 25, 0], rotates: [0, 25, -25, 0], duration: 11, delay: 3.1 },
-  { id: 'f-24', type: 'youtube', size: 32, startX: 70, startY: 52, xMoves: [0, -20, 20, 0], yMoves: [0, 25, -20, 0], rotates: [0, -25, 25, 0], duration: 12, delay: 1.4 },
+  { id: 'f-19', type: 'soundcloud', size: 40, startX: 42, startY: 4, anim: 'bg-float-3', duration: 12, delay: 0.6 },
+  { id: 'f-20', type: 'tiktok', size: 36, startX: 56, startY: 5, anim: 'bg-float-4', duration: 13, delay: 2.2 },
+  { id: 'f-21', type: 'twitter', size: 32, startX: 34, startY: 88, anim: 'bg-float-1', duration: 14, delay: 1.8 },
+  { id: 'f-22', type: 'capcut', size: 42, startX: 62, startY: 89, anim: 'bg-float-2', duration: 13, delay: 0.9 },
+  { id: 'f-23', type: 'instagram', size: 30, startX: 24, startY: 48, anim: 'bg-float-3', duration: 11, delay: 3.1 },
+  { id: 'f-24', type: 'youtube', size: 32, startX: 70, startY: 52, anim: 'bg-float-4', duration: 12, delay: 1.4 },
 ];
 
-// Mobile ambient set: 14 animated floating logos tuned to mobile viewport dimensions
+// Mobile ambient set: 14 animated floating logos
 const MOBILE_ITEMS: FloatingLogo[] = [
-  // Top region
-  { id: 'm-1', type: 'tiktok', size: 38, startX: 6, startY: 8, xMoves: [0, 10, -8, 0], yMoves: [0, -15, 12, 0], rotates: [0, 18, -12, 0], duration: 13, delay: 0 },
-  { id: 'm-2', type: 'youtube', size: 40, startX: 78, startY: 9, xMoves: [0, -10, 8, 0], yMoves: [0, 16, -10, 0], rotates: [0, -15, 18, 0], duration: 14, delay: 0.5 },
-  { id: 'm-3', type: 'instagram', size: 32, startX: 22, startY: 15, xMoves: [0, 8, -10, 0], yMoves: [0, 12, -14, 0], rotates: [0, -18, 14, 0], duration: 12, delay: 1.2 },
-  { id: 'm-4', type: 'soundcloud', size: 36, startX: 68, startY: 16, xMoves: [0, -8, 10, 0], yMoves: [0, -12, 14, 0], rotates: [0, 14, -18, 0], duration: 13, delay: 1.8 },
-
-  // Mid region (flanks)
-  { id: 'm-5', type: 'twitter', size: 34, startX: 5, startY: 35, xMoves: [0, 10, -6, 0], yMoves: [0, -14, 12, 0], rotates: [0, 18, -14, 0], duration: 14, delay: 0.8 },
-  { id: 'm-6', type: 'capcut', size: 38, startX: 80, startY: 37, xMoves: [0, -10, 7, 0], yMoves: [0, 14, -12, 0], rotates: [0, -18, 14, 0], duration: 15, delay: 1.5 },
-  { id: 'm-7', type: 'pinterest', size: 32, startX: 7, startY: 52, xMoves: [0, 8, -8, 0], yMoves: [0, -12, 14, 0], rotates: [0, 22, -12, 0], duration: 12, delay: 2.2 },
-  { id: 'm-8', type: 'threads', size: 38, startX: 76, startY: 54, xMoves: [0, -8, 10, 0], yMoves: [0, 16, -14, 0], rotates: [0, -15, 18, 0], duration: 14, delay: 0.4 },
-
-  // Lower region
-  { id: 'm-9', type: 'facebook', size: 34, startX: 6, startY: 69, xMoves: [0, 9, -8, 0], yMoves: [0, -14, 10, 0], rotates: [0, 16, -16, 0], duration: 13, delay: 1.1 },
-  { id: 'm-10', type: 'instagram', size: 38, startX: 78, startY: 71, xMoves: [0, -10, 8, 0], yMoves: [0, 12, -14, 0], rotates: [0, -18, 14, 0], duration: 14, delay: 2.5 },
-  { id: 'm-11', type: 'soundcloud', size: 38, startX: 8, startY: 84, xMoves: [0, 8, -10, 0], yMoves: [0, -12, 12, 0], rotates: [0, 14, -14, 0], duration: 13, delay: 0.7 },
-  { id: 'm-12', type: 'spotify', size: 38, startX: 74, startY: 86, xMoves: [0, -9, 8, 0], yMoves: [0, 14, -10, 0], rotates: [0, -16, 16, 0], duration: 12, delay: 1.9 },
-  { id: 'm-13', type: 'capcut', size: 34, startX: 28, startY: 93, xMoves: [0, 7, -7, 0], yMoves: [0, -10, 10, 0], rotates: [0, 18, -18, 0], duration: 12, delay: 1.3 },
-  { id: 'm-14', type: 'tiktok', size: 34, startX: 58, startY: 93, xMoves: [0, -8, 7, 0], yMoves: [0, 10, -10, 0], rotates: [0, -14, 14, 0], duration: 13, delay: 2.1 },
+  { id: 'm-1', type: 'tiktok', size: 38, startX: 6, startY: 8, anim: 'bg-float-1', duration: 13, delay: 0 },
+  { id: 'm-2', type: 'youtube', size: 40, startX: 78, startY: 9, anim: 'bg-float-2', duration: 14, delay: 0.5 },
+  { id: 'm-3', type: 'instagram', size: 32, startX: 22, startY: 15, anim: 'bg-float-3', duration: 12, delay: 1.2 },
+  { id: 'm-4', type: 'soundcloud', size: 36, startX: 68, startY: 16, anim: 'bg-float-4', duration: 13, delay: 1.8 },
+  { id: 'm-5', type: 'twitter', size: 34, startX: 5, startY: 35, anim: 'bg-float-1', duration: 14, delay: 0.8 },
+  { id: 'm-6', type: 'capcut', size: 38, startX: 80, startY: 37, anim: 'bg-float-2', duration: 15, delay: 1.5 },
+  { id: 'm-7', type: 'pinterest', size: 32, startX: 7, startY: 52, anim: 'bg-float-3', duration: 12, delay: 2.2 },
+  { id: 'm-8', type: 'threads', size: 38, startX: 76, startY: 54, anim: 'bg-float-4', duration: 14, delay: 0.4 },
+  { id: 'm-9', type: 'facebook', size: 34, startX: 6, startY: 69, anim: 'bg-float-1', duration: 13, delay: 1.1 },
+  { id: 'm-10', type: 'instagram', size: 38, startX: 78, startY: 71, anim: 'bg-float-2', duration: 14, delay: 2.5 },
+  { id: 'm-11', type: 'soundcloud', size: 38, startX: 8, startY: 84, anim: 'bg-float-3', duration: 13, delay: 0.7 },
+  { id: 'm-12', type: 'spotify', size: 38, startX: 74, startY: 86, anim: 'bg-float-4', duration: 12, delay: 1.9 },
+  { id: 'm-13', type: 'capcut', size: 34, startX: 28, startY: 93, anim: 'bg-float-1', duration: 12, delay: 1.3 },
+  { id: 'm-14', type: 'tiktok', size: 34, startX: 58, startY: 93, anim: 'bg-float-2', duration: 13, delay: 2.1 },
 ];
 
 export const SocialBackground: React.FC = () => {
@@ -141,70 +133,51 @@ export const SocialBackground: React.FC = () => {
       aria-hidden="true"
       className="fixed inset-0 pointer-events-none select-none overflow-hidden max-w-full z-0"
       style={{
-        contain: 'strict',
+        transform: 'translate3d(0, 0, 0)',
+        willChange: 'transform',
       }}
     >
-      {/* Mobile items (hidden on sm+) */}
-      <div className="block sm:hidden">
+      {/* Mobile items */}
+      <div className="block sm:hidden w-full h-full relative">
         {MOBILE_ITEMS.map((item) => (
-          <motion.div
+          <div
             key={item.id}
             style={{
               position: 'absolute',
               left: `${item.startX}%`,
               top: `${item.startY}%`,
-              width: item.size,
-              height: item.size,
-              opacity: 'var(--bg-icon-opacity, 0.4)' as any,
+              width: `${item.size}px`,
+              height: `${item.size}px`,
+              opacity: 'var(--bg-icon-opacity, 0.4)',
               willChange: 'transform',
+              animation: `${item.anim} ${item.duration}s infinite ease-in-out ${item.delay}s`,
             }}
             className="text-[var(--bg-icon-color)] transition-colors duration-150"
-            animate={{
-              x: item.xMoves,
-              y: item.yMoves,
-              rotate: item.rotates,
-            }}
-            transition={{
-              duration: item.duration,
-              repeat: Infinity,
-              ease: 'easeInOut',
-              delay: item.delay,
-            }}
           >
             {ICONS[item.type]}
-          </motion.div>
+          </div>
         ))}
       </div>
 
-      {/* Desktop items (hidden on mobile) */}
-      <div className="hidden sm:block">
+      {/* Desktop items */}
+      <div className="hidden sm:block w-full h-full relative">
         {DESKTOP_ITEMS.map((item) => (
-          <motion.div
+          <div
             key={item.id}
             style={{
               position: 'absolute',
               left: `${item.startX}%`,
               top: `${item.startY}%`,
-              width: item.size,
-              height: item.size,
-              opacity: 'var(--bg-icon-opacity, 0.4)' as any,
+              width: `${item.size}px`,
+              height: `${item.size}px`,
+              opacity: 'var(--bg-icon-opacity, 0.4)',
               willChange: 'transform',
+              animation: `${item.anim} ${item.duration}s infinite ease-in-out ${item.delay}s`,
             }}
             className="text-[var(--bg-icon-color)] transition-colors duration-150"
-            animate={{
-              x: item.xMoves,
-              y: item.yMoves,
-              rotate: item.rotates,
-            }}
-            transition={{
-              duration: item.duration,
-              repeat: Infinity,
-              ease: 'easeInOut',
-              delay: item.delay,
-            }}
           >
             {ICONS[item.type]}
-          </motion.div>
+          </div>
         ))}
       </div>
     </div>

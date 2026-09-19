@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link2, Layers } from 'lucide-react';
+import { Link2, Zap } from 'lucide-react';
 import { Navbar } from '@/components/Navbar';
 import { PlatformChips } from '@/components/PlatformChips';
 import { UrlInputBar } from '@/components/UrlInputBar';
@@ -339,9 +339,10 @@ export default function HomePage() {
                 : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
             }`}
           >
-            <Layers className="w-3.5 h-3.5" />
-            <span>⚡ Batch Mode</span>
+            <Zap className="w-3.5 h-3.5" />
+            <span>Batch Mode</span>
           </button>
+
         </motion.div>
 
         {/* Input Area Depending on Mode */}
