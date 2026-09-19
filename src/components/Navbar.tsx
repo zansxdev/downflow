@@ -11,7 +11,7 @@ interface NavbarProps {
 
 export const Navbar: React.FC<NavbarProps> = ({ onOpenHistory, historyCount }) => {
   return (
-    <header className="w-full max-w-4xl mx-auto px-4 py-6 flex items-center justify-between border-b border-[#18181f]">
+    <header className="w-full max-w-4xl mx-auto px-4 py-6 flex items-center justify-between border-b border-[#18181f] relative z-10">
       <div className="flex items-center gap-2">
         <span className="font-extrabold text-xl tracking-tight text-white font-sans">
           DownFlow
