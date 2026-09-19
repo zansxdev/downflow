@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
-import { Plus_Jakarta_Sans, JetBrains_Mono } from 'next/font/google';
+import { Plus_Jakarta_Sans, JetBrains_Mono, Syne } from 'next/font/google';
 import './globals.css';
+import { SocialBackground } from '@/components/SocialBackground';
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -14,6 +15,13 @@ const jetbrains = JetBrains_Mono({
   variable: '--font-jetbrains',
   display: 'swap',
   weight: ['400', '500', '600'],
+});
+
+const syne = Syne({
+  subsets: ['latin'],
+  variable: '--font-syne',
+  display: 'swap',
+  weight: ['700', '800'],
 });
 
 export const metadata: Metadata = {
@@ -33,8 +41,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="id" className={`${jakarta.variable} ${jetbrains.variable} dark`}>
-      <body className="bg-[#050505] text-[#f4f4f5] antialiased selection:bg-zinc-800 selection:text-white min-h-screen flex flex-col justify-between">
+    <html lang="id" className={`${jakarta.variable} ${jetbrains.variable} ${syne.variable} dark`}>
+      <body className="bg-[#050505] text-[#f4f4f5] antialiased selection:bg-zinc-800 selection:text-white min-h-screen flex flex-col justify-between relative">
+        <SocialBackground />
         {children}
       </body>
     </html>

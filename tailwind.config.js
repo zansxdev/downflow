@@ -25,6 +25,7 @@ module.exports = {
       fontFamily: {
         sans: ['var(--font-jakarta)', 'sans-serif'],
         mono: ['var(--font-jetbrains)', 'monospace'],
+        display: ['var(--font-syne)', 'sans-serif'],
       },
       keyframes: {
         'pulse-subtle': {

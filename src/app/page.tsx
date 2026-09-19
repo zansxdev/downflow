@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Navbar } from '@/components/Navbar';
-import { SocialBackground } from '@/components/SocialBackground';
 import { PlatformChips } from '@/components/PlatformChips';
 import { UrlInputBar } from '@/components/UrlInputBar';
 import { LoadingSkeleton } from '@/components/LoadingSkeleton';
@@ -127,9 +126,6 @@ export default function HomePage() {
 
   return (
     <div className="relative flex flex-col min-h-screen">
-      {/* Animated Social Media Logo Background */}
-      <SocialBackground />
-
       <Navbar onOpenHistory={() => setIsHistoryOpen(true)} historyCount={history.length} />
 
       <main className="flex-1 w-full max-w-4xl mx-auto px-4 py-10 sm:py-16 flex flex-col items-center z-10">
@@ -138,13 +134,13 @@ export default function HomePage() {
           initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ type: 'spring', damping: 20, stiffness: 140 }}
-          className="text-center space-y-3 max-w-xl mb-8"
+          className="text-center space-y-3 max-w-2xl mb-8"
         >
           <motion.h1
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1, duration: 0.4 }}
-            className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight"
+            className="font-display text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-[1.1]"
           >
             Universal Media Downloader
           </motion.h1>
