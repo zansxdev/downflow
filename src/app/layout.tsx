@@ -34,7 +34,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="id" className={`${jakarta.variable} ${jetbrains.variable} dark`}>
-      <body className="bg-[#050505] text-[#f4f4f5] antialiased selection:bg-emerald-500/20 selection:text-emerald-300 min-h-screen flex flex-col justify-between">
+      <body className="bg-[#050505] text-[#f4f4f5] antialiased selection:bg-zinc-800 selection:text-white min-h-screen flex flex-col justify-between">
         {children}
       </body>
     </html>
