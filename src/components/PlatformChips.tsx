@@ -78,21 +78,21 @@ export const PlatformChips: React.FC<PlatformChipsProps> = ({
             onClick={() => onSelectPlatform(platform.id)}
             whileHover={{ y: -1 }}
             whileTap={{ scale: 0.96 }}
-            className={`relative flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors cursor-pointer border ${
+            className={`relative flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium transition-colors cursor-pointer border backdrop-blur-sm ${
               isSelected
-                ? 'text-white border-zinc-500 bg-zinc-800 shadow-sm'
-                : 'text-zinc-400 hover:text-zinc-200 border-[#1e1e24] bg-[#0c0c10] hover:bg-[#14141a]'
+                ? 'text-[var(--chip-active-text)] border-[var(--chip-active-border)] bg-[var(--chip-active-bg)] shadow-sm'
+                : 'text-[var(--chip-text)] hover:text-[var(--text-primary)] border-[var(--chip-border)] bg-[var(--chip-bg)] hover:bg-[var(--bg-surface-elevated)]'
             }`}
           >
             {isSelected && (
               <motion.div
                 layoutId="activePlatformIndicator"
-                className="absolute inset-0 rounded-lg bg-zinc-800 border border-zinc-500 -z-10"
+                className="absolute inset-0 rounded-xl bg-[var(--chip-active-bg)] border border-[var(--chip-active-border)] -z-10 shadow-sm"
                 transition={{ type: 'spring', stiffness: 380, damping: 30 }}
               />
             )}
             {ICONS[platform.id] && (
-              <span className="shrink-0 text-zinc-400">{ICONS[platform.id]}</span>
+              <span className="shrink-0 opacity-80">{ICONS[platform.id]}</span>
             )}
             <span>{platform.name}</span>
           </motion.button>

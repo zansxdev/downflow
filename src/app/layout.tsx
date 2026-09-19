@@ -168,8 +168,13 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('downflow_theme')||'dark';document.documentElement.setAttribute('data-theme',t);if(t==='light'){document.documentElement.classList.remove('dark');document.documentElement.classList.add('light');}else{document.documentElement.classList.remove('light');document.documentElement.classList.add('dark');}}catch(e){}})()`,
+          }}
+        />
       </head>
-      <body className="bg-[#050505] text-[#f4f4f5] antialiased selection:bg-zinc-800 selection:text-white min-h-screen flex flex-col justify-between relative">
+      <body className="bg-[var(--bg-canvas)] text-[var(--text-primary)] antialiased min-h-screen flex flex-col justify-between relative transition-colors duration-200">
         <ConsolePrank />
         <div
           dangerouslySetInnerHTML={{

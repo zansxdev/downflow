@@ -35,8 +35,8 @@ const SOCIAL_LINKS = [
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="w-full max-w-4xl mx-auto px-4 py-8 border-t border-[#18181f] text-xs text-zinc-500 font-mono flex flex-col sm:flex-row items-center justify-between gap-4 relative z-10">
-      <span className="text-zinc-500">DownFlow Media Extractor</span>
+    <footer className="w-full max-w-4xl mx-auto px-4 py-8 border-t border-[var(--footer-border)] text-xs text-[var(--text-muted)] font-mono flex flex-col sm:flex-row items-center justify-between gap-4 relative z-10 transition-colors duration-300">
+      <span className="text-[var(--text-muted)]">DownFlow Media Extractor</span>
 
       <div className="flex items-center gap-2 sm:gap-3">
         {SOCIAL_LINKS.map((item) => (
@@ -47,7 +47,7 @@ export const Footer: React.FC = () => {
             rel="noopener noreferrer"
             whileHover={{ y: -2, scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
-            className="p-2.5 rounded-lg text-zinc-500 hover:text-white hover:bg-[#121218] transition-colors cursor-pointer flex items-center justify-center"
+            className="p-2.5 rounded-lg text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface-elevated)] transition-colors cursor-pointer flex items-center justify-center"
             aria-label={`${item.name} @zansxart`}
             title={`@zansxart di ${item.name}`}
           >

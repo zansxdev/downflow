@@ -52,10 +52,10 @@ export const UrlInputBar: React.FC<UrlInputBarProps> = ({
       <motion.div
         animate={{ scale: isLoading ? 0.99 : 1 }}
         transition={{ duration: 0.2 }}
-        className="relative flex flex-col sm:flex-row sm:items-center bg-[#0c0c10]/95 backdrop-blur-md border border-[#24242c] focus-within:border-zinc-400 rounded-xl p-2 sm:p-2.5 transition-colors shadow-xl gap-2 sm:gap-1.5 w-full max-w-full overflow-hidden"
+        className="relative flex flex-col sm:flex-row sm:items-center bg-[var(--bg-surface)] backdrop-blur-xl border border-[var(--border-subtle)] focus-within:border-[var(--border-strong)] rounded-2xl p-2 sm:p-2.5 transition-all shadow-[var(--card-shadow)] gap-2 sm:gap-1.5 w-full max-w-full overflow-hidden"
       >
         <div className="flex items-center flex-1 min-w-0">
-          <div className="pl-2 pr-1 text-zinc-500 flex items-center shrink-0">
+          <div className="pl-2 pr-1 text-[var(--text-muted)] flex items-center shrink-0">
             <Link2 className="w-4 h-4" />
           </div>
 
@@ -75,7 +75,7 @@ export const UrlInputBar: React.FC<UrlInputBarProps> = ({
                 : 'Tempel link video atau audio di sini...'
             }
             disabled={isLoading}
-            className="flex-1 min-w-0 bg-transparent px-2.5 py-2.5 sm:py-2 text-sm text-zinc-100 placeholder:text-zinc-600 focus:outline-none disabled:opacity-50 font-sans"
+            className="flex-1 min-w-0 bg-transparent px-2.5 py-2.5 sm:py-2 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none disabled:opacity-50 font-sans"
             aria-label="Input URL Media"
           />
 
@@ -87,7 +87,7 @@ export const UrlInputBar: React.FC<UrlInputBarProps> = ({
                   animate={{ scale: 1, opacity: 1 }}
                   exit={{ scale: 0.7, opacity: 0 }}
                   transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-                  className="hidden md:inline-flex items-center px-2 py-0.5 rounded text-[10px] font-mono font-medium bg-zinc-800 text-zinc-300 border border-zinc-700"
+                  className="hidden md:inline-flex items-center px-2 py-0.5 rounded text-[10px] font-mono font-medium bg-[var(--bg-surface-elevated)] text-[var(--text-secondary)] border border-[var(--border-subtle)]"
                 >
                   {detectedPlatform.toUpperCase()}
                 </motion.span>
@@ -101,7 +101,7 @@ export const UrlInputBar: React.FC<UrlInputBarProps> = ({
                 disabled={isLoading}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                className="p-2 sm:p-1.5 rounded-md text-zinc-400 hover:text-zinc-100 hover:bg-[#1c1c24] transition-colors cursor-pointer"
+                className="p-2 sm:p-1.5 rounded-lg text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface-elevated)] transition-colors cursor-pointer"
                 title="Hapus input"
               >
                 <X className="w-4 h-4" />
@@ -112,7 +112,7 @@ export const UrlInputBar: React.FC<UrlInputBarProps> = ({
                 onClick={handlePaste}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="flex items-center gap-1 px-2.5 py-1.5 rounded-md text-xs font-medium text-zinc-400 hover:text-zinc-200 bg-[#14141a] hover:bg-[#1a1a22] border border-[#22222a] transition-colors cursor-pointer"
+                className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] bg-[var(--bg-surface-elevated)] hover:bg-[var(--chip-active-bg)] border border-[var(--border-subtle)] transition-colors cursor-pointer"
                 title="Tempel dari Clipboard"
               >
                 <Clipboard className="w-3.5 h-3.5" />
@@ -130,7 +130,7 @@ export const UrlInputBar: React.FC<UrlInputBarProps> = ({
             disabled={isLoading || !url.trim()}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.97 }}
-            className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-2.5 sm:py-2 rounded-lg font-semibold text-xs text-black bg-white hover:bg-zinc-200 disabled:bg-zinc-800 disabled:text-zinc-600 transition-colors cursor-pointer disabled:cursor-not-allowed shadow-md min-h-[42px] sm:min-h-0"
+            className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-2.5 sm:py-2 rounded-xl font-bold text-xs text-[var(--bg-canvas)] bg-[var(--text-primary)] hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-md min-h-[42px] sm:min-h-0 cursor-pointer"
           >
             {isLoading ? (
               <>

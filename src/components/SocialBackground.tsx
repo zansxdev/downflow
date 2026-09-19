@@ -155,10 +155,10 @@ export const SocialBackground: React.FC = () => {
               top: `${item.startY}%`,
               width: item.size,
               height: item.size,
-              opacity: 0.42,
+              opacity: 'var(--bg-icon-opacity, 0.4)' as any,
               willChange: 'transform',
             }}
-            className="text-zinc-400"
+            className="text-[var(--bg-icon-color)] transition-colors duration-300"
             animate={{
               x: item.xMoves,
               y: item.yMoves,
@@ -187,10 +187,10 @@ export const SocialBackground: React.FC = () => {
               top: `${item.startY}%`,
               width: item.size,
               height: item.size,
-              opacity: 0.44,
+              opacity: 'var(--bg-icon-opacity, 0.4)' as any,
               willChange: 'transform',
             }}
-            className="text-zinc-400"
+            className="text-[var(--bg-icon-color)] transition-colors duration-300"
             animate={{
               x: item.xMoves,
               y: item.yMoves,
