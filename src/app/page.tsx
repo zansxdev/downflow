@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Navbar } from '@/components/Navbar';
+import { SocialBackground } from '@/components/SocialBackground';
 import { PlatformChips } from '@/components/PlatformChips';
 import { UrlInputBar } from '@/components/UrlInputBar';
 import { LoadingSkeleton } from '@/components/LoadingSkeleton';
@@ -125,23 +126,46 @@ export default function HomePage() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="relative flex flex-col min-h-screen">
+      {/* Animated Social Media Logo Background */}
+      <SocialBackground />
+
       <Navbar onOpenHistory={() => setIsHistoryOpen(true)} historyCount={history.length} />
 
-      <main className="flex-1 w-full max-w-4xl mx-auto px-4 py-10 sm:py-16 flex flex-col items-center">
-        {/* Clean Hero Header - No gradients, no sparkle pills */}
-        <div className="text-center space-y-3 max-w-xl mb-8">
-          <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
+      <main className="flex-1 w-full max-w-4xl mx-auto px-4 py-10 sm:py-16 flex flex-col items-center z-10">
+        {/* Animated Hero Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ type: 'spring', damping: 20, stiffness: 140 }}
+          className="text-center space-y-3 max-w-xl mb-8"
+        >
+          <motion.h1
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1, duration: 0.4 }}
+            className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight"
+          >
             Universal Media Downloader
-          </h1>
+          </motion.h1>
 
-          <p className="text-sm sm:text-base text-zinc-400 leading-relaxed font-sans">
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.4 }}
+            className="text-sm sm:text-base text-zinc-400 leading-relaxed font-sans"
+          >
             Unduh video, audio, dan foto dari TikTok, Instagram, YouTube, X, Facebook, dan Spotify tanpa iklan.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
-        {/* Input & Platform Filter Container */}
-        <div className="w-full space-y-3.5 mb-8">
+        {/* Input & Animated Platform Chips Container */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3, duration: 0.45 }}
+          className="w-full space-y-3.5 mb-8"
+        >
           <UrlInputBar
             url={url}
             onChangeUrl={setUrl}
@@ -156,17 +180,18 @@ export default function HomePage() {
             selectedPlatform={selectedPlatform}
             onSelectPlatform={(p) => setSelectedPlatform(p)}
           />
-        </div>
+        </motion.div>
 
-        {/* Dynamic State Area */}
+        {/* Dynamic Animated Display Area */}
         <div className="w-full">
           <AnimatePresence mode="wait">
             {isLoading && (
               <motion.div
                 key="loading"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
+                initial={{ opacity: 0, scale: 0.98 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.98 }}
+                transition={{ duration: 0.25 }}
               >
                 <LoadingSkeleton />
               </motion.div>
@@ -175,18 +200,24 @@ export default function HomePage() {
             {!isLoading && result && (
               <motion.div
                 key="result"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
+                initial={{ opacity: 0, scale: 0.98 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.98 }}
+                transition={{ duration: 0.25 }}
               >
                 <MediaResultCard result={result} onReset={handleReset} />
               </motion.div>
             )}
 
             {!isLoading && !result && (
-              <div className="text-center text-xs text-zinc-600 font-mono pt-4">
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.4 }}
+                className="text-center text-xs text-zinc-500 font-mono pt-4"
+              >
                 Tempel link publik di atas untuk memulai ekstraksi media
-              </div>
+              </motion.div>
             )}
           </AnimatePresence>
         </div>

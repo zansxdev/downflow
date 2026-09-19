@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   Download,
   Copy,
@@ -53,15 +53,19 @@ export const MediaResultCard: React.FC<MediaResultCardProps> = ({ result, onRese
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 15 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 15 }}
-      transition={{ duration: 0.3 }}
-      className="w-full bg-[#0c0c10] border border-[#202026] rounded-xl p-5 sm:p-6 space-y-6"
+      initial={{ opacity: 0, y: 20, scale: 0.97 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, y: 20, scale: 0.97 }}
+      transition={{ type: 'spring', damping: 20, stiffness: 150 }}
+      className="w-full bg-[#0c0c10]/95 backdrop-blur-md border border-[#202026] rounded-xl p-5 sm:p-6 space-y-6 shadow-2xl"
     >
       {/* Media Info */}
       <div className="flex flex-col sm:flex-row gap-5">
-        <div className="relative w-full sm:w-52 h-44 sm:h-52 bg-[#121217] rounded-lg overflow-hidden border border-[#222228] shrink-0 flex items-center justify-center">
+        <motion.div
+          whileHover={{ scale: 1.02 }}
+          transition={{ duration: 0.2 }}
+          className="relative w-full sm:w-52 h-44 sm:h-52 bg-[#121217] rounded-lg overflow-hidden border border-[#222228] shrink-0 flex items-center justify-center"
+        >
           {previewImage || result.thumbnail ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
@@ -76,7 +80,7 @@ export const MediaResultCard: React.FC<MediaResultCardProps> = ({ result, onRese
             </div>
           )}
 
-          <div className="absolute top-2 left-2 px-2 py-0.5 rounded bg-black/90 text-[10px] font-mono font-bold text-white uppercase">
+          <div className="absolute top-2 left-2 px-2 py-0.5 rounded bg-black/90 text-[10px] font-mono font-bold text-white uppercase tracking-wider">
             {result.platformName}
           </div>
 
@@ -86,7 +90,7 @@ export const MediaResultCard: React.FC<MediaResultCardProps> = ({ result, onRese
               <span>{result.duration}</span>
             </div>
           )}
-        </div>
+        </motion.div>
 
         <div className="flex-1 flex flex-col justify-between space-y-3">
           <div className="space-y-2">
@@ -121,10 +125,12 @@ export const MediaResultCard: React.FC<MediaResultCardProps> = ({ result, onRese
               </span>
               <div className="flex items-center gap-1.5 overflow-x-auto py-1 no-scrollbar">
                 {result.images.map((imgUrl, i) => (
-                  <button
+                  <motion.button
                     key={i}
                     type="button"
                     onClick={() => setPreviewImage(imgUrl)}
+                    whileHover={{ scale: 1.08 }}
+                    whileTap={{ scale: 0.95 }}
                     className={`relative w-11 h-11 rounded overflow-hidden shrink-0 border cursor-pointer ${
                       previewImage === imgUrl
                         ? 'border-white ring-1 ring-white'
@@ -133,7 +139,7 @@ export const MediaResultCard: React.FC<MediaResultCardProps> = ({ result, onRese
                   >
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={imgUrl} alt={`Slide ${i + 1}`} className="w-full h-full object-cover" />
-                  </button>
+                  </motion.button>
                 ))}
               </div>
             </div>
@@ -161,25 +167,40 @@ export const MediaResultCard: React.FC<MediaResultCardProps> = ({ result, onRese
         </div>
       </div>
 
-      {/* Download Options: Natural Unboxed Layout */}
+      {/* Download Options List with Stagger */}
       <div className="space-y-2 pt-2 border-t border-[#1a1a20]">
         <div className="flex items-center justify-between">
           <span className="text-xs font-mono uppercase text-zinc-400 font-semibold">
             Pilihan Unduhan
           </span>
           <span className="text-[11px] font-mono text-zinc-500">
-            {result.downloads.length} opsi
+            {result.downloads.length} opsi tersedia
           </span>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+        <motion.div
+          initial="hidden"
+          animate="show"
+          variants={{
+            hidden: { opacity: 0 },
+            show: {
+              opacity: 1,
+              transition: { staggerChildren: 0.06 },
+            },
+          }}
+          className="grid grid-cols-1 sm:grid-cols-2 gap-2"
+        >
           {result.downloads.map((opt) => {
             const isCopied = copiedId === opt.id;
             const isDownloading = downloadingId === opt.id;
 
             return (
-              <div
+              <motion.div
                 key={opt.id}
+                variants={{
+                  hidden: { opacity: 0, y: 10 },
+                  show: { opacity: 1, y: 0 },
+                }}
                 className="flex items-center justify-between p-3 rounded-lg bg-[#111116] border border-[#1e1e24] hover:border-zinc-700 transition-colors"
               >
                 <div className="flex items-center gap-2.5 min-w-0 pr-2">
@@ -205,9 +226,11 @@ export const MediaResultCard: React.FC<MediaResultCardProps> = ({ result, onRese
                 </div>
 
                 <div className="flex items-center gap-1.5 shrink-0">
-                  <button
+                  <motion.button
                     type="button"
                     onClick={() => handleCopyLink(opt)}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
                     className="p-1.5 rounded text-zinc-400 hover:text-white bg-[#181820] hover:bg-[#22222a] border border-[#262630] transition-colors cursor-pointer"
                     title="Salin tautan langsung"
                   >
@@ -216,21 +239,23 @@ export const MediaResultCard: React.FC<MediaResultCardProps> = ({ result, onRese
                     ) : (
                       <Copy className="w-3.5 h-3.5" />
                     )}
-                  </button>
+                  </motion.button>
 
-                  <button
+                  <motion.button
                     type="button"
                     onClick={() => handleDownload(opt)}
+                    whileHover={{ scale: 1.04 }}
+                    whileTap={{ scale: 0.96 }}
                     className="flex items-center gap-1 px-3 py-1.5 rounded text-xs font-semibold text-black bg-white hover:bg-zinc-200 transition-colors cursor-pointer"
                   >
                     <Download className="w-3.5 h-3.5" />
                     <span>{isDownloading ? 'Membuka...' : 'Unduh'}</span>
-                  </button>
+                  </motion.button>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </motion.div>
   );

@@ -49,7 +49,11 @@ export const UrlInputBar: React.FC<UrlInputBarProps> = ({
 
   return (
     <div className="w-full">
-      <div className="relative flex items-center bg-[#0c0c10] border border-[#222228] focus-within:border-zinc-500 rounded-xl p-2 transition-colors">
+      <motion.div
+        animate={{ scale: isLoading ? 0.99 : 1 }}
+        transition={{ duration: 0.2 }}
+        className="relative flex items-center bg-[#0c0c10]/95 backdrop-blur-md border border-[#24242c] focus-within:border-zinc-400 rounded-xl p-2 transition-colors shadow-xl"
+      >
         <div className="pl-2 pr-1 text-zinc-500 flex items-center">
           <Link2 className="w-4 h-4" />
         </div>
@@ -78,10 +82,11 @@ export const UrlInputBar: React.FC<UrlInputBarProps> = ({
           <AnimatePresence>
             {detectedPlatform !== 'auto' && (
               <motion.span
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="hidden sm:inline-flex items-center px-2 py-0.5 rounded text-[11px] font-mono font-medium bg-zinc-800 text-zinc-300 border border-zinc-700"
+                initial={{ scale: 0.7, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.7, opacity: 0 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+                className="hidden sm:inline-flex items-center px-2.5 py-1 rounded text-[11px] font-mono font-medium bg-zinc-800 text-zinc-200 border border-zinc-700"
               >
                 {detectedPlatform.toUpperCase()}
               </motion.span>
@@ -89,32 +94,38 @@ export const UrlInputBar: React.FC<UrlInputBarProps> = ({
           </AnimatePresence>
 
           {url ? (
-            <button
+            <motion.button
               type="button"
               onClick={onClear}
               disabled={isLoading}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
               className="p-1.5 rounded text-zinc-400 hover:text-zinc-100 hover:bg-[#1c1c24] transition-colors cursor-pointer"
               title="Hapus input"
             >
               <X className="w-4 h-4" />
-            </button>
+            </motion.button>
           ) : (
-            <button
+            <motion.button
               type="button"
               onClick={handlePaste}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               className="flex items-center gap-1 px-2.5 py-1.5 rounded text-xs font-medium text-zinc-400 hover:text-zinc-200 bg-[#14141a] hover:bg-[#1a1a22] border border-[#22222a] transition-colors cursor-pointer"
               title="Tempel dari Clipboard"
             >
               <Clipboard className="w-3.5 h-3.5" />
               <span className="hidden sm:inline font-mono">Tempel</span>
-            </button>
+            </motion.button>
           )}
 
-          <button
+          <motion.button
             type="button"
             onClick={onSubmit}
             disabled={isLoading || !url.trim()}
-            className="flex items-center gap-1.5 px-4 py-2 rounded-lg font-semibold text-xs text-black bg-white hover:bg-zinc-200 disabled:bg-zinc-800 disabled:text-zinc-600 transition-colors cursor-pointer disabled:cursor-not-allowed"
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            className="flex items-center gap-1.5 px-4 py-2 rounded-lg font-semibold text-xs text-black bg-white hover:bg-zinc-200 disabled:bg-zinc-800 disabled:text-zinc-600 transition-colors cursor-pointer disabled:cursor-not-allowed shadow-md"
           >
             {isLoading ? (
               <>
@@ -127,12 +138,16 @@ export const UrlInputBar: React.FC<UrlInputBarProps> = ({
                 <ArrowRight className="w-3.5 h-3.5" />
               </>
             )}
-          </button>
+          </motion.button>
         </div>
-      </div>
+      </motion.div>
 
       {error && (
-        <div className="mt-2.5 px-3 py-2 rounded-lg bg-[#1a1114] border border-red-900/50 text-red-400 text-xs font-medium flex items-center justify-between">
+        <motion.div
+          initial={{ opacity: 0, y: -4 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mt-2.5 px-3 py-2 rounded-lg bg-[#1a1114] border border-red-900/50 text-red-400 text-xs font-medium flex items-center justify-between"
+        >
           <span>{error}</span>
           <button
             type="button"
@@ -141,7 +156,7 @@ export const UrlInputBar: React.FC<UrlInputBarProps> = ({
           >
             Reset
           </button>
-        </div>
+        </motion.div>
       )}
     </div>
   );
