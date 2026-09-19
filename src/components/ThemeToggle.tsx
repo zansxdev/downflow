@@ -4,6 +4,8 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Moon, Sun, Zap } from 'lucide-react';
 
+import { sounds } from '@/lib/sounds';
+
 export type ThemeMode = 'dark' | 'light' | 'neo';
 
 const THEMES: { id: ThemeMode; label: string; icon: React.ReactNode; desc: string }[] = [
@@ -64,6 +66,7 @@ export const ThemeToggle: React.FC = () => {
   };
 
   const handleSelectTheme = (mode: ThemeMode) => {
+    sounds.playTheme(mode);
     setTheme(mode);
     applyTheme(mode);
     try {

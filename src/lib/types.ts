@@ -60,3 +60,13 @@ export interface DownloadHistoryItem {
   originalUrl: string;
   timestamp: number;
 }
+
+export interface BatchQueueItem {
+  id: string;
+  url: string;
+  platform: PlatformId;
+  status: 'pending' | 'processing' | 'success' | 'error';
+  result?: NormalizedMediaResult;
+  error?: string;
+}
+

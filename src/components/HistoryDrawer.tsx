@@ -4,6 +4,7 @@ import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Trash2, ExternalLink, Clock, Film } from 'lucide-react';
 import { DownloadHistoryItem } from '@/lib/types';
+import { sounds } from '@/lib/sounds';
 
 interface HistoryDrawerProps {
   isOpen: boolean;
@@ -83,8 +84,11 @@ export const HistoryDrawer: React.FC<HistoryDrawerProps> = ({
                       className="group flex items-center justify-between p-2.5 rounded-xl bg-[var(--bg-surface-elevated)] border border-[var(--border-subtle)] hover:border-[var(--border-strong)] transition-colors neo-box"
                     >
                       <div
-                        onClick={() => onSelectHistory(item)}
-                        className="flex items-center gap-3 cursor-pointer min-w-0 flex-1"
+                        onClick={() => {
+                          sounds.playPop();
+                          onSelectHistory(item);
+                        }}
+                        className="flex-1 flex items-center gap-3 min-w-0 cursor-pointer"
                       >
                         <div className="w-12 h-12 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-subtle)] shrink-0 overflow-hidden flex items-center justify-center neo-box">
                           {item.thumbnail ? (
@@ -137,7 +141,10 @@ export const HistoryDrawer: React.FC<HistoryDrawerProps> = ({
               <div className="pt-4 border-t border-[var(--border-subtle)]">
                 <button
                   type="button"
-                  onClick={onClearHistory}
+                  onClick={() => {
+                    sounds.playTrash();
+                    onClearHistory();
+                  }}
                   className="w-full flex items-center justify-center gap-1.5 py-2 px-4 rounded-xl text-xs font-medium text-[var(--text-secondary)] hover:text-red-400 bg-[var(--bg-surface-elevated)] hover:bg-red-500/10 border border-[var(--border-subtle)] hover:border-red-500/30 transition-colors cursor-pointer"
                 >
                   <Trash2 className="w-3.5 h-3.5" />
@@ -145,6 +152,7 @@ export const HistoryDrawer: React.FC<HistoryDrawerProps> = ({
                 </button>
               </div>
             )}
+
           </motion.div>
         </>
       )}

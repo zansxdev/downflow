@@ -4,6 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { PLATFORMS } from '@/lib/url-detector';
 import { PlatformId } from '@/lib/types';
+import { sounds } from '@/lib/sounds';
 
 interface PlatformChipsProps {
   selectedPlatform: PlatformId;
@@ -75,7 +76,10 @@ export const PlatformChips: React.FC<PlatformChipsProps> = ({
           <motion.button
             key={platform.id}
             type="button"
-            onClick={() => onSelectPlatform(platform.id)}
+            onClick={() => {
+              sounds.playPop();
+              onSelectPlatform(platform.id);
+            }}
             whileHover={{ y: -1 }}
             whileTap={{ scale: 0.96 }}
             data-selected={isSelected}

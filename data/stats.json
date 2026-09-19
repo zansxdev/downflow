@@ -1,12 +1,12 @@
 {
-  "totalRequests": 9,
-  "totalSuccess": 9,
+  "totalRequests": 0,
+  "totalSuccess": 0,
   "totalFailed": 0,
-  "totalBotsBlocked": 3,
-  "totalHoneypotHits": 2,
+  "totalBotsBlocked": 0,
+  "totalHoneypotHits": 0,
   "byPlatform": {
-    "tiktok": 2,
-    "youtube": 7,
+    "tiktok": 0,
+    "youtube": 0,
     "instagram": 0,
     "spotify": 0,
     "twitter": 0,
@@ -17,146 +17,6 @@
     "pinterest": 0,
     "other": 0
   },
-  "recentLogs": [
-    {
-      "id": "log-1789816108365-joua",
-      "timestamp": 1789816108365,
-      "type": "download",
-      "platform": "youtube",
-      "title": "SENAM KREASI LAGU BRAZIL #senamkreasi #pelajar #sehat #anakindonesia",
-      "url": "https://youtu.be/gYNnnr_kk-4?feature=shared",
-      "success": true,
-      "ip": "103.166.159.115",
-      "userAgent": "mozilla/5.0 (linux; android 10; k) applewebkit/537.36 (khtml, like gecko) chrome/153.0.0.0 mobile safari/537.36"
-    },
-    {
-      "id": "log-1789816081808-n0m2",
-      "timestamp": 1789816081808,
-      "type": "download",
-      "platform": "youtube",
-      "title": "SENAM KREASI LAGU BRAZIL #senamkreasi #pelajar #sehat #anakindonesia",
-      "url": "https://youtu.be/gYNnnr_kk-4?feature=shared",
-      "success": true,
-      "ip": "103.166.159.115",
-      "userAgent": "mozilla/5.0 (linux; android 10; k) applewebkit/537.36 (khtml, like gecko) chrome/153.0.0.0 mobile safari/537.36"
-    },
-    {
-      "id": "log-1789815504590-kuvp",
-      "timestamp": 1789815504590,
-      "type": "download",
-      "platform": "youtube",
-      "title": "SENAM KREASI LAGU BRAZIL #senamkreasi #pelajar #sehat #anakindonesia",
-      "url": "https://youtu.be/gYNnnr_kk-4?feature=shared",
-      "success": true,
-      "ip": "103.166.159.115",
-      "userAgent": "mozilla/5.0 (linux; android 10; k) applewebkit/537.36 (khtml, like gecko) chrome/153.0.0.0 mobile safari/537.36"
-    },
-    {
-      "id": "log-1789815443853-ctas",
-      "timestamp": 1789815443853,
-      "type": "download",
-      "platform": "youtube",
-      "title": "SENAM KREASI LAGU BRAZIL #senamkreasi #pelajar #sehat #anakindonesia",
-      "url": "https://youtu.be/gYNnnr_kk-4?feature=shared",
-      "success": true,
-      "ip": "103.166.159.115",
-      "userAgent": "mozilla/5.0 (linux; android 10; k) applewebkit/537.36 (khtml, like gecko) chrome/153.0.0.0 mobile safari/537.36"
-    },
-    {
-      "id": "log-1789810996082-7hk2",
-      "timestamp": 1789810996082,
-      "type": "download",
-      "platform": "youtube",
-      "title": "Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster)",
-      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-      "success": true,
-      "ip": "104.234.26.109",
-      "userAgent": "curl/7.81.0"
-    },
-    {
-      "id": "log-1789810993593-tyn5",
-      "timestamp": 1789810993593,
-      "type": "download",
-      "platform": "tiktok",
-      "title": "how many frogs did you find? 🐸 check out tiktok’s #Minecraft community today! @Gorillo",
-      "url": "https://www.tiktok.com/@tiktok/video/7106594312292453675",
-      "success": true,
-      "ip": "104.234.26.109",
-      "userAgent": "curl/7.81.0"
-    },
-    {
-      "id": "log-1789810981952-83h4",
-      "timestamp": 1789810981952,
-      "type": "download",
-      "platform": "tiktok",
-      "title": "how many frogs did you find? 🐸 check out tiktok’s #Minecraft community today! @Gorillo",
-      "url": "https://www.tiktok.com/@tiktok/video/7106594312292453675",
-      "success": true,
-      "ip": "127.0.0.1",
-      "userAgent": "node"
-    },
-    {
-      "id": "hp-1789810981835-zoer",
-      "timestamp": 1789810981835,
-      "type": "honeypot",
-      "ip": "::ffff:127.0.0.1",
-      "userAgent": "node",
-      "details": "Accessed trap endpoint: /api/v1/secret-admin-leak"
-    },
-    {
-      "id": "bot-1789810981825-m1a7",
-      "timestamp": 1789810981825,
-      "type": "bot_blocked",
-      "ip": "198.51.100.44",
-      "userAgent": "python-requests/2.31.0",
-      "details": "Blocked scraper bot: python-requests/2.31.0"
-    },
-    {
-      "id": "bot-1789810826133-f0i3",
-      "timestamp": 1789810826133,
-      "type": "bot_blocked",
-      "ip": "203.0.113.195",
-      "userAgent": "python-requests/2.31.0",
-      "details": "Blocked scraper bot: python-requests/2.31.0"
-    },
-    {
-      "id": "log-1789810823297-h6o2",
-      "timestamp": 1789810823297,
-      "type": "download",
-      "platform": "youtube",
-      "title": "Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster)",
-      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-      "success": true,
-      "ip": "127.0.0.1",
-      "userAgent": "python-requests/2.31.0"
-    },
-    {
-      "id": "log-1789809507579-kbkg",
-      "timestamp": 1789809507579,
-      "type": "download",
-      "platform": "youtube",
-      "title": "Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster)",
-      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-      "success": true,
-      "ip": "104.234.26.109",
-      "userAgent": "curl/7.81.0"
-    },
-    {
-      "id": "hp-1789809503936-exlu",
-      "timestamp": 1789809503936,
-      "type": "honeypot",
-      "ip": "104.234.26.109",
-      "userAgent": "Scrapy/2.11",
-      "details": "Accessed trap endpoint: /api/v1/secret-admin-leak"
-    },
-    {
-      "id": "bot-1789809503867-z0rh",
-      "timestamp": 1789809503867,
-      "type": "bot_blocked",
-      "ip": "104.234.26.109",
-      "userAgent": "python-requests/2.31.0",
-      "details": "Blocked scraper bot: python-requests/2.31.0"
-    }
-  ],
-  "updatedAt": 1789816108365
+  "recentLogs": [],
+  "updatedAt": 1789825400072
 }

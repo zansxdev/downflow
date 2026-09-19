@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Clipboard, X, Link2, Loader2 } from 'lucide-react';
 import { PlatformId } from '@/lib/types';
 import { PLATFORMS } from '@/lib/url-detector';
+import { sounds } from '@/lib/sounds';
 
 interface UrlInputBarProps {
   url: string;
@@ -32,6 +33,7 @@ export const UrlInputBar: React.FC<UrlInputBarProps> = ({
       if (navigator.clipboard && navigator.clipboard.readText) {
         const text = await navigator.clipboard.readText();
         if (text) {
+          sounds.playPop();
           onChangeUrl(text);
           if (inputRef.current) {
             inputRef.current.focus();
@@ -66,6 +68,7 @@ export const UrlInputBar: React.FC<UrlInputBarProps> = ({
             onChange={(e) => onChangeUrl(e.target.value)}
             onKeyDown={(e) => {
               if (e.key === 'Enter' && !isLoading && url.trim()) {
+                sounds.playPop();
                 onSubmit();
               }
             }}
@@ -97,7 +100,10 @@ export const UrlInputBar: React.FC<UrlInputBarProps> = ({
             {url ? (
               <motion.button
                 type="button"
-                onClick={onClear}
+                onClick={() => {
+                  sounds.playTrash();
+                  onClear();
+                }}
                 disabled={isLoading}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
@@ -126,8 +132,12 @@ export const UrlInputBar: React.FC<UrlInputBarProps> = ({
         <div className="flex items-center sm:shrink-0 w-full sm:w-auto">
           <motion.button
             type="button"
-            onClick={onSubmit}
+            onClick={() => {
+              sounds.playPop();
+              onSubmit();
+            }}
             disabled={isLoading || !url.trim()}
+
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.97 }}
             style={{

@@ -14,6 +14,7 @@ import {
   Clock,
 } from 'lucide-react';
 import { NormalizedMediaResult, DownloadOption } from '@/lib/types';
+import { sounds } from '@/lib/sounds';
 
 interface MediaResultCardProps {
   result: NormalizedMediaResult;
@@ -29,6 +30,7 @@ export const MediaResultCard: React.FC<MediaResultCardProps> = ({ result, onRese
 
   const handleCopyLink = async (opt: DownloadOption) => {
     try {
+      sounds.playPop();
       await navigator.clipboard.writeText(opt.url);
       setCopiedId(opt.id);
       setTimeout(() => setCopiedId(null), 2000);
@@ -38,8 +40,10 @@ export const MediaResultCard: React.FC<MediaResultCardProps> = ({ result, onRese
   };
 
   const handleDownload = (opt: DownloadOption) => {
+    sounds.playDownload();
     setDownloadingId(opt.id);
     setTimeout(() => setDownloadingId(null), 3000);
+
 
     const link = document.createElement('a');
     link.href = opt.downloadUrl || opt.url;

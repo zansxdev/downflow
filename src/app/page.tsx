@@ -2,19 +2,24 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link2, Layers } from 'lucide-react';
 import { Navbar } from '@/components/Navbar';
 import { PlatformChips } from '@/components/PlatformChips';
 import { UrlInputBar } from '@/components/UrlInputBar';
+import { BatchInputBar } from '@/components/BatchInputBar';
+import { BatchQueueView } from '@/components/BatchQueueView';
 import { LoadingSkeleton } from '@/components/LoadingSkeleton';
 import { MediaResultCard } from '@/components/MediaResultCard';
 import { HistoryDrawer } from '@/components/HistoryDrawer';
 import { Footer } from '@/components/Footer';
 import { detectPlatform } from '@/lib/url-detector';
-import { PlatformId, NormalizedMediaResult, DownloadHistoryItem } from '@/lib/types';
+import { PlatformId, NormalizedMediaResult, DownloadHistoryItem, BatchQueueItem } from '@/lib/types';
+import { sounds } from '@/lib/sounds';
 
 const STORAGE_KEY = 'downflow_history_v1';
 
 export default function HomePage() {
+  const [mode, setMode] = useState<'single' | 'batch'>('single');
   const [url, setUrl] = useState('');
   const [selectedPlatform, setSelectedPlatform] = useState<PlatformId>('auto');
   const [detectedPlatform, setDetectedPlatform] = useState<PlatformId>('auto');
@@ -24,6 +29,10 @@ export default function HomePage() {
   const [isHistoryOpen, setIsHistoryOpen] = useState(false);
   const [history, setHistory] = useState<DownloadHistoryItem[]>([]);
 
+  // Batch states
+  const [batchItems, setBatchItems] = useState<BatchQueueItem[]>([]);
+  const [isBatchProcessing, setIsBatchProcessing] = useState(false);
+
   useEffect(() => {
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
@@ -32,6 +41,16 @@ export default function HomePage() {
       }
     } catch {
       // Ignored
+    }
+
+    // Auto-fetch if ?url= is passed in query string
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const qUrl = params.get('url');
+      if (qUrl && qUrl.trim()) {
+        setUrl(qUrl.trim());
+        handleDownloadMedia(qUrl.trim());
+      }
     }
   }, []);
 
@@ -78,6 +97,7 @@ export default function HomePage() {
   };
 
   const handleSelectHistoryItem = (item: DownloadHistoryItem) => {
+    setMode('single');
     setUrl(item.originalUrl);
     setSelectedPlatform(item.platform);
     setIsHistoryOpen(false);
@@ -111,9 +131,11 @@ export default function HomePage() {
         throw new Error(json.message || 'Gagal memproses media dari URL yang diberikan.');
       }
 
+      sounds.playSuccess();
       setResult(json.data);
       saveToHistory(json.data);
     } catch (err: any) {
+      sounds.playError();
       setError(err.message || 'Terjadi gangguan saat menghubungkan ke server.');
     } finally {
       setIsLoading(false);
@@ -125,6 +147,126 @@ export default function HomePage() {
     setResult(null);
     setError(null);
     setDetectedPlatform('auto');
+  };
+
+  // --- Batch Processing Handlers ---
+  const handleStartBatch = async (urls: string[]) => {
+    if (urls.length === 0 || isBatchProcessing) return;
+
+    const initialItems: BatchQueueItem[] = urls.map((u, i) => ({
+      id: `batch-${Date.now()}-${i}`,
+      url: u,
+      platform: detectPlatform(u),
+      status: 'pending',
+    }));
+
+    setBatchItems(initialItems);
+    setIsBatchProcessing(true);
+
+    for (let i = 0; i < initialItems.length; i++) {
+      const currentItem = initialItems[i];
+
+      setBatchItems((prev) =>
+        prev.map((item) =>
+          item.id === currentItem.id ? { ...item, status: 'processing' } : item
+        )
+      );
+
+      try {
+        const res = await fetch('/api/download', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-client-flow': 'downflow-web-v1',
+          },
+          body: JSON.stringify({
+            url: currentItem.url,
+            platform: currentItem.platform,
+          }),
+        });
+
+        const json = await res.json().catch(() => ({}));
+
+        if (!res.ok || !json.status) {
+          throw new Error(json.message || 'Gagal memproses media dari URL.');
+        }
+
+        sounds.playSuccess();
+        saveToHistory(json.data);
+
+        setBatchItems((prev) =>
+          prev.map((item) =>
+            item.id === currentItem.id
+              ? { ...item, status: 'success', result: json.data }
+              : item
+          )
+        );
+      } catch (err: any) {
+        sounds.playError();
+        setBatchItems((prev) =>
+          prev.map((item) =>
+            item.id === currentItem.id
+              ? { ...item, status: 'error', error: err.message || 'Gagal memproses media' }
+              : item
+          )
+        );
+      }
+
+      // Small polite delay between requests
+      await new Promise((r) => setTimeout(r, 400));
+    }
+
+    setIsBatchProcessing(false);
+  };
+
+  const handleRetryBatchItem = async (id: string) => {
+    const target = batchItems.find((item) => item.id === id);
+    if (!target) return;
+
+    setBatchItems((prev) =>
+      prev.map((item) => (item.id === id ? { ...item, status: 'processing', error: undefined } : item))
+    );
+
+    try {
+      const res = await fetch('/api/download', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-client-flow': 'downflow-web-v1',
+        },
+        body: JSON.stringify({
+          url: target.url,
+          platform: target.platform,
+        }),
+      });
+
+      const json = await res.json().catch(() => ({}));
+
+      if (!res.ok || !json.status) {
+        throw new Error(json.message || 'Gagal memproses media dari URL.');
+      }
+
+      sounds.playSuccess();
+      saveToHistory(json.data);
+
+      setBatchItems((prev) =>
+        prev.map((item) =>
+          item.id === id ? { ...item, status: 'success', result: json.data } : item
+        )
+      );
+    } catch (err: any) {
+      sounds.playError();
+      setBatchItems((prev) =>
+        prev.map((item) =>
+          item.id === id ? { ...item, status: 'error', error: err.message || 'Gagal memproses media' } : item
+        )
+      );
+    }
+  };
+
+  const handleClearBatchQueue = () => {
+    sounds.playTrash();
+    setBatchItems([]);
   };
 
   return (
@@ -158,68 +300,138 @@ export default function HomePage() {
           </motion.p>
         </motion.div>
 
-        {/* Input & Animated Platform Chips Container */}
+        {/* Mode Selector Tabs: Single Link vs Batch Downloader */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.45 }}
-          className="w-full space-y-3.5 mb-8"
+          transition={{ delay: 0.25 }}
+          className="flex items-center gap-1 p-1 rounded-xl bg-[var(--bg-surface-elevated)] border border-[var(--border-subtle)] shadow-sm backdrop-blur-md mb-4"
         >
-          <UrlInputBar
-            url={url}
-            onChangeUrl={setUrl}
-            detectedPlatform={detectedPlatform}
-            isLoading={isLoading}
-            onSubmit={() => handleDownloadMedia()}
-            onClear={handleReset}
-            error={error}
-          />
+          <button
+            type="button"
+            onClick={() => {
+              if (mode !== 'single') {
+                sounds.playPop();
+                setMode('single');
+              }
+            }}
+            className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer ${
+              mode === 'single'
+                ? 'bg-[var(--chip-active-bg)] text-[var(--chip-active-text)] border border-[var(--chip-active-border)] shadow-sm font-bold'
+                : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+            }`}
+          >
+            <Link2 className="w-3.5 h-3.5" />
+            <span>Single Link</span>
+          </button>
 
-          <PlatformChips
-            selectedPlatform={selectedPlatform}
-            onSelectPlatform={(p) => setSelectedPlatform(p)}
-          />
+          <button
+            type="button"
+            onClick={() => {
+              if (mode !== 'batch') {
+                sounds.playPop();
+                setMode('batch');
+              }
+            }}
+            className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer ${
+              mode === 'batch'
+                ? 'bg-[var(--chip-active-bg)] text-[var(--chip-active-text)] border border-[var(--chip-active-border)] shadow-sm font-bold'
+                : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+            }`}
+          >
+            <Layers className="w-3.5 h-3.5" />
+            <span>⚡ Batch Mode</span>
+          </button>
         </motion.div>
 
-        {/* Dynamic Animated Display Area */}
-        <div className="w-full">
-          <AnimatePresence mode="wait">
-            {isLoading && (
-              <motion.div
-                key="loading"
-                initial={{ opacity: 0, scale: 0.98 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.98 }}
-                transition={{ duration: 0.25 }}
-              >
-                <LoadingSkeleton />
-              </motion.div>
-            )}
+        {/* Input Area Depending on Mode */}
+        {mode === 'single' ? (
+          <motion.div
+            key="single-input-box"
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+            className="w-full space-y-3.5 mb-8"
+          >
+            <UrlInputBar
+              url={url}
+              onChangeUrl={setUrl}
+              detectedPlatform={detectedPlatform}
+              isLoading={isLoading}
+              onSubmit={() => handleDownloadMedia()}
+              onClear={handleReset}
+              error={error}
+            />
 
-            {!isLoading && result && (
-              <motion.div
-                key="result"
-                initial={{ opacity: 0, scale: 0.98 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.98 }}
-                transition={{ duration: 0.25 }}
-              >
-                <MediaResultCard result={result} onReset={handleReset} />
-              </motion.div>
-            )}
+            <PlatformChips
+              selectedPlatform={selectedPlatform}
+              onSelectPlatform={(p) => setSelectedPlatform(p)}
+            />
+          </motion.div>
+        ) : (
+          <motion.div
+            key="batch-input-box"
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+            className="w-full space-y-4 mb-8"
+          >
+            <BatchInputBar
+              onStartBatch={handleStartBatch}
+              isProcessing={isBatchProcessing}
+            />
 
-            {!isLoading && !result && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.4 }}
-                className="text-center text-xs text-[var(--text-muted)] font-mono pt-4 transition-colors duration-300"
-              >
-                Tempel link publik di atas untuk memulai ekstraksi media
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
+            <BatchQueueView
+              items={batchItems}
+              onRetryItem={handleRetryBatchItem}
+              onClearQueue={handleClearBatchQueue}
+              isProcessing={isBatchProcessing}
+            />
+          </motion.div>
+        )}
+
+        {/* Dynamic Animated Display Area for Single Mode */}
+        {mode === 'single' && (
+          <div className="w-full">
+            <AnimatePresence mode="wait">
+              {isLoading && (
+                <motion.div
+                  key="loading"
+                  initial={{ opacity: 0, scale: 0.98 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.98 }}
+                  transition={{ duration: 0.25 }}
+                >
+                  <LoadingSkeleton />
+                </motion.div>
+              )}
+
+              {!isLoading && result && (
+                <motion.div
+                  key="result"
+                  initial={{ opacity: 0, scale: 0.98 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.98 }}
+                  transition={{ duration: 0.25 }}
+                >
+                  <MediaResultCard result={result} onReset={handleReset} />
+                </motion.div>
+              )}
+
+              {!isLoading && !result && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.4 }}
+                  className="text-center text-xs text-[var(--text-muted)] font-mono pt-4 transition-colors duration-300"
+                >
+                  Tempel link publik di atas untuk memulai ekstraksi media
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        )}
+
         {/* Invisible Honeypot Trap for automated crawlers & scrapers */}
         <div className="hidden" aria-hidden="true">
           <a href="/api/v1/secret-admin-leak" rel="nofollow" tabIndex={-1}>
