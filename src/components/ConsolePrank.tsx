@@ -26,7 +26,7 @@ export const ConsolePrank: React.FC = () => {
       'color: #facc15; font-size: 13px; font-weight: 600; padding: 4px 0;'
     );
     console.log(
-      '%c💡 Kalau butuh bantuan atau mau izin, sungkem & follow dulu author-nya:\n👉 GitHub: https://github.com/zansxart\n👉 Instagram: @zansxart\n👉 TikTok: @zansxart',
+      '%c💡 Kalau butuh bantuan atau mau izin, sungkem & follow dulu author-nya:\n👉 GitHub: https://github.com/zansxdev\n👉 Instagram: @zansxart\n👉 TikTok: @zansxart',
       'color: #a1a1aa; font-size: 12px; font-family: monospace;'
     );
     console.log(

@@ -39,7 +39,7 @@ export async function GET(request: NextRequest) {
       message:
         'Mau ngintip parameter ya? Endpoint ini cuma nerima request resmi dari web DownFlow. Bikin downloader sendiri jangan manja nyolong endpoint orang wkwk.',
       creator: 'zansxart',
-      tips: 'Sungkem dulu ke @zansxart di GitHub (https://github.com/zansxart) atau traktir kopi.',
+      tips: 'Sungkem dulu ke @zansxart di GitHub (https://github.com/zansxdev) atau traktir kopi.',
       rickroll: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
     },
     {
@@ -89,7 +89,7 @@ export async function POST(request: NextRequest) {
           roast: 'CIEEE KETAHUAN NGE-SCRAPE PAKE BOT WKWKWK! 😂',
           message: `Lu kira gua gatau lu pake script bot (${detectedBot}) buat nembak endpoint ini? Minimal modal browser lah bjir! Bikin downloader sendiri jangan manja nyolong endpoint orang wkwk.`,
           creator: 'zansxart',
-          tips: 'Sungkem dulu ke @zansxart di GitHub (https://github.com/zansxart) atau traktir kopi biar dapet restu.',
+          tips: 'Sungkem dulu ke @zansxart di GitHub (https://github.com/zansxdev) atau traktir kopi biar dapet restu.',
           rickroll: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
         },
         {

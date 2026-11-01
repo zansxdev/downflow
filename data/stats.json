@@ -1,23 +1,456 @@
 {
-  "totalRequests": 1,
-  "totalSuccess": 1,
-  "totalFailed": 0,
+  "totalRequests": 36,
+  "totalSuccess": 32,
+  "totalFailed": 4,
   "totalBotsBlocked": 0,
-  "totalHoneypotHits": 0,
+  "totalHoneypotHits": 6,
   "byPlatform": {
-    "tiktok": 0,
-    "youtube": 0,
-    "instagram": 1,
+    "tiktok": 15,
+    "youtube": 10,
+    "instagram": 3,
     "spotify": 0,
-    "twitter": 0,
-    "facebook": 0,
+    "twitter": 1,
+    "facebook": 6,
     "soundcloud": 0,
-    "capcut": 0,
+    "capcut": 1,
     "threads": 0,
     "pinterest": 0,
     "other": 0
   },
   "recentLogs": [
+    {
+      "id": "log-1793550036788-p8h8",
+      "timestamp": 1793550036788,
+      "type": "download",
+      "platform": "instagram",
+      "title": "Media Download",
+      "url": "https://www.instagram.com/s/aGlnaGxpZ2h0OjE3OTEyNjYxOTY5MTA1NDU0?story_media_id=3606829360521069121_62829685024&exln=cngxNTFyaTFkbmx4",
+      "success": true,
+      "ip": "222.124.94.77",
+      "userAgent": "mozilla/5.0 (linux; android 10; k) applewebkit/537.36 (khtml, like gecko) chrome/143.0.0.0 mobile safari/537.36"
+    },
+    {
+      "id": "log-1793549989100-5ljx",
+      "timestamp": 1793549989100,
+      "type": "download",
+      "platform": "instagram",
+      "title": "Media Download",
+      "url": "https://www.instagram.com/s/aGlnaGxpZ2h0OjE3OTEyNjYxOTY5MTA1NDU0?story_media_id=3587753481161479619_62829685024&mdxt=cngxNTFyaTFkbmx4",
+      "success": true,
+      "ip": "222.124.94.77",
+      "userAgent": "mozilla/5.0 (linux; android 10; k) applewebkit/537.36 (khtml, like gecko) chrome/143.0.0.0 mobile safari/537.36"
+    },
+    {
+      "id": "log-1793444063164-s8rg",
+      "timestamp": 1793444063164,
+      "type": "download",
+      "platform": "youtube",
+      "title": "Azab pencuri korek",
+      "url": "https://youtu.be/KqYdLQe1peA?si=t-_zu8_6YX4ximVw",
+      "success": true,
+      "ip": "114.10.5.153",
+      "userAgent": "mozilla/5.0 (linux; android 10; k) applewebkit/537.36 (khtml, like gecko) chrome/155.0.0.0 mobile safari/537.36"
+    },
+    {
+      "id": "log-1793351009978-hfh4",
+      "timestamp": 1793351009978,
+      "type": "download",
+      "platform": "youtube",
+      "title": "Gamma - Bersatu Karena Rindu (lirik)",
+      "url": "https://www.youtube.com/watch?v=czLfG-PG4Ls",
+      "success": true,
+      "ip": "103.136.56.2",
+      "userAgent": "mozilla/5.0 (windows nt 10.0; win64; x64) applewebkit/537.36 (khtml, like gecko) chrome/128.0.0.0 safari/537.36"
+    },
+    {
+      "id": "log-1793350999624-ba7d",
+      "timestamp": 1793350999624,
+      "type": "download",
+      "platform": "twitter",
+      "title": "https://twitter.com/X/status/1785025064560419266",
+      "url": "https://twitter.com/X/status/1785025064560419266",
+      "success": false,
+      "ip": "103.136.56.2",
+      "userAgent": "mozilla/5.0 (windows nt 10.0; win64; x64)"
+    },
+    {
+      "id": "log-1793350994235-itqc",
+      "timestamp": 1793350994235,
+      "type": "download",
+      "platform": "tiktok",
+      "title": "https://vt.tiktok.com/ZSjX1abc/",
+      "url": "https://vt.tiktok.com/ZSjX1abc/",
+      "success": false,
+      "ip": "103.136.56.2",
+      "userAgent": "mozilla/5.0 (windows nt 10.0; win64; x64)"
+    },
+    {
+      "id": "log-1793350967999-18a8",
+      "timestamp": 1793350967999,
+      "type": "download",
+      "platform": "tiktok",
+      "title": "https://www.tiktok.com/@tiktok/video/7106594312292453678",
+      "url": "https://www.tiktok.com/@tiktok/video/7106594312292453678",
+      "success": false,
+      "ip": "103.136.56.2",
+      "userAgent": "mozilla/5.0 (windows nt 10.0; win64; x64) applewebkit/537.36 (khtml, like gecko) chrome/128.0.0.0 safari/537.36"
+    },
+    {
+      "id": "log-1793084543398-c3g3",
+      "timestamp": 1793084543398,
+      "type": "download",
+      "platform": "tiktok",
+      "title": "titut sholawat  #meme#znxlll#indonesia#ketawatitut ",
+      "url": "https://www.tiktok.com/@yanzzz_puki/video/7692844924127022356?q=titut%20ketawa&t=1793082033874",
+      "success": true,
+      "ip": "103.99.22.158",
+      "userAgent": "mozilla/5.0 (windows nt 10.0; win64; x64) applewebkit/537.36 (khtml, like gecko) chrome/155.0.0.0 safari/537.36"
+    },
+    {
+      "id": "log-1793082139295-k4rt",
+      "timestamp": 1793082139296,
+      "type": "download",
+      "platform": "tiktok",
+      "title": "Tertitut titut #titut  #memes #meme  #videolucu ",
+      "url": "https://www.tiktok.com/@zenzummy/video/7692091421637086485?is_from_webapp=1&sender_device=pc&web_id=7701168058090964488",
+      "success": true,
+      "ip": "103.99.22.158",
+      "userAgent": "mozilla/5.0 (windows nt 10.0; win64; x64) applewebkit/537.36 (khtml, like gecko) chrome/155.0.0.0 safari/537.36"
+    },
+    {
+      "id": "hp-1791702732739-7ykw",
+      "timestamp": 1791702732739,
+      "type": "honeypot",
+      "ip": "24.199.113.76",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+      "details": "Accessed trap endpoint: /api/v1/free-api-key"
+    },
+    {
+      "id": "hp-1791700365413-hp05",
+      "timestamp": 1791700365414,
+      "type": "honeypot",
+      "ip": "146.190.32.181",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+      "details": "Accessed trap endpoint: /api/v1/secret-admin-leak"
+    },
+    {
+      "id": "log-1791630239977-h5bb",
+      "timestamp": 1791630239977,
+      "type": "download",
+      "platform": "tiktok",
+      "title": "Cekelan anying #dikaaa #kdikaaa #fypage #heupahh",
+      "url": "https://vt.tiktok.com/ZSbWKayHw/",
+      "success": true,
+      "ip": "112.215.151.236",
+      "userAgent": "mozilla/5.0 (linux; android 10; k) applewebkit/537.36 (khtml, like gecko) chrome/137.0.0.0 mobile safari/537.36"
+    },
+    {
+      "id": "hp-1791587497129-okjq",
+      "timestamp": 1791587497130,
+      "type": "honeypot",
+      "ip": "57.141.18.82",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36 (compatible; meta-externalagent/1.1 (+https://developers.facebook.com/docs/sharing/webmasters/crawler))",
+      "details": "Accessed trap endpoint: /api/v1/free-api-key"
+    },
+    {
+      "id": "hp-1791586678387-u7il",
+      "timestamp": 1791586678387,
+      "type": "honeypot",
+      "ip": "57.141.18.97",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36 (compatible; meta-externalagent/1.1 (+https://developers.facebook.com/docs/sharing/webmasters/crawler))",
+      "details": "Accessed trap endpoint: /api/v1/secret-admin-leak"
+    },
+    {
+      "id": "log-1791460792411-97pq",
+      "timestamp": 1791460792411,
+      "type": "download",
+      "platform": "tiktok",
+      "title": "#djharisnugraha💔🥀 ",
+      "url": "https://vt.tiktok.com/ZSbpDxUKL/",
+      "success": true,
+      "ip": "140.213.13.58",
+      "userAgent": "mozilla/5.0 (linux; android 10; k) applewebkit/537.36 (khtml, like gecko) chrome/154.0.0.0 mobile safari/537.36"
+    },
+    {
+      "id": "log-1791388854886-1mhi",
+      "timestamp": 1791388854886,
+      "type": "download",
+      "platform": "facebook",
+      "title": "Facebook Video",
+      "url": "https://www.facebook.com/reel/1093003343125486/?mibextid=9drbnH&s=yWDuG2&fs=e",
+      "success": true,
+      "ip": "140.213.11.238",
+      "userAgent": "mozilla/5.0 (linux; android 10; k) applewebkit/537.36 (khtml, like gecko) chrome/154.0.0.0 mobile safari/537.36"
+    },
+    {
+      "id": "log-1791388341204-73jb",
+      "timestamp": 1791388341204,
+      "type": "download",
+      "platform": "facebook",
+      "title": "Facebook Video",
+      "url": "https://www.facebook.com/share/r/1MG8irRVyC/",
+      "success": true,
+      "ip": "140.213.11.238",
+      "userAgent": "mozilla/5.0 (linux; android 10; k) applewebkit/537.36 (khtml, like gecko) chrome/154.0.0.0 mobile safari/537.36"
+    },
+    {
+      "id": "log-1791387111052-px3c",
+      "timestamp": 1791387111052,
+      "type": "download",
+      "platform": "facebook",
+      "title": "Facebook Video",
+      "url": "https://www.facebook.com/share/r/1ThtbCFwA3/",
+      "success": true,
+      "ip": "140.213.2.154",
+      "userAgent": "mozilla/5.0 (linux; android 10; k) applewebkit/537.36 (khtml, like gecko) chrome/154.0.0.0 mobile safari/537.36"
+    },
+    {
+      "id": "log-1791372029700-ej1m",
+      "timestamp": 1791372029700,
+      "type": "download",
+      "platform": "tiktok",
+      "title": "Media Download",
+      "url": "https://vt.tiktok.com/ZSbqHwvFd/",
+      "success": true,
+      "ip": "103.188.169.116",
+      "userAgent": "mozilla/5.0 (linux; android 10; k) applewebkit/537.36 (khtml, like gecko) chrome/154.0.0.0 mobile safari/537.36"
+    },
+    {
+      "id": "log-1791371958924-lk2r",
+      "timestamp": 1791371958924,
+      "type": "download",
+      "platform": "tiktok",
+      "title": "Media Download",
+      "url": "https://vt.tiktok.com/ZSbq9hMW8/",
+      "success": true,
+      "ip": "103.188.169.116",
+      "userAgent": "mozilla/5.0 (linux; android 10; k) applewebkit/537.36 (khtml, like gecko) chrome/154.0.0.0 mobile safari/537.36"
+    },
+    {
+      "id": "log-1791361698294-nu5k",
+      "timestamp": 1791361698294,
+      "type": "download",
+      "platform": "tiktok",
+      "title": "Media Download",
+      "url": "https://vt.tiktok.com/ZSbqYuDQ7/",
+      "success": true,
+      "ip": "103.188.169.116",
+      "userAgent": "mozilla/5.0 (linux; android 10; k) applewebkit/537.36 (khtml, like gecko) chrome/154.0.0.0 mobile safari/537.36"
+    },
+    {
+      "id": "log-1791043936436-wnv0",
+      "timestamp": 1791043936436,
+      "type": "download",
+      "platform": "facebook",
+      "title": "Facebook Video",
+      "url": "https://www.facebook.com/share/r/19QATLwg1Q/",
+      "success": true,
+      "ip": "103.188.169.116",
+      "userAgent": "mozilla/5.0 (linux; android 10; k) applewebkit/537.36 (khtml, like gecko) chrome/154.0.0.0 mobile safari/537.36"
+    },
+    {
+      "id": "log-1791041195796-sow6",
+      "timestamp": 1791041195796,
+      "type": "download",
+      "platform": "tiktok",
+      "title": "Pengen sehat + produktif itu artinya: badan dijaga, pikiran dijaga, dan waktu dipake buat hal yang beneran penting. *Cara mengubah pandangan hidup jadi lebih sehat & produktif* *1. Ubah mindset dasarnya dulu* - *Dari*: `“Aku harus sempurna baru mulai”`     *Ke*: `“Mulai dulu, perbaiki sambil jalan”` → produktif itu konsisten, bukan hebat 1 hari. - *Dari*: `“Istirahat = malas”`     *Ke*: `“Istirahat = bahan bakar biar bisa jalan jauh”` → sehat itu investasi, bukan hadiah. - *Dari*: `“Aku gak punya waktu”`     *Ke*: `“Aku pilih pake waktu buat apa”` → kita selalu punya 24 jam yang sama. *2. 3 Pilar Sehat biar energi ada* 1.  *Tidur*: Usahain 7-8 jam. Kurang tidur = mood jelek + susah fokus seharian 2.  *Gerak*: Gak harus gym. Jalan 20 menit, stretching, naik tangga. Badan gerak, otak ikut encer 3.  *Makan & Air*: Aturan simpel `80/20`. 80% makanan bergizi, 20% nikmatin aja. Air putih 2L. *3. 3 Pilar Produktif biar waktu gak kebuang* 1.  *Kejernihan*: Tiap malam tulis 3 hal penting buat besok. Bukan 20. Cuma 3. Kalau 3 itu selesai, hari itu menang. 2.  *Fokus*: Kerjain 1 hal 25 menit tanpa HP. Teknik Pomodoro. Notifikasi dimatiin dulu. 3.  *Evaluasi*: Tiap minggu tanya: `Apa yang bikin aku capek tapi gak ada hasilnya?` `Apa yang bikin aku hidup tapi juga produktif?` Lakuin lebih banyak yang kedua. *4. Atur lingkungan biar gampang* Pandangan berubah kalau kebiasaan berubah. Kebiasaan berubah kalau lingkungan bantu. - Mau sehat → taruh botol minum + buah di meja - Mau produktif → meja kerja cuma ada laptop + buku. HP di laci - Mau tenang → follow/unfollow akun yang bikin kamu ngerasa cukup, bukan ngerasa kurang *5. Kalimat jangkar harian* Tempel di notes atau wallpaper: - `“Aku jaga tubuhku biar bisa kejar mimpiku”` - `“Progress kecil > nunggu momen sempurna”` - `“Aku cukup, tapi aku mau bertumbuh”` *Inget ya*: Sehat tanpa produktif = bosen. Produktif tanpa sehat = burnout.   Tujuannya bukan jadi mesin. Tapi jadi versi kamu yang energinya cukup buat hal-hal penting. #galaubrutal ",
+      "url": "https://vt.tiktok.com/ZSbm7jUBG/",
+      "success": true,
+      "ip": "140.213.9.120",
+      "userAgent": "mozilla/5.0 (linux; android 10; k) applewebkit/537.36 (khtml, like gecko) chrome/154.0.0.0 mobile safari/537.36"
+    },
+    {
+      "id": "log-1791021185344-h5df",
+      "timestamp": 1791021185344,
+      "type": "download",
+      "platform": "facebook",
+      "title": "Facebook Video",
+      "url": "https://www.facebook.com/reel/1814233220019960/?mibextid=9drbnH",
+      "success": true,
+      "ip": "112.215.238.99",
+      "userAgent": "mozilla/5.0 (linux; android 10; k) applewebkit/537.36 (khtml, like gecko) chrome/154.0.0.0 mobile safari/537.36"
+    },
+    {
+      "id": "log-1790863972491-qgru",
+      "timestamp": 1790863972491,
+      "type": "download",
+      "platform": "tiktok",
+      "title": "Media Download",
+      "url": "https://vt.tiktok.com/ZSby5gYVs/",
+      "success": true,
+      "ip": "103.188.169.116",
+      "userAgent": "mozilla/5.0 (linux; android 10; k) applewebkit/537.36 (khtml, like gecko) chrome/154.0.0.0 mobile safari/537.36"
+    },
+    {
+      "id": "log-1790863947038-1sef",
+      "timestamp": 1790863947038,
+      "type": "download",
+      "platform": "tiktok",
+      "title": "Media Download",
+      "url": "https://vt.tiktok.com/ZSby5gYVs/",
+      "success": true,
+      "ip": "103.188.169.116",
+      "userAgent": "mozilla/5.0 (linux; android 10; k) applewebkit/537.36 (khtml, like gecko) chrome/154.0.0.0 mobile safari/537.36"
+    },
+    {
+      "id": "log-1790863623263-vocn",
+      "timestamp": 1790863623263,
+      "type": "download",
+      "platform": "tiktok",
+      "title": "#foryou #katakata #4upage #xyzbca ",
+      "url": "https://vt.tiktok.com/ZSbyPWFcN/",
+      "success": true,
+      "ip": "103.188.169.116",
+      "userAgent": "mozilla/5.0 (linux; android 10; k) applewebkit/537.36 (khtml, like gecko) chrome/154.0.0.0 mobile safari/537.36"
+    },
+    {
+      "id": "log-1790863017787-dbqj",
+      "timestamp": 1790863017787,
+      "type": "download",
+      "platform": "tiktok",
+      "title": "#fypシ゚ #storrytime ",
+      "url": "https://www.tiktok.com/@pioontz66/video/7630871976487210258?_r=1&u_code=eej59e9bmkfla2&region=ID&mid=7606871589048584991&preview_pb=0&sharer_language=id&_d=ei5dk8iki9mm26&share_item_id=7630871976487210258&source=h5_t&timestamp=1790862981&user_id=7381641666262221829&sec_user_id=MS4wLjABAAAACTy9mMCNXsB5quCohplgPo75NFkMncSRtXfTL_oRIS5_dy9vZZEdA2Eydqy0wYaZ&social_share_type=0&utm_source=copy&utm_campaign=client_share&utm_medium=android&share_iid=7691681243528922901&share_link_id=b8dccbdc-beb2-4ea9-bcea-a5b9c5d52b71&share_app_id=1180&ugbiz_name=MAIN&ug_btm=b6880%2Cb2878&sp_root_share_link_id=b8dccbdc-beb2-4ea9-bcea-a5b9c5d52b71&link_reflow_popup_iteration_sharer=%7B%22click_empty_to_play%22%3A1%2C%22dynamic_cover%22%3A1%2C%22follow_to_play_duration%22%3A-1.0%2C%22profile_clickable%22%3A1%7D&panel_source_v2=share_panel&share_enter_from=general_search&item_author_type=2&enable_checksum=1&sp_level=1&sp_root_u=eej59e9bmkfla2&sp_root_d=ei5dk8iki9mm26",
+      "success": true,
+      "ip": "103.188.169.116",
+      "userAgent": "mozilla/5.0 (linux; android 10; k) applewebkit/537.36 (khtml, like gecko) chrome/154.0.0.0 mobile safari/537.36"
+    },
+    {
+      "id": "log-1790785935545-hzq0",
+      "timestamp": 1790785935545,
+      "type": "download",
+      "platform": "facebook",
+      "title": "Facebook Video",
+      "url": "https://www.facebook.com/share/r/1CUGaXNamj/",
+      "success": true,
+      "ip": "112.215.170.232",
+      "userAgent": "mozilla/5.0 (linux; android 10; k) applewebkit/537.36 (khtml, like gecko) chrome/154.0.0.0 mobile safari/537.36"
+    },
+    {
+      "id": "log-1790501827590-bn5l",
+      "timestamp": 1790501827590,
+      "type": "download",
+      "platform": "tiktok",
+      "title": "Sialan kau Iori #grandblue #sakurakobusujima #iorikitahara #mangarekomendation #mangaedit",
+      "url": "https://vt.tiktok.com/ZSqEFudpr/",
+      "success": true,
+      "ip": "103.189.200.24",
+      "userAgent": "mozilla/5.0 (linux; android 10; k) applewebkit/537.36 (khtml, like gecko) chrome/153.0.0.0 mobile safari/537.36"
+    },
+    {
+      "id": "hp-1790044239422-rg6g",
+      "timestamp": 1790044239422,
+      "type": "honeypot",
+      "ip": "45.115.26.203",
+      "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Mobile Safari/537.36 [ip:93.41.125.186]",
+      "details": "Accessed trap endpoint: /api/v1/secret-admin-leak"
+    },
+    {
+      "id": "hp-1790044239408-0jec",
+      "timestamp": 1790044239408,
+      "type": "honeypot",
+      "ip": "45.115.26.203",
+      "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Mobile Safari/537.36 [ip:93.41.125.186]",
+      "details": "Accessed trap endpoint: /api/v1/free-api-key"
+    },
+    {
+      "id": "log-1789972878971-tfmv",
+      "timestamp": 1789972878972,
+      "type": "download",
+      "platform": "youtube",
+      "title": "SENAM KREASI LAGU BRAZIL #senamkreasi #pelajar #sehat #anakindonesia",
+      "url": "https://youtu.be/gYNnnr_kk-4?feature=shared",
+      "success": true,
+      "ip": "182.2.37.237",
+      "userAgent": "mozilla/5.0 (linux; android 10; k) applewebkit/537.36 (khtml, like gecko) chrome/153.0.0.0 mobile safari/537.36"
+    },
+    {
+      "id": "log-1789884467309-y5mo",
+      "timestamp": 1789884467309,
+      "type": "download",
+      "platform": "capcut",
+      "title": "https://youtu.be/gYNnnr_kk-4?feature=shared",
+      "url": "https://youtu.be/gYNnnr_kk-4?feature=shared",
+      "success": false,
+      "ip": "103.166.159.115",
+      "userAgent": "mozilla/5.0 (linux; android 10; k) applewebkit/537.36 (khtml, like gecko) chrome/153.0.0.0 mobile safari/537.36"
+    },
+    {
+      "id": "log-1789884437873-jl7g",
+      "timestamp": 1789884437873,
+      "type": "download",
+      "platform": "youtube",
+      "title": "SENAM KREASI LAGU BRAZIL #senamkreasi #pelajar #sehat #anakindonesia",
+      "url": "https://youtu.be/gYNnnr_kk-4?feature=shared",
+      "success": true,
+      "ip": "103.166.159.115",
+      "userAgent": "mozilla/5.0 (linux; android 10; k) applewebkit/537.36 (khtml, like gecko) chrome/153.0.0.0 mobile safari/537.36"
+    },
+    {
+      "id": "log-1789883209240-u5kj",
+      "timestamp": 1789883209240,
+      "type": "download",
+      "platform": "youtube",
+      "title": "SENAM KREASI LAGU BRAZIL #senamkreasi #pelajar #sehat #anakindonesia",
+      "url": "https://youtu.be/gYNnnr_kk-4?feature=shared",
+      "success": true,
+      "ip": "103.166.159.115",
+      "userAgent": "mozilla/5.0 (linux; android 10; k) applewebkit/537.36 (khtml, like gecko) chrome/153.0.0.0 mobile safari/537.36"
+    },
+    {
+      "id": "log-1789883195813-i2k3",
+      "timestamp": 1789883195813,
+      "type": "download",
+      "platform": "youtube",
+      "title": "SENAM KREASI LAGU BRAZIL #senamkreasi #pelajar #sehat #anakindonesia",
+      "url": "https://youtu.be/gYNnnr_kk-4?feature=shared",
+      "success": true,
+      "ip": "103.166.159.115",
+      "userAgent": "mozilla/5.0 (linux; android 10; k) applewebkit/537.36 (khtml, like gecko) chrome/153.0.0.0 mobile safari/537.36"
+    },
+    {
+      "id": "log-1789881200500-fmbc",
+      "timestamp": 1789881200500,
+      "type": "download",
+      "platform": "youtube",
+      "title": "SENAM KREASI LAGU BRAZIL #senamkreasi #pelajar #sehat #anakindonesia",
+      "url": "https://youtu.be/gYNnnr_kk-4?feature=shared",
+      "success": true,
+      "ip": "103.166.159.115",
+      "userAgent": "mozilla/5.0 (linux; android 10; k) applewebkit/537.36 (khtml, like gecko) chrome/153.0.0.0 mobile safari/537.36"
+    },
+    {
+      "id": "log-1789881034046-xu3y",
+      "timestamp": 1789881034046,
+      "type": "download",
+      "platform": "youtube",
+      "title": "SENAM KREASI LAGU BRAZIL #senamkreasi #pelajar #sehat #anakindonesia",
+      "url": "https://youtu.be/gYNnnr_kk-4?feature=shared",
+      "success": true,
+      "ip": "103.166.159.115",
+      "userAgent": "mozilla/5.0 (linux; android 10; k) applewebkit/537.36 (khtml, like gecko) chrome/153.0.0.0 mobile safari/537.36"
+    },
+    {
+      "id": "log-1789881032068-z9qe",
+      "timestamp": 1789881032068,
+      "type": "download",
+      "platform": "youtube",
+      "title": "SENAM KREASI LAGU BRAZIL #senamkreasi #pelajar #sehat #anakindonesia",
+      "url": "https://youtu.be/gYNnnr_kk-4?feature=shared",
+      "success": true,
+      "ip": "103.166.159.115",
+      "userAgent": "mozilla/5.0 (linux; android 10; k) applewebkit/537.36 (khtml, like gecko) chrome/153.0.0.0 mobile safari/537.36"
+    },
+    {
+      "id": "log-1789881028902-0d2s",
+      "timestamp": 1789881028902,
+      "type": "download",
+      "platform": "youtube",
+      "title": "SENAM KREASI LAGU BRAZIL #senamkreasi #pelajar #sehat #anakindonesia",
+      "url": "https://youtu.be/gYNnnr_kk-4?feature=shared",
+      "success": true,
+      "ip": "103.166.159.115",
+      "userAgent": "mozilla/5.0 (linux; android 10; k) applewebkit/537.36 (khtml, like gecko) chrome/153.0.0.0 mobile safari/537.36"
+    },
     {
       "id": "log-1789826169962-j852",
       "timestamp": 1789826169962,
@@ -30,5 +463,5 @@
       "userAgent": "mozilla/5.0 (linux; android 10; k) applewebkit/537.36 (khtml, like gecko) chrome/153.0.0.0 mobile safari/537.36"
     }
   ],
-  "updatedAt": 1789826169963
+  "updatedAt": 1793550036788
 }

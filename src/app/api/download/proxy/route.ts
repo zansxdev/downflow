@@ -76,6 +76,7 @@ export async function GET(request: NextRequest) {
 
   try {
     const upstreamRes = await fetch(streamUrl.toString(), {
+      signal: request.signal,
       headers: {
         'X-API-Key': BACKEND_KEY,
       },
@@ -96,6 +97,9 @@ export async function GET(request: NextRequest) {
       headers,
     });
   } catch (err: any) {
+    if (err.name === 'AbortError' || err.code === 'UND_ERR_ABORTED') {
+      return new Response(null, { status: 499 });
+    }
     return NextResponse.json({ status: false, message: err.message }, { status: 500 });
   }
 }

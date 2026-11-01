@@ -26,7 +26,7 @@ const nextConfig = {
           },
           {
             key: 'X-Creator',
-            value: 'zansxart (https://github.com/zansxart)',
+            value: 'zansxart (https://github.com/zansxdev)',
           },
         ],
       },

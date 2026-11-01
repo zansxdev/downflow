@@ -27,7 +27,7 @@ export async function GET(request: NextRequest) {
       },
       creator: 'zansxart',
       pesan: 'Mending tidur bang daripada nyari celah di web orang, besok kerja/sekolah wkwk.',
-      traktir_kopi: 'https://github.com/zansxart',
+      traktir_kopi: 'https://github.com/zansxdev',
       bonus_special: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
     },
     {

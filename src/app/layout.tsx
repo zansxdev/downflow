@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     'facebook video download',
     'zansxart',
   ],
-  authors: [{ name: 'zansxart', url: 'https://github.com/zansxart' }],
+  authors: [{ name: 'zansxart', url: 'https://github.com/zansxdev' }],
   creator: 'zansxart',
   publisher: 'zansxart',
   alternates: {
@@ -126,7 +126,7 @@ const jsonLd = {
       author: {
         '@type': 'Person',
         name: 'zansxart',
-        url: 'https://github.com/zansxart',
+        url: 'https://github.com/zansxdev',
       },
       offers: {
         '@type': 'Offer',
@@ -184,7 +184,7 @@ export default function RootLayout({
   Mau nyolong kode atau scraping endpoint ya?
   Minimal bikin scraper sendiri jangan modal copy-paste dek.
   Dibuat oleh @zansxart.
-  GitHub: https://github.com/zansxart
+  GitHub: https://github.com/zansxdev
 =======================================================
 -->`,
           }}
